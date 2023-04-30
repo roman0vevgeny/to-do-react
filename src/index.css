@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* body::-webkit-scrollbar {
+  @apply w-[6px] absolute right-0;
+}
+
+body::-webkit-scrollbar-track {
+  @apply bg-scrollTrack;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-scroll rounded-md;
+} */
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+
+  /* font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; */
+}
+
+.light {
+  --color-text-primary: #002eff;
+  --color-text-secondary: #c4c3c6;
+  --color-text-accent: #2c355c;
+}
+
+.dark {
+  --color-text-primary: #9ea5d0;
+  --color-text-secondary: #7f8cb2;
+  --color-text-accent: #efefef;
+}
