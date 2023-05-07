@@ -1,11 +1,14 @@
 import './App.scss'
-import Button from './components/Button/Button'
+import { ThemeProvider } from './context/ThemeContext'
+import router from './pages/Router'
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
   return (
     <>
-      <h1 className='m-3'>Hello world</h1>
-      <Button />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </>
   )
 }

@@ -1,0 +1,11 @@
+.main {
+  @apply relative flex flex-grow max-h-[30px] min-w-[50px] items-center ml-2 text-menu box-border;
+}
+
+.icon {
+  @apply absolute top-[6px] left-2;
+}
+
+.input {
+  @apply flex w-full box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-1 outline-none text-16 h-[30px] font-medium placeholder-search;
+}

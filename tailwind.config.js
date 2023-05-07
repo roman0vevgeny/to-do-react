@@ -8,8 +8,18 @@ export default {
   ],
   theme: {
     fontFamily: {
-      sans: ['Montserrat', 'sans-serif'],
-      serif: ['inter', 'serif'],
+      normal: ['Gilroy-Regular', 'sans-serif'],
+      medium: ['Gilroy-Medium', 'sans-serif'],
+      bold: ['Gilroy-Bold', 'sans-serif'],
+      extraBold: ['Gilroy-ExtraBold', 'sans-serif'],
+      // serif: ['inter', 'serif'],
+    },
+    borderWidth: {
+      0: '0px',
+      1: '1px',
+      2: '2px',
+      3: '3px',
+      4: '4px',
     },
     fontSize: {
       14: [
@@ -30,6 +40,7 @@ export default {
       18: [
         '18px',
         {
+          lineHeight: '19.5px',
           fontWeight: '400',
         },
       ],
@@ -101,73 +112,41 @@ export default {
     gradientColorStops: {
       //       theme => ({
       // ...theme('colors'),
-      'loginFirst': 'var(--color-gradient-login-first)',
-      'loginSecond': 'var(--color-gradient-login-second)',
-      'loginHoverFirst': 'var(--color-gradient-login-hover-first)',
-      'loginHoverSecond': 'var(--color-gradient-login-hover-second)',
-      'sectionFirst': 'var(--color-gradient-bg-section-first)',
-      'sectionSecond': 'var(--color-gradient-bg-section-second)',
-      'categoryFirst': 'var(--color-category-bg-first)',
-      'categorySecond': 'var(--color-category-bg-second)',
-      'subcategoryFirst': 'var(--color-subcategory-bg-first)',
-      'subcategorySecond': 'var(--color-subcategory-bg-second)',
-      'formFirst': 'var(--color-login-form-first)',
-      'formSecond': 'var(--color-login-form-second)',
-      'roseFirst': 'var(--color-bg-rose-first)',
-      'roseSecond': 'var(--color-bg-rose-second)',
-      'roseFirstHover': 'var(--color-bg-rose-first-hover)',
-      'roseSecondHover': 'var(--color-bg-rose-second-hover)',
-      'instructionCardFirst': 'var(--color-bg-instructioncard-first)',
-      'instructionCardSecond': 'var(--color-bg-instructioncard-second)',
-      'login-form-first': '#7312D3',
-      'login-form-second': '#7472D8',
     },
     extend: {
+      colors: {
+        current: 'currentColor',
+        // main: 'var(--color-main)',
+      },
       textColor: {
-        primary: 'var(--color-text-primary)',
-        secondary: 'var(--color-text-secondary)',
         gray: 'var(--color-text-gray)',
-        accent: 'var(--color-text-accent)',
-        blue: 'var(--color-text-always-blue)',
-        light: 'var(--color-text-light)',
-        button: 'var(--color-text-button)',
+        grayHover: 'var(--color-text-gray-hover)',
+        main: 'var(--color-main)',
+        menu: 'var(--menu-text)',
       },
       backgroundColor: {
-        primary: 'var(--color-bg-primary)',
-        menuButton: 'var(--color-bg-menu-button)',
-        menuHover: 'var(--color-bg-menu-button-hover)',
-        white: 'var(--color-bg-white)',
-        whiteHover: 'var(--color-bg-white-hover)',
-        scrollTrack: 'var(--color-bg-scroll-track)',
-        scroll: 'var(--color-bg-scroll)',
-        line: 'var(--color-bg-line)',
-        input: 'var(--color-bg-input)',
+        main: 'var(--color-main)',
+        mainBg: 'var(--color-main-bg)',
+        gray: 'var(--color-bg-gray)',
+        grayHover: 'var(--color-bg-gray-hover)',
+        menu: 'var(--menu-button-hover)',
+        nav: 'var(--nav-bg)',
+        navButtonHover: 'var(--navbutton-bg-hover)',
       },
       borderColor: {
-        input: 'var(--color-border-input)',
-        focus: 'var(--color-border-input-focus)',
-        search: 'var(--color-border-search)',
-        searchFocus: 'var(--color-border-search-focus)',
+        header: 'var(--border-header)',
+        search: 'var(--menu-text)',
       },
       placeholderColor: {
-        search: 'var(--color-placeholder-search)',
-        searchHover: 'var(--color-placeholder-search-hover)',
+        search: 'var(--menu-text)',
       },
-      // Adds a new breakpoint in addition to the default breakpoints
       screens: {
         '3xl': '1600px',
         'widescreen': { raw: '(min-aspect-ratio: 3/2)' },
         'tallscreen': { raw: '(max-aspect-ratio: 13/20)' },
       },
       backgroundImage: {
-        'footer-texture': "url('/src/assets/firstFigure.png')",
-        'footer-texture-sm': "url('/src/assets/firstFigureSm.png')",
-        'ball': "url('/src/assets/ball-mask.svg')",
-        'ball-sm': "url('/src/assets/ball-mask-sm.svg')",
-        'logo': "url('/src/assets/Logo.svg')",
-        'star': "url('/src/assets/Star.svg')",
-        'starSub': "url('/src/assets/Star-sub.svg')",
-        'starInst': "url('/src/assets/Star-inst.svg')",
+        'footer-texture': "url('/src/assets/faicon.ico')",
       },
       keyframes: {
         'open-menu': {
@@ -197,5 +176,8 @@ export default {
       90: '0.9',
       100: '1',
     },
+    fill: ({ theme }) => ({
+      gray: theme('colors.gray'),
+    }),
   },
 }

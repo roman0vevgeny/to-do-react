@@ -1,12 +1,15 @@
 .main {
-  @apply m-2 px-5 py-2 bg-gray-100 rounded-lg;
+  @apply flex flex-nowrap flex-row grid-cols-2 auto-cols-fr gap-1 auto-rows-fr 
+  justify-center h-[25px] min-w-[25px] 
+  items-center px-[7px] py-1 bg-gray rounded-[5px] 
+  font-bold text-14 text-gray mx-2;
 
   &:hover {
-    @apply bg-gray-200 text-gray-700;
+    @apply bg-grayHover text-grayHover;
   }
 
-  &::before {
-    @apply inline-block;
-    content: '👍';
-  }
+  // &::before {
+  //   @apply inline-block;
+  //   content: '👍';
+  // }
 }
