@@ -1,0 +1,40 @@
+.body {
+  @apply flex flex-row p-5 mx-5 my-3 border-stroke items-start rounded-[10px] max-w-[750px];
+}
+
+.checkbox {
+  @apply flex justify-start items-center w-10 h-full;
+}
+
+.clickable {
+  @apply flex flex-grow;
+}
+
+.favourite {
+  @apply flex flex-row text-gray justify-center h-[25px] max-w-[25px] 
+  items-center px-[4px] pb-[1px] rounded-[5px] 
+  font-bold text-14 mx-2;
+
+  &:hover {
+    @apply bg-gray text-gray;
+  }
+}
+
+.notFavourite {
+  @apply flex flex-row text-gray justify-center h-[25px] max-w-[25px] 
+  items-center px-[4px] pb-[1px] rounded-[5px] 
+  font-bold text-14 mx-2;
+
+  &:hover {
+    @apply bg-gray text-gray;
+  }
+}
+
+.devider {
+  @apply flex items-center flex-grow mx-5;
+
+  &::after {
+    @apply flex-grow h-[1px] bg-devider;
+    content: '';
+  }
+}

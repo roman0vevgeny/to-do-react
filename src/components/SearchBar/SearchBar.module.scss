@@ -1,0 +1,24 @@
+.main {
+  @apply relative flex flex-grow max-h-[30px] items-center ml-2 text-menu box-border;
+}
+
+.icon {
+  @apply absolute top-[6px] left-2;
+}
+
+.input {
+  @apply flex w-full box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
+  font-medium placeholder-search cursor-pointer;
+
+  &:focus {
+    @apply cursor-text;
+  }
+}
+
+.close {
+  @apply px-[7px] pt-[6px] pb-[5px] absolute top-[4px] right-[4px] rounded-[3px];
+
+  &:hover {
+    @apply bg-menu;
+  }
+}
