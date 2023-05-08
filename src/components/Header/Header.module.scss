@@ -1,6 +1,6 @@
 .main {
-  @apply box-border flex flex-row min-h-[50px]
-    h-[25px] min-w-[25px] justify-between
+  @apply box-border flex flex-row h-[50px]
+    min-w-[25px] justify-between
     items-center px-[7px] py-[7px] bg-main
     font-bold text-gray text-14
     border-b-1 border-header;

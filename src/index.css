@@ -24,27 +24,26 @@
 }
 
 body {
-  @apply m-0 p-0 bg-mainBg;
+  @apply relative m-0 p-0 bg-mainBg;
 }
 
-/* body::-webkit-scrollbar {
-  @apply w-[6px] absolute right-0;
+body::-webkit-scrollbar {
+  @apply w-[10px] absolute right-0;
 }
 
 body::-webkit-scrollbar-track {
-  @apply bg-scrollTrack;
+  @apply bg-nav;
 }
 
 body::-webkit-scrollbar-thumb {
-  @apply bg-scroll rounded-md;
-} */
+  @apply bg-grayHover rounded-md;
+}
 
 #root {
   font-family: 'Gilroy-Medium', sans-serif;
   line-height: 1.5;
   width: 100%;
   max-width: none;
-  /* font-weight: 400; */
   color-scheme: light dark;
   padding: 0;
 
@@ -67,6 +66,11 @@ body::-webkit-scrollbar-thumb {
   --menu-button-hover: #8e9aff;
   --navbutton-bg-hover: #eaeaea;
   --nav-bg: #f4f4f4;
+  --task-text: #484848;
+  --stroke: #e2e2e2;
+  --checkbox-active: #6e7dff;
+  --checkbox--icon-active: #ffffff;
+  --selection: #8e9aff;
 }
 
 .dark {
@@ -81,4 +85,18 @@ body::-webkit-scrollbar-thumb {
   --menu-button-hover: #3d3d3d;
   --navbutton-bg-hover: #4f4f4f;
   --nav-bg: #424242;
+  --task-text: #dcdcdc;
+  --stroke: #737373;
+  --checkbox-active: #6e7dff;
+  --checkbox--icon-active: #dcdcdc;
+  --selection: #3d3d3d;
 }
+
+/* ::selection {
+  background-color: 'var(--selection)';
+  color: 'var(--menu-text)';
+} */
+
+/* h3 {
+  line-height: 1.5;
+} */
