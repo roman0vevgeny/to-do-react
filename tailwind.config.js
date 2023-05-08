@@ -22,13 +22,6 @@ export default {
       4: '4px',
     },
     fontSize: {
-      12: [
-        '12px',
-        {
-          lineHeight: '1',
-          fontWeight: '400',
-        },
-      ],
       14: [
         '14px',
         {
@@ -130,8 +123,6 @@ export default {
         grayHover: 'var(--color-text-gray-hover)',
         main: 'var(--color-main)',
         menu: 'var(--menu-text)',
-        task: 'var(--task-text)',
-        checkboxIcon: 'var(--checkbox--icon-active)',
       },
       backgroundColor: {
         main: 'var(--color-main)',
@@ -141,16 +132,10 @@ export default {
         menu: 'var(--menu-button-hover)',
         nav: 'var(--nav-bg)',
         navButtonHover: 'var(--navbutton-bg-hover)',
-        checkmark: "url('/src/assets/Checkmark.svg')",
-        checkboxActive: 'var(--checkbox-active)',
-        devider: 'var(--stroke)',
       },
       borderColor: {
         header: 'var(--border-header)',
         search: 'var(--menu-text)',
-        checkbox: 'var(--color-text-gray)',
-        stroke: 'var(--stroke)',
-        checkboxActive: 'var(--checkbox-active)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',
@@ -160,11 +145,8 @@ export default {
         'widescreen': { raw: '(min-aspect-ratio: 3/2)' },
         'tallscreen': { raw: '(max-aspect-ratio: 13/20)' },
       },
-      // backgroundImage: {
-      //   checkmark: "url('/src/assets/Checkmark.svg')",
-      // },
-      boxShadow: {
-        button: '0 0 15px rgba(0, 0, 0, 0.25)',
+      backgroundImage: {
+        'footer-texture': "url('/src/assets/faicon.ico')",
       },
       keyframes: {
         'open-menu': {
@@ -193,22 +175,6 @@ export default {
       85: '0.85',
       90: '0.9',
       100: '1',
-    },
-    lineHeight: {
-      0: '0',
-      1: '1',
-      1.2: '1.2',
-      1.233: '1.233',
-      1.5: '1.5',
-      1.6: '1.6',
-      1.8: '1.8',
-      2: '2',
-      2.5: '2.5',
-      3: '3',
-      3.5: '3.5',
-      4: '4',
-      4.5: '4.5',
-      5: '5',
     },
     fill: ({ theme }) => ({
       gray: theme('colors.gray'),

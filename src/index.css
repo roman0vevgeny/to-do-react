@@ -2,8 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('./fonts//Gilroy-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('./fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-Extrabold';
+  src: url('./fonts/Gilroy-Extrabold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  @apply transition-all duration-300 ease-in-out;
+  @apply m-0 p-0 bg-mainBg;
 }
 
 /* body::-webkit-scrollbar {
@@ -18,11 +39,14 @@ body::-webkit-scrollbar-thumb {
   @apply bg-scroll rounded-md;
 } */
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+#root {
+  font-family: 'Gilroy-Medium', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  width: 100%;
+  max-width: none;
+  /* font-weight: 400; */
   color-scheme: light dark;
+  padding: 0;
 
   /* font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,13 +56,29 @@ body::-webkit-scrollbar-thumb {
 }
 
 .light {
-  --color-text-primary: #002eff;
-  --color-text-secondary: #c4c3c6;
-  --color-text-accent: #2c355c;
+  --color-text-gray: #aaaaaa;
+  --color-text-gray-hover: #7c7c7c;
+  --color-bg-gray: #f0f0f0;
+  --color-bg-gray-hover: #dddddd;
+  --color-main: #6e7dff;
+  --color-main-bg: #ffffff;
+  --border-header: #6e7dff;
+  --menu-text: #ffffff;
+  --menu-button-hover: #8e9aff;
+  --navbutton-bg-hover: #eaeaea;
+  --nav-bg: #f4f4f4;
 }
 
 .dark {
-  --color-text-primary: #9ea5d0;
-  --color-text-secondary: #7f8cb2;
-  --color-text-accent: #efefef;
+  --color-text-gray: #aaaaaa;
+  --color-text-gray-hover: #aaaaaa;
+  --color-bg-gray: #4f4f4f;
+  --color-bg-gray-hover: #2d2d2d;
+  --color-main: #2d2d2d;
+  --color-main-bg: #373737;
+  --border-header: #4f4f4f;
+  --menu-text: #aeaeae;
+  --menu-button-hover: #3d3d3d;
+  --navbutton-bg-hover: #4f4f4f;
+  --nav-bg: #424242;
 }

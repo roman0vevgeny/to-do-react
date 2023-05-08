@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './NavButton.module.scss'
-import Arrow from '../svgs/Arrow'
 
 const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
@@ -15,10 +14,7 @@ const NavButton = ({ svgLeft, children, counter }) => {
           ? capitalizeFirstLetter(children)
           : children}
       </div>
-      <div className={styles.counter}>
-        {!counter && <div>{<Arrow />}</div>}
-        {counter && <p>{counter}</p>}
-      </div>
+      <p>3</p>
     </button>
   )
 }

@@ -7,8 +7,7 @@ const capitalizeFirstLetter = (string) => {
 
 const Button = ({ svgLeft, svgRight, children }) => {
   return (
-    <button
-      className={children ? styles.main : `${styles.main} max-w-[25px] px-0`}>
+    <button className={children ? styles.main : `${styles.main} max-w-[25px]`}>
       {svgLeft && svgLeft}
       {typeof children === 'string'
         ? capitalizeFirstLetter(children)
