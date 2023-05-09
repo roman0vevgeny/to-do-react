@@ -71,6 +71,9 @@ body::-webkit-scrollbar-thumb {
   --checkbox-active: #6e7dff;
   --checkbox--icon-active: #ffffff;
   --selection: #8e9aff;
+  --input-focus-bg: #e5ecff;
+  --input-focus-text: #6e7dff;
+  --input-placeholder: #c0c7ff;
 }
 
 .dark {
@@ -90,6 +93,9 @@ body::-webkit-scrollbar-thumb {
   --checkbox-active: #6e7dff;
   --checkbox--icon-active: #dcdcdc;
   --selection: #3d3d3d;
+  --input-focus-bg: #aeaeae;
+  --input-focus-text: #2d2d2d;
+  --input-placeholder: #868686;
 }
 
 /* ::selection {

@@ -8,21 +8,25 @@ import Subtasks from '../components/svgs/Subtasks'
 import Star from '../components/svgs/Star'
 import CheckBox from '../components/CheckBox/CheckBox'
 import ListItem from '../components/ListItem/ListItem'
+import CreateButton from '../components/Button/CreateButton'
+import { Provider } from 'react-redux'
+import { store } from '../store/store'
+import SectionName from '../components/SectionName/SectionName'
 
 const Home = () => {
   return (
     <div>
+      <SectionName name={'Today'} />
+      <SectionName name={'Today'} editable={true} />
       <ListItem
-        name={
-          'Какая-то очень важная задача, которая очень длинная и не влезает в одну строку'
-        }
+        name={'Какая-то очень важная задача'}
         date={'07.05.23'}
         subtasks={'0/2'}
       />
       <ListItem
         name={'Какая-то очень важная задача'}
         checked={true}
-        // date={'07.05.23'}
+        date={'19.05.23'}
         // subtasks={'0/2'}
       />
       <ListItem
@@ -33,12 +37,6 @@ const Home = () => {
       />
       <div className='flex flex-row m-2 justify-center items-center'>
         <Button children={'Hello'} svgLeft={<Plus />} />
-        <Button svgLeft={<Plus />} />
-        <Button svgLeft={<Edit />} />
-        <InfoCard svgLeft={<Calendar />} date={'20.02.23'} />
-        <InfoCard svgLeft={<Subtasks />} subtasksCounter={'0/5'} />
-        <Button svgLeft={<Star />} />
-        <CheckBox />
       </div>
     </div>
   )

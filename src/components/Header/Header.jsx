@@ -18,7 +18,7 @@ const Header = () => {
         <MenuButton svg={<Burger />} />
         <SearchBar />
       </div>
-      <div className='flex flex-row ml-16 items-center'>
+      <div className='flex flex-row ml-24 items-center'>
         <ViewButton svg={<TabList />} />
         <ViewButton svg={<TabCards />} />
         <ViewButton svg={<TabBoards />} />

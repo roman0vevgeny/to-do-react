@@ -1,0 +1,7 @@
+.modal {
+  @apply fixed top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] bg-mainBg px-20 pt-12 pb-12 z-[201] rounded-[10px] shadow-lg;
+}
+
+.overlay {
+  @apply fixed inset-0 z-[200] bg-black opacity-20;
+}

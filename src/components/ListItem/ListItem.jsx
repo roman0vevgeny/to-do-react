@@ -1,12 +1,12 @@
 import React from 'react'
 import InfoCard from '../Info/InfoCard'
-import Calendar from '../svgs/Calendar'
 import Star from '../svgs/Star'
 import Subtasks from '../svgs/Subtasks'
 import TaskName from '../TaskName/TaskName'
 import CheckBox from '../CheckBox/CheckBox'
 import styles from './ListItem.module.scss'
 import { Link } from 'react-router-dom'
+import Calendar from '../svgs/Calendar'
 
 const ListItem = ({ name, checked, date, subtasks, favorite }) => {
   return (
@@ -21,9 +21,9 @@ const ListItem = ({ name, checked, date, subtasks, favorite }) => {
               <TaskName name={name} />
             </div>
             <div className='flex flex-row mt-[2px]'>
-              {date && <InfoCard svgLeft={<Calendar />} date={'07.05.23'} />}
+              {date && <InfoCard svgLeft={<Calendar />} date={date} />}
               {subtasks && (
-                <InfoCard svgLeft={<Subtasks />} subtasksCounter={'0/2'} />
+                <InfoCard svgLeft={<Subtasks />} subtasksCounter={subtasks} />
               )}
               <button
                 className={favorite ? styles.favourite : styles.notFavourite}>

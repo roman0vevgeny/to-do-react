@@ -123,7 +123,6 @@ export default {
     extend: {
       colors: {
         current: 'currentColor',
-        // main: 'var(--color-main)',
       },
       textColor: {
         gray: 'var(--color-text-gray)',
@@ -132,6 +131,8 @@ export default {
         menu: 'var(--menu-text)',
         task: 'var(--task-text)',
         checkboxIcon: 'var(--checkbox--icon-active)',
+        inputFocus: 'var(--input-focus-text)',
+        placeholder: 'var(--input-placeholder)',
       },
       backgroundColor: {
         main: 'var(--color-main)',
@@ -144,6 +145,7 @@ export default {
         checkmark: "url('/src/assets/Checkmark.svg')",
         checkboxActive: 'var(--checkbox-active)',
         devider: 'var(--stroke)',
+        inputFocus: 'var(--input-focus-bg)',
       },
       borderColor: {
         header: 'var(--border-header)',
@@ -210,8 +212,5 @@ export default {
       4.5: '4.5',
       5: '5',
     },
-    fill: ({ theme }) => ({
-      gray: theme('colors.gray'),
-    }),
   },
 }
