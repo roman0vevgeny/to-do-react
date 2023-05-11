@@ -16,7 +16,6 @@ import SectionName from '../components/SectionName/SectionName'
 const Home = () => {
   return (
     <div>
-      <SectionName name={'Today'} />
       <SectionName name={'Today'} editable={true} />
       <ListItem
         name={'Какая-то очень важная задача'}
@@ -38,6 +37,12 @@ const Home = () => {
       <div className='flex flex-row m-2 justify-center items-center'>
         <Button children={'Hello'} svgLeft={<Plus />} />
       </div>
+      <SectionName name={'Today'} />
+      <ListItem
+        name={'Какая-то очень важная задача'}
+        date={'07.05.23'}
+        subtasks={'0/2'}
+      />
     </div>
   )
 }
