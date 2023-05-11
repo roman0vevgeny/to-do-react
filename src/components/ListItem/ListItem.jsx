@@ -31,10 +31,10 @@ const ListItem = ({ name, checked, date, subtasks, favorite }) => {
               </button>
             </div>
           </div>
-          {/* <div className='flex flex-raw'>
-          <Tag size={'small'} color={red} children={'programming'} />
-          <Tag size={'small'} color={blue} children={'gaming'} />
-        </div> */}
+          <div className='flex flex-raw'>
+            <Tag size={'small'} color={red} children={'programming'} />
+            <Tag size={'small'} color={blue} children={'gaming'} />
+          </div>
         </div>
       </Link>
       <div className={styles.devider}></div>
