@@ -1,6 +1,6 @@
 .body {
   @apply relative flex w-[20px] h-[20px] box-border border-2 border-checkbox rounded-full 
-    text-gray justify-center items-center mx-2 my-1;
+    text-gray justify-center items-center mx-2 mb-1 mt-[5px];
 
   &:hover::after {
     @apply absolute h-[9px] w-[11px] top-[-4px] right-[2px];
@@ -10,5 +10,5 @@
 
 .checked {
   @apply flex w-[20px] h-[20px] rounded-full justify-center items-center mx-2 bg-checkboxActive 
-  text-checkboxIcon my-1;
+  text-checkboxIcon mb-1 mt-[5px];
 }

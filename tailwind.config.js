@@ -22,6 +22,20 @@ export default {
       4: '4px',
     },
     fontSize: {
+      10: [
+        '10px',
+        {
+          lineHeight: '1',
+          fontWeight: '400',
+        },
+      ],
+      11: [
+        '11px',
+        {
+          lineHeight: '1',
+          fontWeight: '400',
+        },
+      ],
       12: [
         '12px',
         {
@@ -32,8 +46,7 @@ export default {
       14: [
         '14px',
         {
-          lineHeight: '2rem',
-          letterSpacing: '-0.01em',
+          lineHeight: '19.5px',
           fontWeight: '400',
         },
       ],
@@ -133,6 +146,15 @@ export default {
         checkboxIcon: 'var(--checkbox--icon-active)',
         inputFocus: 'var(--input-focus-text)',
         placeholder: 'var(--input-placeholder)',
+        redTag: 'var(--color-text-red-tag)',
+        greenTag: 'var(--color-text-green-tag)',
+        yellowTag: 'var(--color-text-yellow-tag)',
+        blueTag: 'var(--color-text-blue-tag)',
+        purpleTag: 'var(--color-text-purple-tag)',
+        grayTag: 'var(--color-text-gray-tag)',
+        seaTag: 'var(--color-text-sea-tag)',
+        imageColor: 'var(--image-color)',
+        tagDelete: 'var(--tag-delete)',
       },
       backgroundColor: {
         main: 'var(--color-main)',
@@ -146,6 +168,13 @@ export default {
         checkboxActive: 'var(--checkbox-active)',
         devider: 'var(--stroke)',
         inputFocus: 'var(--input-focus-bg)',
+        redTag: 'var(--color-red)',
+        greenTag: 'var(--color-green)',
+        yellowTag: 'var(--color-yellow)',
+        blueTag: 'var(--color-blue)',
+        purpleTag: 'var(--color-purple)',
+        grayTag: 'var(--color-gray)',
+        seaTag: 'var(--color-sea)',
       },
       borderColor: {
         header: 'var(--border-header)',
@@ -156,6 +185,10 @@ export default {
       },
       placeholderColor: {
         search: 'var(--menu-text)',
+      },
+      gradientColorStops: {
+        main: 'var(--color-main-bg)',
+        green: '#339523',
       },
       screens: {
         '3xl': '1600px',
@@ -184,6 +217,8 @@ export default {
         3: '3',
         4: '4',
         5: '5',
+        200: '200',
+        201: '201',
       },
     },
     opacity: {

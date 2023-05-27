@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react'
 import CreateButton from '../Button/CreateButton'
-import { Provider } from 'react-redux'
-import { store } from '../../store/store'
 import Button from '../Button/Button'
 import Edit from '../svgs/Edit'
 import styles from './SectionName.module.scss'
@@ -39,7 +37,7 @@ const SectionName = ({ name, editable }) => {
 
   return (
     <>
-      <div className='flex flex-row justify-between mx-2 items-center my-2'>
+      <div className='relative flex flex-row justify-between mx-2 items-center mb-2 bg-mainBg z-30'>
         <input
           className={styles.input}
           placeholder={name}
@@ -53,9 +51,7 @@ const SectionName = ({ name, editable }) => {
           onBlur={handleBlur}
         />
         <div className='flex flex-row'>
-          <Provider store={store}>
-            <CreateButton children={'Hello'} />
-          </Provider>
+          <CreateButton children={'Hello'} />
           {editable && <Button svgLeft={<Edit />} onClick={handleFocus} />}
         </div>
       </div>

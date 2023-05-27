@@ -1,0 +1,16 @@
+.tags {
+  @apply flex w-[245px] flex-wrap items-start px-2 py-1 border-1 border-checkbox rounded-[5px] max-h-[113px] overflow-y-scroll;
+  align-content: flex-start;
+
+  &::-webkit-scrollbar {
+    @apply w-[10px] absolute right-0;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-nav rounded-[5px];
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-grayHover rounded-[5px];
+  }
+}

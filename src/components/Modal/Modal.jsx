@@ -1,35 +1,37 @@
 import React, { useEffect } from 'react'
 import styles from './Modal.module.scss'
-import { useSelector, useDispatch } from 'react-redux'
-import { openModal, closeModal } from '../features/modalSlice'
 
-export default function Modal({ children }) {
-  const open = useSelector((state) => state.modal.open)
-  const dispatch = useDispatch()
+const Modal = ({ open, onClose, children }) => {
+  useEffect(() => {
+    const handleEscapePress = (e) => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    window.addEventListener('keydown', handleEscapePress)
+    return () => {
+      window.removeEventListener('keydown', handleEscapePress)
+    }
+  }, [onClose])
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
-      dispatch(closeModal())
+      onClose()
     }
   }
 
-  const handleEscapePress = (e) => {
-    if (e.key === 'Escape') {
-      dispatch(closeModal())
-    }
+  if (!open) {
+    return null
   }
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleEscapePress)
-    return () => window.removeEventListener('keydown', handleEscapePress)
-  }, [])
-
-  if (!open) return null
 
   return (
-    <>
-      <div className={styles.overlay} onClick={handleOverlayClick} />
-      <div className={styles.modal}>{children}</div>
-    </>
+    <div className={styles.overlay} onClick={handleOverlayClick}>
+      <div className={styles.modal} children={children}>
+        {children}
+      </div>
+    </div>
   )
 }
+
+export default Modal

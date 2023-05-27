@@ -3,22 +3,55 @@
 }
 
 .icon {
-  @apply absolute top-[6px] left-2;
+  @apply absolute top-[6px] left-2 z-5;
+}
+
+.inputWrapper {
+  @apply relative flex items-center;
 }
 
 .input {
-  @apply flex w-full box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
+  @apply flex absolute left-0 top-0 w-[240px] box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
   font-medium placeholder-search cursor-pointer;
 
   &:focus {
-    @apply cursor-text;
+    @apply cursor-text w-[500px];
   }
 }
 
 .close {
-  @apply px-[7px] pt-[6px] pb-[5px] absolute top-[4px] right-[4px] rounded-[3px];
+  @apply px-[7px] pt-[6px] pb-[5px] absolute top-[4px] left-[471px] rounded-[3px] z-5;
 
   &:hover {
     @apply bg-menu;
   }
+}
+
+.devider {
+  @apply flex items-center flex-grow my-1;
+
+  &::after {
+    @apply flex-grow h-[1px] bg-devider;
+    content: '';
+  }
+}
+
+.searchPopup {
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[201] rounded-[5px];
+}
+
+.item {
+  @apply flex flex-row items-center justify-between w-full px-2 py-2 cursor-pointer;
+
+  &:hover {
+    @apply bg-navButtonHover text-grayHover;
+  }
+}
+
+.infoBlock {
+  @apply flex flex-row items-center font-medium;
+}
+
+.searchText {
+  @apply text-14 text-start flex-grow truncate;
 }
