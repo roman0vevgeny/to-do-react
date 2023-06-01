@@ -10,6 +10,10 @@
   }
 }
 
+.selected {
+  @apply border-1 border-checkbox;
+}
+
 .tagInner {
   @apply h-[11px] w-[11px] rounded-full bg-[var(--color-text-gray-tag)];
 }

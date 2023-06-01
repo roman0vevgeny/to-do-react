@@ -1,43 +1,42 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './SubtaskInput.module.scss'
-import Edit from '../../svgs/Edit'
-import ModalButton from '../../Button/ModalButton'
 
-const SubtaskInput = () => {
-  const [text, setText] = useState('+ Add a subtask')
-  const inputRef = useRef(null)
+const SubtaskInput = ({ value, onChange, onSubmit }) => {
+  const [text, setText] = useState(value)
 
   const handleFocus = () => {
     setText('')
-    inputRef.current.focus()
   }
 
   const handleBlur = () => {
     if (text === '') {
-      setText('+ Add a subtask')
+      setText(value)
     }
+  }
+
+  const handleChange = (e) => {
+    setText(e.target.value)
+    onChange(e.target.value)
   }
 
   const handleKeyUp = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      inputRef.current.blur()
+      onSubmit(e)
     }
   }
 
-  useEffect(() => {
-    inputRef.current.textContent = text
-  }, [text])
-
   return (
     <div className='flex flex-row justify-between ml-2 items-start my-2'>
-      <div
+      <input
         className={styles.input}
-        contentEditable
-        ref={inputRef}
+        type='text'
+        value={text}
         onKeyUp={handleKeyUp}
         onBlur={handleBlur}
-        onFocus={handleFocus}></div>
+        onFocus={handleFocus}
+        onChange={handleChange}
+      />
     </div>
   )
 }

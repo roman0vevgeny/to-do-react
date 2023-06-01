@@ -6,35 +6,35 @@ import TaskName from '../TaskName/TaskName'
 import CheckBox from '../CheckBox/CheckBox'
 import styles from './ListItem.module.scss'
 import Cal from '../svgs/Cal'
-import Tag from '../../Tag/Tag'
-import Modal from '../Modal/Modal'
-import TaskNameModal from '../TaskModal/TaskName/TaskNameModal'
-import TaskDescription from '../TaskModal/TaskDescription/TaskDescription'
-import Subtask from '../TaskModal/Subtask/Subtask'
-import SubtaskInput from '../TaskModal/SubtaskInput/SubtaskInput'
+import Tag from '../Tag/Tag'
 import Projects from '../svgs/Projects'
-import Calend from '../TaskModal/Calendar/Calendar'
-import TagInput from '../TaskModal/TagInput/TagInput'
-import TagColorSection from '../TaskModal/TagColorSection/TagColorSection'
-import AllTags from '../TaskModal/AllTags/AllTags'
+import EditTaskModal from '../TaskModal/EditModal'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  updateTaskSubtaskChecked,
+  updateTaskChecked,
+} from '../../features/tasksSlice'
+import Modal from '../Modal/Modal'
 
-const ListItem = ({
-  name,
-  description,
-  checked: initialChecked,
-  date,
-  subtasksCounter,
-  subtasks,
-  favorite,
-  tags,
-  project,
-}) => {
-  const [checked, setChecked] = useState(initialChecked || false)
+const ListItem = ({ task }) => {
   const [open, setOpen] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(favorite || false)
+  const [isFavorite, setIsFavorite] = useState(task.favorite || false)
+
+  const dispatch = useDispatch()
+
+  console.log(task.name)
+  // console.log(task.expirationDate)
+
+  const checked = useSelector(
+    (state) => state.tasks.tasks.find((t) => t.id === task.id).checked
+  )
 
   const toggleChecked = () => {
-    setChecked(!checked)
+    dispatch(updateTaskChecked(task.id))
+  }
+
+  const toggleSubtaskChecked = (subtaskId) => {
+    dispatch(updateTaskSubtaskChecked({ id: task.id, subtaskId }))
   }
 
   const handleOpenModal = () => {
@@ -50,6 +50,25 @@ const ListItem = ({
     setIsFavorite(!isFavorite)
   }
 
+  const allTags = useSelector((state) => state.tags)
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear().toString().slice(-2)
+
+    return `${day < 10 ? '0' + day : day}.${
+      month < 10 ? '0' + month : month
+    }.${year}`
+  }
+
+  const totalSubtasks = task.subtasks.length
+  const completedSubtasks = task.subtasks.filter(
+    (subtask) => subtask.checked
+  ).length
+  const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
+
   return (
     <div>
       <div className={styles.body} onClick={handleOpenModal}>
@@ -59,15 +78,20 @@ const ListItem = ({
         <div className={styles.clickable}>
           <div className='flex flex-raw justify-between items-start w-full'>
             <div className='flex flex-grow'>
-              <TaskName name={name} />
+              <TaskName name={task.name} />
             </div>
             <div className='flex mt-[2px]'>
-              {date && <InfoCard svg={<Cal />} children={date} />}
-              {subtasks && (
+              {task.expirationDate && (
+                <InfoCard
+                  svg={<Cal />}
+                  children={formatDate(task.expirationDate)}
+                />
+              )}
+              {task.subtasks && (
                 <InfoCard svg={<Subtasks />} children={subtasksCounter} />
               )}
-              {project && (
-                <InfoCard svg={<Projects />} children={project.name} />
+              {task.project && (
+                <InfoCard svg={<Projects />} children={task.project.name} />
               )}
               <button
                 className={isFavorite ? styles.favourite : styles.notFavourite}
@@ -77,68 +101,33 @@ const ListItem = ({
             </div>
           </div>
           <div className='flex'>
-            {tags && (
+            {task.tags.length > 0 && (
               <div className='flex'>
-                {tags.map((tag, index) => (
-                  <Tag color={tag.color} tagName={tag.name} key={index} />
-                ))}
+                {task.tags.map((tagId, index) => {
+                  const tag = allTags.find((tag) => tag.id === tagId)
+                  return (
+                    tag && (
+                      <Tag color={tag.color} tagName={tag.name} key={index} />
+                    )
+                  )
+                })}
               </div>
             )}
           </div>
         </div>
       </div>
       <div className={styles.devider}></div>
-      <Modal open={open} onClose={handleCloseModal}>
-        <div className='flex flex-row justify-between items-center text-gray mb-3'>
-          <p className='text-12'>Created at 10/02/23</p>
-          <div className='flex flex-row justify-end'>
-            {date && <InfoCard svg={<Cal />} children={date} />}
-            {subtasksCounter && (
-              <InfoCard svg={<Subtasks />} children={subtasksCounter} />
-            )}
-            <button
-              className={isFavorite ? styles.favourite : styles.notFavourite}
-              onClick={handleToggleFavorite}>
-              <Star />
-            </button>
-          </div>
-        </div>
-        <div className={styles.sectionDevider}></div>
-        <TaskNameModal name={name} />
-        <TaskDescription description={description} />
-        {tags && (
-          <div className='flex ml-4 mr-2 mt-1 mb-3'>
-            {tags.map((tag, index) => (
-              <Tag
-                color={tag.color}
-                tagName={tag.name}
-                deleteTag={true}
-                key={index}
-              />
-            ))}
-          </div>
-        )}
-        {subtasks &&
-          subtasks.map((subtask, index) => (
-            <div key={index} className='flex items-start mx-2 mb-3'>
-              <button className={styles.checkbox}>
-                <CheckBox />
-              </button>
-              <Subtask subtask={subtask.name} />
-            </div>
-          ))}
-        <SubtaskInput />
-        <div className='flex mx-2'>
-          <Calend />
-          <div className='flex flex-col mt-8 ml-8 w-full'>
-            <TagInput />
-            <div className='flex mt-2'>
-              <TagColorSection />
-              <AllTags />
-            </div>
-          </div>
-        </div>
-      </Modal>
+      <Modal
+        open={open}
+        onClose={handleCloseModal}
+        children={
+          <EditTaskModal
+            task={task}
+            onClose={(e) => handleCloseModal()}
+            formatDate={formatDate}
+          />
+        }
+      />
     </div>
   )
 }

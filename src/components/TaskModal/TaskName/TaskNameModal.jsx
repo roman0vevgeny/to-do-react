@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Button from '../../Button/Button'
+import React, { useRef, useEffect } from 'react'
 import Edit from '../../svgs/Edit'
 import styles from './TaskNameModal.module.scss'
 import ModalButton from '../../Button/ModalButton'
+import { useDispatch } from 'react-redux'
+import { updateTaskName } from '../../../features/tasksSlice'
 
-const TaskNameModal = ({ name }) => {
-  const [text, setText] = useState(name)
-  const [prevText, setPrevText] = useState(name)
+const TaskNameModal = ({ taskId, name }) => {
   const inputRef = useRef(null)
+  const dispatch = useDispatch()
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -22,8 +22,9 @@ const TaskNameModal = ({ name }) => {
   }
 
   const handleBlur = () => {
-    if (text.trim() === '') {
-      setText(prevText)
+    const newText = inputRef.current.textContent.trim()
+    if (newText !== name) {
+      dispatch(updateTaskName({ id: taskId, name: newText }))
     }
   }
 
@@ -34,17 +35,8 @@ const TaskNameModal = ({ name }) => {
     }
   }
 
-  const handleInput = () => {
-    setText(inputRef.current.textContent)
-  }
-
   useEffect(() => {
-    inputRef.current.textContent = text
-  }, [text])
-
-  useEffect(() => {
-    setPrevText(name)
-    setText(name)
+    inputRef.current.textContent = name
   }, [name])
 
   return (
@@ -56,7 +48,6 @@ const TaskNameModal = ({ name }) => {
         contentEditable='true'
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        onInput={handleInput}
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />

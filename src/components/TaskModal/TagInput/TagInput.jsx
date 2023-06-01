@@ -1,22 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import styles from './TagInput.module.scss'
 import Close from '../../svgs/Close'
 
-const TagInput = () => {
-  const [value, setValue] = useState('')
+const TagInput = ({ name, onNameChange }) => {
   const inputRef = useRef(null)
 
   const handleKeyUp = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      console.log(value)
-      setValue('')
+      console.log(name)
+      onNameChange('') // сбрасываем имя при нажатии Enter
       inputRef.current.value = ''
     }
   }
 
   const handleClearInput = () => {
-    setValue('')
+    onNameChange('') // сбрасываем имя при очистке инпута
     inputRef.current.value = ''
   }
 
@@ -26,10 +25,11 @@ const TagInput = () => {
         className={styles.input}
         placeholder='+ Add a tag'
         onKeyUp={handleKeyUp}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onNameChange(e.target.value)}
+        value={name} // устанавливаем значение инпута из пропса
         ref={inputRef}></input>
       <div className={styles.editBtn}>
-        {value && (
+        {name && (
           <button className={styles.close} onClick={handleClearInput}>
             <Close />
           </button>

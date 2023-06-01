@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Tag.module.scss'
-import Delete from '../components/svgs/Delete'
+import Delete from '../svgs/Delete'
 
 const capitalize = (string) => {
   return string.toUpperCase()

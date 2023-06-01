@@ -1,5 +1,5 @@
 .tags {
-  @apply flex w-[245px] flex-wrap items-start px-2 py-1 border-1 border-checkbox rounded-[5px] max-h-[113px] overflow-y-scroll;
+  @apply flex w-[245px] flex-wrap items-start px-2 py-1 border-1 border-stroke rounded-[5px] max-h-[113px] overflow-y-auto;
   align-content: flex-start;
 
   &::-webkit-scrollbar {
