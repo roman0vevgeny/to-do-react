@@ -1,0 +1,23 @@
+.input {
+  @apply flex box-border text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-task rounded-[5px] w-[500px] cursor-pointer border-1 border-stroke;
+
+  &:hover {
+    @apply text-gray box-border;
+  }
+
+  &::placeholder {
+    @apply text-placeholder;
+  }
+
+  &:focus {
+    @apply outline-none bg-inputFocus text-inputFocus cursor-auto border-none pl-[9px] py-[5px] box-border;
+  }
+}
+
+.editBtn {
+  @apply flex flex-row mt-1;
+
+  &:focus {
+    @apply outline-none filter-none;
+  }
+}

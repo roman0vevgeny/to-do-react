@@ -1,8 +1,8 @@
 import React from 'react'
-import Tag from '../../Tag/Tag'
+import Tag from '../../../Tag/Tag'
 import styles from './AllTags.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTaskTag } from '../../../features/tasksSlice'
+import { addTaskTag } from '../../../../features/tasksSlice'
 
 const AllTags = ({ tags, taskId }) => {
   const dispatch = useDispatch()

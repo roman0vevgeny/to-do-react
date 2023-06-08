@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styles from './TagInput.module.scss'
-import Close from '../../svgs/Close'
+import Close from '../../../svgs/Close'
 
 const TagInput = ({ name, onNameChange }) => {
   const inputRef = useRef(null)
@@ -9,13 +9,13 @@ const TagInput = ({ name, onNameChange }) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       console.log(name)
-      onNameChange('') // сбрасываем имя при нажатии Enter
+      onNameChange('')
       inputRef.current.value = ''
     }
   }
 
   const handleClearInput = () => {
-    onNameChange('') // сбрасываем имя при очистке инпута
+    onNameChange('')
     inputRef.current.value = ''
   }
 
@@ -26,7 +26,7 @@ const TagInput = ({ name, onNameChange }) => {
         placeholder='+ Add a tag'
         onKeyUp={handleKeyUp}
         onChange={(e) => onNameChange(e.target.value)}
-        value={name} // устанавливаем значение инпута из пропса
+        value={name}
         ref={inputRef}></input>
       <div className={styles.editBtn}>
         {name && (

@@ -8,7 +8,7 @@ import styles from './ListItem.module.scss'
 import Cal from '../svgs/Cal'
 import Tag from '../Tag/Tag'
 import Projects from '../svgs/Projects'
-import EditTaskModal from '../TaskModal/EditModal'
+import EditTaskModal from '../TaskModal/EditTaskModal'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   updateTaskSubtaskChecked,
@@ -23,7 +23,6 @@ const ListItem = ({ task }) => {
   const dispatch = useDispatch()
 
   console.log(task.name)
-  // console.log(task.expirationDate)
 
   const checked = useSelector(
     (state) => state.tasks.tasks.find((t) => t.id === task.id).checked

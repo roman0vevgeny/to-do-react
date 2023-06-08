@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Button from '../../Button/Button'
-import Edit from '../../svgs/Edit'
+import Button from '../../../Button/Button'
+import Edit from '../../../svgs/Edit'
 import styles from './Subtask.module.scss'
-import Close from '../../svgs/Close'
-import ModalButton from '../../Button/ModalButton'
+import Close from '../../../svgs/Close'
+import ModalButton from '../../../Button/ModalButton'
 
 const CreateInput = ({ subtask }) => {
   const [text, setText] = useState(subtask)

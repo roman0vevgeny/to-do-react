@@ -3,13 +3,10 @@ import InfoCard from '../Info/InfoCard'
 import Subtasks from '../svgs/Subtasks'
 import Star from '../svgs/Star'
 import Cal from '../svgs/Cal'
-import CheckBox from '../CheckBox/CheckBox'
-import styles from './EditModal.module.scss'
-import TaskNameModal from '../TaskModal/TaskName/TaskNameModal'
-import TaskDescription from '../TaskModal/TaskDescription/TaskDescription'
-import Subtask from '../TaskModal/Subtask/Subtask'
-import SubtaskInput from '../TaskModal/SubtaskInput/SubtaskInput'
-import TagForm from '../TaskModal/TagForm/TagForm'
+import styles from './EditTaskModal.module.scss'
+import TaskNameModal from './TaskName/TaskNameModal'
+import TaskDescription from './TaskDescription/TaskDescription'
+import TagForm from './TagForm/TagForm'
 import Tag from '../Tag/Tag'
 import Calend from './Calendar/Calendar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,11 +17,8 @@ import {
   updateTaskExpirationDate,
   addTaskTag,
   deleteTaskTag,
-  addTaskSubtask,
-  deleteTaskSubtask,
-  updateTaskSubtaskName,
-  updateTaskSubtaskChecked,
 } from '../../features/tasksSlice'
+import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 
 const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
   const {
@@ -37,17 +31,12 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     expirationDate,
   } = task
 
-  const [subtaskInput, setSubtaskInput] = useState('')
   const [selectedDate, setSelectedDate] = useState(expirationDate)
   const [selectedTags, setSelectedTags] = useState(tags)
 
   const dispatch = useDispatch()
 
   console.log('name:', name)
-
-  const handleEditClick = () => {
-    setIsOpen(true)
-  }
 
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.id))
@@ -73,40 +62,11 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     dispatch(deleteTaskTag({ id: task.id, tagId }))
   }
 
-  const handleAddSubtask = (subtask) => {
-    dispatch(addTaskSubtask({ id: task.id, subtask }))
-  }
-
-  const handleDeleteSubtask = (subtaskId) => {
-    dispatch(deleteTaskSubtask({ id: task.id, subtaskId }))
-  }
-
-  const handleSubtaskNameChange = (subtaskId, subtaskName) => {
-    dispatch(updateTaskSubtaskName({ id: task.id, subtaskId, subtaskName }))
-  }
-
-  const handleSubtaskCheckedChange = (subtaskId, checked) => {
-    dispatch(updateTaskSubtaskChecked({ id: task.id, subtaskId, checked }))
-  }
-
   const handleExpirationDateChange = (expirationDate) => {
     const dateString = expirationDate
     dispatch(
       updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
     )
-  }
-
-  const handleSubtaskSubmit = (e) => {
-    e.preventDefault()
-    if (subtaskInput.trim()) {
-      const newSubtask = {
-        id: new Date(),
-        name: subtaskInput,
-        checked: false,
-      }
-      handleAddSubtask(newSubtask)
-      setSubtaskInput('')
-    }
   }
 
   const handleDateChange = () => {
@@ -176,32 +136,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
           })}
         </div>
       )}
-
-      {subtasks &&
-        subtasks.map((subtask) => (
-          <div key={subtask.id} className='flex items-start mx-2 mb-3'>
-            <button
-              className={styles.checkbox}
-              onClick={() =>
-                handleSubtaskCheckedChange(subtask.id, !subtask.checked)
-              }>
-              {subtask.checked ? <CheckBoxChecked /> : <CheckBox />}
-            </button>
-            <Subtask
-              subtask={subtask.name}
-              onChange={(e) =>
-                handleSubtaskNameChange(subtask.id, e.target.value)
-              }
-            />
-          </div>
-        ))}
-
-      <SubtaskInput
-        value={subtaskInput}
-        onChange={(e) => setSubtaskInput(e.target.value)}
-        onSubmit={handleSubtaskSubmit}
-      />
-
+      <SubtaskBlock />
       <div className='flex mx-2'>
         <Calend value={selectedDate} onChange={handleDateChange} taskId={id} />
         <TagForm value={selectedTags} onChange={handleTagChange} taskId={id} />

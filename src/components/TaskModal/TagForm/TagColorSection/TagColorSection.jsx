@@ -1,5 +1,5 @@
 import React from 'react'
-import TagBubble from '../../TagBubble/TagBubble'
+import TagBubble from './TagBubble/TagBubble'
 
 const TagColorSection = ({ color, onColorSelect }) => {
   // массив с возможными цветами
