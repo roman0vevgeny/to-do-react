@@ -19,6 +19,7 @@ import {
   deleteTaskTag,
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
+import TaskHeader from './TaskHeader/TaskHeader'
 
 const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
   const {
@@ -62,13 +63,6 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     dispatch(deleteTaskTag({ id: task.id, tagId }))
   }
 
-  const handleExpirationDateChange = (expirationDate) => {
-    const dateString = expirationDate
-    dispatch(
-      updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
-    )
-  }
-
   const handleDateChange = () => {
     setSelectedDate(expirationDate)
     handleExpirationDateChange(expirationDate)
@@ -89,29 +83,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
 
   return (
     <div onClose={handleCloseModal}>
-      <div className='flex flex-row justify-between items-center text-gray mb-3'>
-        <p className='text-12'>Created at {formatDate(creationDate)}</p>
-        <div className='flex flex-row justify-end'>
-          {expirationDate && (
-            <InfoCard svg={<Cal />} children={formatDate(expirationDate)} />
-          )}
-          {subtasks && (
-            <InfoCard
-              svg={<Subtasks />}
-              children={`${
-                subtasks.filter((subtask) => subtask.checked).length
-              }/${subtasks.length}`}
-            />
-          )}
-          <button
-            className={task.isFavorite ? styles.favourite : styles.notFavourite}
-            onClick={handleToggleFavorite}>
-            <Star />
-          </button>
-        </div>
-      </div>
-      <div className={styles.sectionDevider}></div>
-
+      <TaskHeader />
       <TaskNameModal name={name} onChange={handleNameChange} />
       <TaskDescription
         description={description}

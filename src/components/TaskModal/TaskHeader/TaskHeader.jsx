@@ -1,9 +1,27 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateTaskIsFavorite } from '../../../features/tasksSlice'
+import InfoCard from '../../Info/InfoCard'
+import Subtasks from '../../svgs/Subtasks'
+import Star from '../../svgs/Star'
+import Cal from '../../svgs/Cal'
+import styles from './TaskHeader.module.scss'
+import { formatDate } from '../../../helpers/formatDate'
 
 const TaskHeader = () => {
+  const dispatch = useDispatch()
+  const task = useSelector((state) => state.tasks[task.id])
+  const subtasks = useSelector((state) => state.tasks[task.id].subtasks)
+  const creationDate = useSelector((state) => state.tasks[task.id].creationDate)
+  const expirationDate = useSelector(
+    (state) => state.tasks[task.id].expirationDate
+  )
+  const favorite = useSelector((state) => state.tasks[task.id].favorite)
+
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.id))
   }
+
   return (
     <div>
       <div className='flex flex-row justify-between items-center text-gray mb-3'>
@@ -21,7 +39,7 @@ const TaskHeader = () => {
             />
           )}
           <button
-            className={task.isFavorite ? styles.favourite : styles.notFavourite}
+            className={favorite ? styles.favorite : styles.notFavorite}
             onClick={handleToggleFavorite}>
             <Star />
           </button>
@@ -33,3 +51,12 @@ const TaskHeader = () => {
 }
 
 export default TaskHeader
+
+//   const handleExpirationDateChange = (expirationDate) => {
+//     const dateString = expirationDate
+//     if (dateString.length > 0) {
+//       dispatch(
+//         updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
+//       )
+//     }
+//   }
