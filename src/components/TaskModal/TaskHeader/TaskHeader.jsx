@@ -10,16 +10,14 @@ import { formatDate } from '../../../helpers/formatDate'
 
 const TaskHeader = () => {
   const dispatch = useDispatch()
-  const task = useSelector((state) => state.tasks[task.id])
-  const subtasks = useSelector((state) => state.tasks[task.id].subtasks)
-  const creationDate = useSelector((state) => state.tasks[task.id].creationDate)
-  const expirationDate = useSelector(
-    (state) => state.tasks[task.id].expirationDate
-  )
-  const favorite = useSelector((state) => state.tasks[task.id].favorite)
+  const task = useSelector((state) => state.tasks)
+  const subtasks = task.subtasks
+  const creationDate = task.creationDate
+  const expirationDate = task.expirationDate
+  const favorite = task.favorite
 
   const handleToggleFavorite = () => {
-    dispatch(updateTaskIsFavorite(task.id))
+    dispatch(updateTaskIsFavorite(task.favorite))
   }
 
   return (
