@@ -6,7 +6,7 @@ const capitalize = (string) => {
   return string.toUpperCase()
 }
 
-const Tag = ({ tagName, color, deleteTag }) => {
+const Tag = ({ tagName, color, deleteTag, onDelete }) => {
   const getTagType = (color) => {
     switch (color) {
       case 'red':
@@ -23,6 +23,8 @@ const Tag = ({ tagName, color, deleteTag }) => {
         return 'sea'
       case 'gray':
         return 'gray'
+      case 'pink':
+        return 'pink'
       default:
         return 'gray'
     }
@@ -40,7 +42,8 @@ const Tag = ({ tagName, color, deleteTag }) => {
             color
               ? `${styles.tagBg} ${styles[tagType]} ${styles.delete}`
               : styles.tagBg
-          }>
+          }
+          onClick={onDelete}>
           <Delete />
         </div>
       )}

@@ -46,6 +46,10 @@
   @apply bg-seaTag;
 }
 
+.pinkOuter {
+  @apply bg-pinkTag;
+}
+
 .redInner {
   @apply bg-[var(--color-text-red-tag)];
 }
@@ -72,4 +76,8 @@
 
 .seaInner {
   @apply bg-[var(--color-text-sea-tag)];
+}
+
+.pinkInner {
+  @apply bg-[var(--color-text-pink-tag)];
 }

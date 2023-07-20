@@ -2,8 +2,16 @@ import React from 'react'
 import TagBubble from './TagBubble/TagBubble'
 
 const TagColorSection = ({ color, onColorSelect }) => {
-  // массив с возможными цветами
-  const colors = ['red', 'yellow', 'blue', 'sea', 'green', 'purple', 'gray']
+  const colors = [
+    'red',
+    'pink',
+    'purple',
+    'blue',
+    'sea',
+    'green',
+    'yellow',
+    'gray',
+  ]
 
   return (
     <div className='flex w-[60px] flex-wrap'>
@@ -11,8 +19,8 @@ const TagColorSection = ({ color, onColorSelect }) => {
         <TagBubble
           key={c}
           color={c}
-          onColorSelect={onColorSelect} // передаем функцию из пропса
-          selected={c === color} // проверяем, выбран ли данный цвет
+          onColorSelect={onColorSelect}
+          selected={c === color}
         />
       ))}
     </div>

@@ -10,20 +10,27 @@ import { formatDate } from '../../../helpers/formatDate'
 
 const TaskHeader = (taskId) => {
   const dispatch = useDispatch()
-  const task = useSelector((state) => state.tasks[taskId])
-  // const subtasks = task.subtasks
-  const creationDate = useSelector((state) => state.tasks[taskId].creationDate)
-  // const expirationDate = task.expirationDate
-  // const favorite = task.favorite
+  console.log('task id:', taskId)
+  const task = useSelector((state) =>
+    state.tasks.tasks.find((t) => t.id === taskId.taskId)
+  )
+  console.log('task:', task)
+  const subtasks = task.subtasks
+  console.log('subtasks:', subtasks)
+  const creationDate = task.creationDate
+  console.log('creationDate:', creationDate)
+  const expirationDate = task.expirationDate
+  const favorite = task.favorite
+  console.log('favorite:', favorite)
 
   const handleToggleFavorite = () => {
-    dispatch(updateTaskIsFavorite(task.favorite))
+    dispatch(updateTaskIsFavorite(task.id))
   }
 
   return (
     <div>
       <div className='flex flex-row justify-between items-center text-gray mb-3'>
-        <p className='text-12'>Created at {formatDate(creationDate)}</p>
+        <p className='text-12'>Created at {creationDate}</p>
         <div className='flex flex-row justify-end'>
           {expirationDate && (
             <InfoCard svg={<Cal />} children={formatDate(expirationDate)} />

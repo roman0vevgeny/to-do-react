@@ -58,13 +58,6 @@ main::-webkit-scrollbar-thumb {
   max-width: none;
   color-scheme: light dark;
   padding: 0;
-  /* height: calc(100vh - 50px); */
-
-  /* font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; */
 }
 
 .light {
@@ -94,6 +87,7 @@ main::-webkit-scrollbar-thumb {
   --color-yellow: #f4edad;
   --color-purple: #ebdafc;
   --color-sea: #cff3ed;
+  --color-pink: #ffdef9;
   --color-text-gray-tag: #5b5b5b;
   --color-text-red-tag: #ac273f;
   --color-text-green-tag: #339523;
@@ -101,6 +95,7 @@ main::-webkit-scrollbar-thumb {
   --color-text-purple-tag: #833fac;
   --color-text-sea-tag: #228694;
   --color-text-blue-tag: #5c86ee;
+  --color-text-pink-tag: #c73c89;
   --image-color: #a8b1ff;
   --tag-delete: #000000;
   --calendar-disable: #e6e6e6;
@@ -134,13 +129,15 @@ main::-webkit-scrollbar-thumb {
   --color-yellow: #58542f;
   --color-purple: #57446a;
   --color-sea: #3d675f;
+  --color-pink: #66335d;
   --color-text-gray-tag: #b9b9b9;
-  --color-text-red-tag: #e87388;
+  --color-text-red-tag: #f07c91;
   --color-text-green-tag: #76c869;
   --color-text-yellow-tag: #e3ad5c;
   --color-text-purple-tag: #bd8bdc;
   --color-text-sea-tag: #87d1db;
   --color-text-blue-tag: #7698f0;
+  --color-text-pink-tag: #ee9cc9;
   --image-color: #585858;
   --tag-delete: #dcdcdc;
   --calendar-disable: #636363;
@@ -185,7 +182,6 @@ main::-webkit-scrollbar-thumb {
 }
 
 .react-calendar__month-view__weekdays {
-  /* @apply text-gray flex flex-nowrap justify-around items-center text-10 uppercase; */
   @apply flex;
 }
 
@@ -243,10 +239,6 @@ main::-webkit-scrollbar-thumb {
   background: var(--color-blue);
   color: var(--color-text-blue-tag);
 }
-
-/* .react-calendar__tile--now:enabled:focus {
-  outline: none;
-} */
 
 .react-calendar__tile--now:enabled:focus:hover {
   background: var(--color-blue);

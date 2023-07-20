@@ -1,5 +1,5 @@
 .tagBg {
-  @apply flex flex-row items-center my-[5px] mr-[8px] pt-[3px] pb-[3px] px-[3px] rounded-[3px] text-11 tracking-widest leading-[11px] cursor-pointer max-h-[17px];
+  @apply flex flex-row items-center w-fit my-[5px] mr-[8px] pt-[3px] pb-[3px] px-[3px] rounded-[3px] text-11 tracking-widest leading-[11px] cursor-pointer max-h-[17px];
 }
 
 .red {
@@ -28,6 +28,10 @@
 
 .sea {
   @apply bg-seaTag text-seaTag;
+}
+
+.pink {
+  @apply bg-pinkTag text-pinkTag;
 }
 
 .delete {

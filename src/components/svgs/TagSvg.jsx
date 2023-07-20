@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Tag = () => {
+const TagSvg = () => {
   return (
     <svg
       width='16'
@@ -17,4 +17,4 @@ const Tag = () => {
   )
 }
 
-export default Tag
+export default TagSvg

@@ -1,4 +1,4 @@
-.notFavourite {
+.notFavorite {
   @apply flex flex-row text-gray justify-center h-[25px] w-[25px] 
   items-center px-[4px] pb-[1px] rounded-[5px] 
   font-bold text-14 mx-2;
@@ -8,7 +8,7 @@
   }
 }
 
-.favourite {
+.favorite {
   @apply flex flex-row text-yellowTag bg-yellowTag justify-center h-[25px] w-[25px] 
   items-center px-[4px] pb-[1px] rounded-[5px] 
   font-bold text-14 mx-2;

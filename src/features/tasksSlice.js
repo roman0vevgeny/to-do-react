@@ -17,7 +17,7 @@ const initialState = {
       id: 2,
       name: 'Вторая задача',
       description: 'Описание второй задачи',
-      creationDate: '20.02.2022',
+      creationDate: '21.02.2022',
       expirationDate: null,
       subtasks: [],
       favorite: false,
@@ -32,8 +32,6 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action) {
-      // console.log(state)
-      // console.log(action)
       state.tasks.push({
         ...action.payload,
         creationDate: new Date().toISOString(),
@@ -46,8 +44,6 @@ const tasksSlice = createSlice({
     },
 
     updateTaskName(state, action) {
-      // console.log(state)
-      // console.log(action)
       const { id, name } = action.payload
       const task = state.tasks.find((task) => task.id === id)
       if (task) {
@@ -56,8 +52,6 @@ const tasksSlice = createSlice({
     },
 
     updateTaskDescription(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -67,8 +61,6 @@ const tasksSlice = createSlice({
     },
 
     addTaskTag(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -78,21 +70,18 @@ const tasksSlice = createSlice({
     },
 
     deleteTaskTag(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
       if (index > -1) {
-        state.tasks[index].tags = state.tasks[index].tags.filter(
-          (tagId) => tagId !== action.payload.tagId
+        const tagIndex = state.tasks[index].tags.findIndex(
+          (tagId) => tagId === action.payload.tagId
         )
+        state.tasks[index].tags.splice(tagIndex, 1)
       }
     },
 
     addTaskSubtask(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -102,8 +91,6 @@ const tasksSlice = createSlice({
     },
 
     deleteTaskSubtask(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -115,8 +102,6 @@ const tasksSlice = createSlice({
     },
 
     updateTaskSubtaskName(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -132,8 +117,6 @@ const tasksSlice = createSlice({
     },
 
     updateTaskSubtaskChecked(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       )
@@ -157,8 +140,6 @@ const tasksSlice = createSlice({
     },
 
     updateTaskChecked(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex((task) => task.id === action.payload)
       if (index > -1) {
         state.tasks[index].checked = !state.tasks[index].checked
@@ -166,11 +147,9 @@ const tasksSlice = createSlice({
     },
 
     updateTaskIsFavorite(state, action) {
-      // console.log(state)
-      // console.log(action)
       const index = state.tasks.findIndex((task) => task.id === action.payload)
       if (index > -1) {
-        state.tasks[index].isFavorite = !state.tasks[index].isFavorite
+        state.tasks[index].favorite = !state.tasks[index].favorite
       }
     },
   },

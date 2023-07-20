@@ -11,7 +11,6 @@ const AllTags = ({ tags, taskId }) => {
     dispatch(addTaskTag({ id: taskId, tagId }))
   }
 
-  // Проверяем, есть ли у задачи уже добавленный тег
   const task = useSelector((state) =>
     state.tasks.tasks.find((task) => task.id === taskId)
   )

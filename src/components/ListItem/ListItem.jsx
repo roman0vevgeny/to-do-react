@@ -13,20 +13,31 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   updateTaskSubtaskChecked,
   updateTaskChecked,
+  updateTaskIsFavorite,
 } from '../../features/tasksSlice'
 import Modal from '../Modal/Modal'
 
 const ListItem = ({ task }) => {
   const [open, setOpen] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(task.favorite || false)
+  // const [isFavorite, setIsFavorite] = useState(task.favorite || false)
 
   const dispatch = useDispatch()
 
   console.log(task.name)
+  console.log('favorite:', task.favorite)
 
   const checked = useSelector(
     (state) => state.tasks.tasks.find((t) => t.id === task.id).checked
   )
+
+  const favorite = useSelector(
+    (state) => state.tasks.tasks.find((t) => t.id === task.id).favorite
+  )
+
+  const handleToggleFavorite = (e) => {
+    dispatch(updateTaskIsFavorite(task.id))
+    e.stopPropagation()
+  }
 
   const toggleChecked = () => {
     dispatch(updateTaskChecked(task.id))
@@ -42,11 +53,6 @@ const ListItem = ({ task }) => {
 
   const handleCloseModal = () => {
     setOpen(false)
-  }
-
-  const handleToggleFavorite = (e) => {
-    e.stopPropagation()
-    setIsFavorite(!isFavorite)
   }
 
   const allTags = useSelector((state) => state.tags)
@@ -93,7 +99,7 @@ const ListItem = ({ task }) => {
                 <InfoCard svg={<Projects />} children={task.project.name} />
               )}
               <button
-                className={isFavorite ? styles.favourite : styles.notFavourite}
+                className={favorite ? styles.favorite : styles.notFavorite}
                 onClick={handleToggleFavorite}>
                 <Star />
               </button>

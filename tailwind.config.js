@@ -153,6 +153,7 @@ export default {
         purpleTag: 'var(--color-text-purple-tag)',
         grayTag: 'var(--color-text-gray-tag)',
         seaTag: 'var(--color-text-sea-tag)',
+        pinkTag: 'var(--color-text-pink-tag)',
         imageColor: 'var(--image-color)',
         tagDelete: 'var(--tag-delete)',
       },
@@ -175,6 +176,7 @@ export default {
         purpleTag: 'var(--color-purple)',
         grayTag: 'var(--color-gray)',
         seaTag: 'var(--color-sea)',
+        pinkTag: 'var(--color-pink)',
       },
       borderColor: {
         header: 'var(--border-header)',

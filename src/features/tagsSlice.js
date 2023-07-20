@@ -10,8 +10,14 @@ const tagsSlice = createSlice({
       state.push(action.payload)
     },
 
+    // deleteTag(state, action) {
+    //   return state.filter((tag) => tag.id !== action.payload)
+    // },
+
     deleteTag(state, action) {
-      return state.filter((tag) => tag.id !== action.payload)
+      const index = state.findIndex((tag) => tag.id === action.payload)
+      state.splice(index, 1)
+      return state
     },
 
     updateTagName(state, action) {

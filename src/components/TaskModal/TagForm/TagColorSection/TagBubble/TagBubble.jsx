@@ -6,16 +6,18 @@ const TagBubble = ({ color, onColorSelect, selected }) => {
     switch (color) {
       case 'red':
         return 'red'
+      case 'pink':
+        return 'pink'
+      case 'purple':
+        return 'purple'
       case 'blue':
         return 'blue'
+      case 'sea':
+        return 'sea'
       case 'green':
         return 'green'
       case 'yellow':
         return 'yellow'
-      case 'purple':
-        return 'purple'
-      case 'sea':
-        return 'sea'
       case 'gray':
         return 'gray'
       default:
@@ -24,10 +26,7 @@ const TagBubble = ({ color, onColorSelect, selected }) => {
   }
 
   const tagType = getTagType(color)
-
-  // функция для обработки клика на пузырек
   const handleClick = () => {
-    // вызываем функцию из пропса и передаем ей цвет
     onColorSelect(color)
   }
 
@@ -40,8 +39,7 @@ const TagBubble = ({ color, onColorSelect, selected }) => {
             }`
           : styles.tagOuter
       }
-      onClick={handleClick} // добавляем обработчик клика
-    >
+      onClick={handleClick}>
       <div
         className={
           color
