@@ -39,6 +39,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
 
   console.log('name:', name)
   console.log('id:', id)
+  console.log('expiration date:', expirationDate)
 
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.id))
@@ -64,6 +65,15 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     dispatch(deleteTaskTag({ id: task.id, tagId }))
   }
 
+  const handleExpirationDateChange = (expirationDate) => {
+    const dateString = expirationDate
+    if (dateString) {
+      dispatch(
+        updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
+      )
+    }
+  }
+
   const handleDateChange = () => {
     setSelectedDate(expirationDate)
     handleExpirationDateChange(expirationDate)
@@ -84,7 +94,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
 
   return (
     <div onClose={handleCloseModal}>
-      <TaskHeader />
+      <TaskHeader taskId={id} />
       <TaskNameModal name={name} onChange={handleNameChange} />
       <TaskDescription
         description={description}

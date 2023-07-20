@@ -8,13 +8,13 @@ import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
 import { formatDate } from '../../../helpers/formatDate'
 
-const TaskHeader = () => {
+const TaskHeader = (taskId) => {
   const dispatch = useDispatch()
-  const task = useSelector((state) => state.tasks)
-  const subtasks = task.subtasks
-  const creationDate = task.creationDate
-  const expirationDate = task.expirationDate
-  const favorite = task.favorite
+  const task = useSelector((state) => state.tasks[taskId])
+  // const subtasks = task.subtasks
+  const creationDate = useSelector((state) => state.tasks[taskId].creationDate)
+  // const expirationDate = task.expirationDate
+  // const favorite = task.favorite
 
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.favorite))
@@ -49,12 +49,3 @@ const TaskHeader = () => {
 }
 
 export default TaskHeader
-
-//   const handleExpirationDateChange = (expirationDate) => {
-//     const dateString = expirationDate
-//     if (dateString.length > 0) {
-//       dispatch(
-//         updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
-//       )
-//     }
-//   }

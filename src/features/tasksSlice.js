@@ -6,7 +6,7 @@ const initialState = {
       id: 1,
       name: 'Первая задача',
       description: 'Описание первой задачи',
-      creationDate: '02.05.23',
+      creationDate: '20.02.2022',
       expirationDate: null,
       subtasks: [],
       favorite: false,
@@ -17,7 +17,7 @@ const initialState = {
       id: 2,
       name: 'Вторая задача',
       description: 'Описание второй задачи',
-      creationDate: '02.05.23',
+      creationDate: '20.02.2022',
       expirationDate: null,
       subtasks: [],
       favorite: false,
@@ -32,8 +32,8 @@ const tasksSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action) {
-      console.log(state)
-      console.log(action)
+      // console.log(state)
+      // console.log(action)
       state.tasks.push({
         ...action.payload,
         creationDate: new Date().toISOString(),
@@ -46,8 +46,8 @@ const tasksSlice = createSlice({
     },
 
     updateTaskName(state, action) {
-      console.log(state)
-      console.log(action)
+      // console.log(state)
+      // console.log(action)
       const { id, name } = action.payload
       const task = state.tasks.find((task) => task.id === id)
       if (task) {
@@ -150,7 +150,7 @@ const tasksSlice = createSlice({
 
     updateTaskExpirationDate(state, action) {
       const { id, expirationDate } = action.payload
-      const task = state.tasks.find((task) => task.id === id)
+      const task = state.tasks.findIndex((task) => task.id === id)
       if (task) {
         task.expirationDate = expirationDate
       }
