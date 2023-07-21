@@ -10,14 +10,17 @@ import TabList from '../svgs/TabList'
 import TabCards from '../svgs/TabCards'
 import TabBoards from '../svgs/TabBoards'
 
-const Header = () => {
+const Header = ({ toggleNavbar, showNavbar }) => {
   return (
     <div className={styles.main}>
       <div className='flex flex-raw min-w-[292px] max-w-[292px]'>
-        <MenuButton svg={<Burger />} />
+        <MenuButton svg={<Burger />} onClick={toggleNavbar} />
         <SearchBar />
       </div>
-      <div className='flex flex-row ml-24 items-center'>
+      <div
+        className={`flex flex-row ${
+          showNavbar ? 'ml-24 items-center' : 'mr-52 items-center'
+        }`}>
         <ViewButton svg={<TabList />} />
         <ViewButton svg={<TabCards />} />
         <ViewButton svg={<TabBoards />} />
