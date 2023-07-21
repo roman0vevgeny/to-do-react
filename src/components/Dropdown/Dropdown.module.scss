@@ -14,6 +14,22 @@
   }
 }
 
+.open {
+  @apply flex flex-row w-full grid-cols-2 auto-cols-fr gap-1 auto-rows-fr 
+  h-[30px] min-w-[25px] bg-mainBg
+  items-center px-[7px] py-1 rounded-t-[5px] 
+  font-bold text-14 text-gray mt-1
+  justify-between;
+
+  &:hover {
+    @apply bg-navButtonHover text-grayHover;
+  }
+
+  &:active {
+    @apply bg-grayHover text-grayHover;
+  }
+}
+
 .icon {
   @apply flex flex-row w-full grid-cols-2 auto-cols-fr gap-2 auto-rows-fr 
   items-center;
@@ -21,4 +37,8 @@
 
 .counter {
   @apply flex min-w-[15px] justify-center items-center;
+}
+
+.dropdown {
+  @apply flex flex-col w-full mt-[1px] rounded-md transition duration-300 max-h-0 overflow-hidden origin-top;
 }

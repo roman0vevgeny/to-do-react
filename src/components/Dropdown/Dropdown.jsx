@@ -21,7 +21,12 @@ const Dropdown = ({ children, items, onDeleteTag, svg }) => {
 
   return (
     <div>
-      <button className={styles.main} onClick={toggleDropdown}>
+      <button
+        className={isOpen ? styles.open : styles.main}
+        onClick={() => {
+          toggleDropdown()
+          toggleRotation()
+        }}>
         <div className={styles.icon}>
           {svg && svg}
           {typeof children === 'string'
@@ -29,16 +34,16 @@ const Dropdown = ({ children, items, onDeleteTag, svg }) => {
             : children}
         </div>
         <div className={styles.counter}>
-          <div>{<Arrow className={`${isRotated ? 'rotate-180' : ''}`} />}</div>
+          <div>{<Arrow rotate={isRotated} />}</div>
         </div>
       </button>
       <div
-        className={`flex flex-col w-full mt-[1px] rounded-md transition duration-300 max-h-0 overflow-hidden origin-top ${
+        className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden ${
           isOpen ? 'max-h-screen opacity-100' : 'opacity-0'
         }`}>
-        <ul className='divide-y divide-gray-500'>
+        <ul className='divide-y divide-gray-500 py-2'>
           {items.map((item) => (
-            <li key={item.name} className='px-4 py-[3px] hover:bg-gray-100'>
+            <li key={item.name} className='px-8 pt-[1px] hover:bg-gray-100'>
               <Tag
                 color={item.color}
                 tagName={item.name}
