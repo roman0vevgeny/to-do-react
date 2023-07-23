@@ -37,10 +37,6 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
 
   const dispatch = useDispatch()
 
-  // console.log('name:', name)
-  // console.log('id:', id)
-  // console.log('expiration date:', expirationDate)
-
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.id))
   }

@@ -40,5 +40,13 @@
 }
 
 .dropdown {
-  @apply flex flex-col w-full mt-[1px] rounded-md transition duration-300 max-h-0 overflow-hidden origin-top;
+  @apply flex flex-col content-start justify-start w-full mt-[1px] rounded-md transition duration-300 max-h-0 overflow-hidden origin-top;
+}
+
+.item {
+  @apply flex py-1 pl-7 pr-2 text-14 text-gray cursor-pointer truncate;
+
+  &:hover {
+    @apply bg-gray text-grayHover;
+  }
 }

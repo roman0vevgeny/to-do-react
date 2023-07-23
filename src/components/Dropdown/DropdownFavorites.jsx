@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import Tag from '../Tag/Tag'
 import Arrow from '../svgs/Arrow'
 import styles from './Dropdown.module.scss'
+import Modal from '../Modal/Modal'
+import EditTaskModal from '../TaskModal/EditTaskModal'
+import { formatDate } from '../../helpers/formatDate'
 
 const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
 }
 
-const Dropdown = ({ children, items, onDeleteTag, svg }) => {
+const DropdownFavorites = ({ children, items = [], svg }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRotated, setIsRotated] = useState(false)
+  const [openModal, setOpenModal] = useState(null)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -18,6 +21,17 @@ const Dropdown = ({ children, items, onDeleteTag, svg }) => {
   const toggleRotation = () => {
     setIsRotated(!isRotated)
   }
+
+  const handleOpenModal = (item) => {
+    setOpenModal(item)
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
+
+  console.log(items)
+  items.map((item) => console.log(item.name))
 
   return (
     <div>
@@ -41,26 +55,38 @@ const Dropdown = ({ children, items, onDeleteTag, svg }) => {
         className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden ${
           isOpen ? 'max-h-screen opacity-100' : 'opacity-0'
         }`}>
-        <ul className='divide-y divide-gray-500 py-2'>
-          {items && items.length > 0 ? (
+        <ul className='py-2 w-[270px]'>
+          {items.length > 0 ? (
             items.map((item) => (
-              <li key={item.name} className='px-7 pt-[1px] hover:bg-gray-100'>
-                <Tag
-                  color={item.color}
-                  tagName={item.name}
-                  deleteTag={true}
-                  key={item.id}
-                  onDelete={() => onDeleteTag(item)}
-                />
+              <li
+                key={item.name}
+                className={styles.item}
+                onClick={() => handleOpenModal(item)}>
+                <span className='text-14 text-gray truncate'>{item.name}</span>
               </li>
             ))
           ) : (
-            <p className='text-14 flex px-7 text-gray'>No tags yet</p>
+            <p className='text-14 flex px-7 text-gray truncate'>
+              No favorites yet
+            </p>
           )}
         </ul>
       </div>
+      {openModal && (
+        <Modal
+          open={openModal}
+          onClose={handleCloseModal}
+          children={
+            <EditTaskModal
+              task={openModal}
+              onClose={(e) => handleCloseModal()}
+              formatDate={formatDate}
+            />
+          }
+        />
+      )}
     </div>
   )
 }
 
-export default Dropdown
+export default DropdownFavorites

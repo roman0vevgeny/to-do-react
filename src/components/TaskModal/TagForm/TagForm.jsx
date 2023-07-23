@@ -14,9 +14,18 @@ const TagForm = ({ value, onChange, taskId }) => {
   const [color, setColor] = useState('')
   const [error, setError] = useState('')
 
+  // const handleNameChange = (value) => {
+  //   setName(value)
+  //   setError('')
+  // }
+
   const handleNameChange = (value) => {
     setName(value)
-    setError('')
+    if (value.length > 20) {
+      setError('20 charecters max')
+    } else {
+      setError('')
+    }
   }
 
   const handleColorSelect = (value) => {
@@ -27,6 +36,10 @@ const TagForm = ({ value, onChange, taskId }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (name && color) {
+      if (name.length > 20) {
+        setError('20 charecters max')
+        return false
+      }
       const newTag = {
         id: Date.now().toString(),
         name,

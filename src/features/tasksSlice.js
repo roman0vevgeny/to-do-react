@@ -4,7 +4,7 @@ const initialState = {
   tasks: [
     {
       id: 1,
-      name: 'Первая задача',
+      name: 'Первая задача с очень длинным текстом',
       description: 'Описание первой задачи',
       creationDate: '20.02.2022',
       expirationDate: null,
