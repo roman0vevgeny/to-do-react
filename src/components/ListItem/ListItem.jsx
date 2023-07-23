@@ -19,12 +19,11 @@ import Modal from '../Modal/Modal'
 
 const ListItem = ({ task }) => {
   const [open, setOpen] = useState(false)
-  // const [isFavorite, setIsFavorite] = useState(task.favorite || false)
 
   const dispatch = useDispatch()
 
   console.log(task.name)
-  console.log('favorite:', task.favorite)
+  // console.log('favorite:', task.favorite)
 
   const checked = useSelector(
     (state) => state.tasks.tasks.find((t) => t.id === task.id).checked
@@ -107,7 +106,7 @@ const ListItem = ({ task }) => {
           </div>
           <div className='flex'>
             {task.tags.length > 0 && (
-              <div className='flex'>
+              <div className='flex max-w-[600px] flex-wrap'>
                 {task.tags.map((tagId, index) => {
                   const tag = allTags.find((tag) => tag.id === tagId)
                   return (

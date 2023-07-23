@@ -18,7 +18,7 @@ const Navbar = () => {
     dispatch(deleteTag(tag.id))
   }
 
-  console.log('allTags:', allTags)
+  // console.log('allTags:', allTags)
 
   return (
     <div className={styles.main}>

@@ -8,7 +8,7 @@ const initialState = {
       description: 'Описание первой задачи',
       creationDate: '20.02.2022',
       expirationDate: null,
-      subtasks: [],
+      subtasks: [{ id: 1, name: 'Подзадача 1', checked: false }],
       favorite: false,
       tags: [],
       project: null,

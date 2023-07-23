@@ -37,9 +37,9 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
 
   const dispatch = useDispatch()
 
-  console.log('name:', name)
-  console.log('id:', id)
-  console.log('expiration date:', expirationDate)
+  // console.log('name:', name)
+  // console.log('id:', id)
+  // console.log('expiration date:', expirationDate)
 
   const handleToggleFavorite = () => {
     dispatch(updateTaskIsFavorite(task.id))
@@ -102,7 +102,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
       />
 
       {tags && (
-        <div className='flex ml-4 mr-2 mt-1 mb-3'>
+        <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
           {tags.map((tagId, index) => {
             const tag = allTags.find((tag) => tag.id === tagId)
             return (
