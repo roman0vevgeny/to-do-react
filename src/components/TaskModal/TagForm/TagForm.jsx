@@ -14,11 +14,6 @@ const TagForm = ({ value, onChange, taskId }) => {
   const [color, setColor] = useState('')
   const [error, setError] = useState('')
 
-  // const handleNameChange = (value) => {
-  //   setName(value)
-  //   setError('')
-  // }
-
   const handleNameChange = (value) => {
     setName(value)
     if (value.length > 20) {
@@ -62,7 +57,7 @@ const TagForm = ({ value, onChange, taskId }) => {
   return (
     <form className='flex flex-col mt-8 ml-8 w-full' onSubmit={handleSubmit}>
       <TagInput name={name} onNameChange={handleNameChange} />
-      <div className='flex mt-2'>
+      <div className='flex mt-2 mr-2'>
         <TagColorSection color={color} onColorSelect={handleColorSelect} />{' '}
         <AllTags tags={tags} onSelect={handleTagSelect} taskId={taskId} />
       </div>

@@ -1,12 +1,16 @@
 .input {
-  @apply flex box-border text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-task rounded-[5px] w-[500px] cursor-pointer border-1 border-stroke;
+  @apply flex box-border text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-task rounded-[5px] w-[500px] cursor-pointer border-1 border-search;
 
   &:hover {
     @apply text-gray box-border;
+
+    &::placeholder {
+      @apply text-gray;
+    }
   }
 
   &::placeholder {
-    @apply text-gray;
+    @apply text-task;
   }
 
   &:focus {

@@ -50,7 +50,7 @@ const Subtask = ({ subtask, onDelete, onChange }) => {
   }, [subtask])
 
   return (
-    <div className='flex flex-row justify-between items-start w-full'>
+    <div className='flex flex-row justify-between items-start w-full mt-[1px]'>
       <div
         className={styles.input}
         placeholder={subtask}

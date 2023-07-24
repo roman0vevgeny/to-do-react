@@ -1,8 +1,4 @@
 import React, { useState } from 'react'
-// import InfoCard from '../Info/InfoCard'
-// import Subtasks from '../svgs/Subtasks'
-// import Star from '../svgs/Star'
-// import Cal from '../svgs/Cal'
 import styles from './EditTaskModal.module.scss'
 import TaskNameModal from './TaskName/TaskNameModal'
 import TaskDescription from './TaskDescription/TaskDescription'
@@ -13,26 +9,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   updateTaskName,
   updateTaskDescription,
-  updateTaskIsFavorite,
-  updateTaskExpirationDate,
   addTaskTag,
   deleteTaskTag,
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
 
-const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
-  const {
-    id,
-    name,
-    description,
-    creationDate,
-    tags,
-    subtasks,
-    expirationDate,
-  } = task
+const EditTaskModal = ({ handleCloseModal, task }) => {
+  const { id, name, description, tags } = task
 
-  const [selectedDate, setSelectedDate] = useState(expirationDate)
+  const expirationDate = useSelector(
+    (state) => state.tasks.tasks.find((t) => t.id === id).expirationDate
+  )
+
   const [selectedTags, setSelectedTags] = useState(tags)
 
   const dispatch = useDispatch()
@@ -57,20 +46,6 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     dispatch(deleteTaskTag({ id: task.id, tagId }))
   }
 
-  const handleExpirationDateChange = (expirationDate) => {
-    const dateString = expirationDate
-    if (dateString) {
-      dispatch(
-        updateTaskExpirationDate({ id: task.id, expirationDate: dateString })
-      )
-    }
-  }
-
-  const handleDateChange = () => {
-    setSelectedDate(expirationDate)
-    handleExpirationDateChange(expirationDate)
-  }
-
   const handleTagChange = (tagId) => {
     if (selectedTags.includes(tagId)) {
       const newSelectedTags = selectedTags.filter((id) => id !== tagId)
@@ -83,6 +58,8 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
     }
     dispatch(updateTaskTags({ id: task.id, tags: selectedTags }))
   }
+
+  console.log(expirationDate)
 
   return (
     <div onClose={handleCloseModal}>
@@ -112,8 +89,12 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
         </div>
       )}
       <SubtaskBlock task={task} />
-      <div className='flex mx-2'>
-        <Calend value={selectedDate} onChange={handleDateChange} taskId={id} />
+      <div className='flex ml-2'>
+        <Calend
+          expirationDate={expirationDate}
+          dispatch={dispatch}
+          task={task}
+        />
         <TagForm value={selectedTags} onChange={handleTagChange} taskId={id} />
       </div>
     </div>

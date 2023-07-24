@@ -11,7 +11,6 @@ import Projects from '../svgs/Projects'
 import EditTaskModal from '../TaskModal/EditTaskModal'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  updateTaskSubtaskChecked,
   updateTaskChecked,
   updateTaskIsFavorite,
 } from '../../features/tasksSlice'
@@ -39,10 +38,6 @@ const ListItem = ({ task }) => {
   const toggleChecked = () => {
     dispatch(updateTaskChecked(task.id))
   }
-
-  // const toggleSubtaskChecked = (subtaskId) => {
-  //   dispatch(updateTaskSubtaskChecked({ id: task.id, subtaskId }))
-  // }
 
   const handleOpenModal = () => {
     setOpen(true)

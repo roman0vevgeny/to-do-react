@@ -149,9 +149,17 @@ const tasksSlice = createSlice({
       }
     },
 
+    // updateTaskExpirationDate(state, action) {
+    //   const { id, expirationDate } = action.payload
+    //   const task = state.tasks.findIndex((task) => task.id === id)
+    //   if (task) {
+    //     task.expirationDate = expirationDate
+    //   }
+    // },
+
     updateTaskExpirationDate(state, action) {
       const { id, expirationDate } = action.payload
-      const task = state.tasks.findIndex((task) => task.id === id)
+      const task = state.tasks.find((task) => task.id === id)
       if (task) {
         task.expirationDate = expirationDate
       }
