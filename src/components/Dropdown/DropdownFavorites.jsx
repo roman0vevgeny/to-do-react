@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import Arrow from '../svgs/Arrow'
 import styles from './Dropdown.module.scss'
 import Modal from '../Modal/Modal'
 import EditTaskModal from '../TaskModal/EditTaskModal'
 import { formatDate } from '../../helpers/formatDate'
+import { getTaskById } from '../../helpers/getTaskById'
 
 const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
@@ -13,6 +15,10 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRotated, setIsRotated] = useState(false)
   const [openModal, setOpenModal] = useState(null)
+
+  const task = useSelector((state) =>
+    openModal ? getTaskById(state, openModal.id) : null
+  )
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -29,8 +35,6 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
   const handleCloseModal = () => {
     setOpenModal(false)
   }
-
-  //   items.map((item) => console.log(item.name))
 
   return (
     <div>
@@ -58,7 +62,7 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
           {items.length > 0 ? (
             items.map((item) => (
               <li
-                key={item.name}
+                key={item.id}
                 className={styles.item}
                 onClick={() => handleOpenModal(item)}>
                 <span className='text-14 text-gray truncate'>{item.name}</span>
@@ -77,7 +81,7 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
           onClose={handleCloseModal}
           children={
             <EditTaskModal
-              task={openModal}
+              task={task}
               onClose={(e) => handleCloseModal()}
               formatDate={formatDate}
             />

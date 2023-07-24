@@ -60,7 +60,7 @@ const SubtaskBlock = ({ task }) => {
         subtasks.map((subtask, index) => (
           <div
             key={`${subtask.id}-${subtasks.length}`}
-            className='flex items-start mx-2 mb-3'>
+            className='flex items-start mx-2 mb-1'>
             <button
               className={styles.checkbox}
               onClick={(e) => {
