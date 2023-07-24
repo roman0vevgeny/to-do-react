@@ -1,24 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './SubtaskInput.module.scss'
+import Close from '../../../svgs/Close'
 
-const SubtaskInput = ({ value, onChange, onSubmit }) => {
-  const [text, setText] = useState(value)
-
-  const handleFocus = () => {
-    setText('')
-  }
-
-  const handleBlur = () => {
-    if (text === '') {
-      setText(value)
-    }
-  }
-
-  const handleChange = (e) => {
-    setText(e.target.value)
-    onChange(e.target.value)
-  }
-
+const SubtaskInput = ({ value, onChange, onSubmit, inputRef }) => {
   const handleKeyUp = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
@@ -26,17 +10,26 @@ const SubtaskInput = ({ value, onChange, onSubmit }) => {
     }
   }
 
+  const handleClearInput = () => {
+    inputRef.current.value = ''
+  }
+
   return (
-    <div className='flex flex-row justify-between ml-2 items-start my-2'>
+    <div className='relative flex flex-row justify-between ml-2 items-start my-2'>
       <input
         className={styles.input}
         type='text'
-        value={text}
+        value={value}
+        placeholder='+ Add a subtask'
         onKeyUp={handleKeyUp}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        onChange={handleChange}
+        onChange={onChange}
+        ref={inputRef}
       />
+      {value.length > 0 && (
+        <button className={styles.close} onClick={handleClearInput}>
+          <Close />
+        </button>
+      )}
     </div>
   )
 }

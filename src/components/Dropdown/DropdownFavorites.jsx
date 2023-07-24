@@ -30,8 +30,7 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
     setOpenModal(false)
   }
 
-  console.log(items)
-  items.map((item) => console.log(item.name))
+  //   items.map((item) => console.log(item.name))
 
   return (
     <div>

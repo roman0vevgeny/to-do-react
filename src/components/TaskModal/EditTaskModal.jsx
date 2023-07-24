@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import InfoCard from '../Info/InfoCard'
-import Subtasks from '../svgs/Subtasks'
-import Star from '../svgs/Star'
-import Cal from '../svgs/Cal'
+// import InfoCard from '../Info/InfoCard'
+// import Subtasks from '../svgs/Subtasks'
+// import Star from '../svgs/Star'
+// import Cal from '../svgs/Cal'
 import styles from './EditTaskModal.module.scss'
 import TaskNameModal from './TaskName/TaskNameModal'
 import TaskDescription from './TaskDescription/TaskDescription'
@@ -36,10 +36,6 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
   const [selectedTags, setSelectedTags] = useState(tags)
 
   const dispatch = useDispatch()
-
-  const handleToggleFavorite = () => {
-    dispatch(updateTaskIsFavorite(task.id))
-  }
 
   const handleNameChange = (e) => {
     dispatch(updateTaskName({ id: task.id, name: e.target.value }))
@@ -115,7 +111,7 @@ const EditTaskModal = ({ handleCloseModal, task, formatDate }) => {
           })}
         </div>
       )}
-      <SubtaskBlock />
+      <SubtaskBlock task={task} />
       <div className='flex mx-2'>
         <Calend value={selectedDate} onChange={handleDateChange} taskId={id} />
         <TagForm value={selectedTags} onChange={handleTagChange} taskId={id} />

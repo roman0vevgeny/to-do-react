@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Button from '../../../Button/Button'
 import Edit from '../../../svgs/Edit'
 import styles from './Subtask.module.scss'
 import Close from '../../../svgs/Close'
 import ModalButton from '../../../Button/ModalButton'
 
-const CreateInput = ({ subtask }) => {
-  const [text, setText] = useState(subtask)
-  const [prevText, setPrevText] = useState(subtask)
+const Subtask = ({ subtask, onDelete, onChange }) => {
+  const [text, setText] = useState(subtask.name)
+  const [prevText, setPrevText] = useState(subtask.name)
   const inputRef = useRef(null)
 
   const handleFocus = () => {
@@ -26,12 +25,14 @@ const CreateInput = ({ subtask }) => {
     if (text.trim() === '') {
       setText(prevText)
     }
+    onChange(subtask.id, text)
   }
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       inputRef.current.blur()
+      onChange(subtask.id, text)
     }
   }
 
@@ -44,8 +45,8 @@ const CreateInput = ({ subtask }) => {
   }, [text])
 
   useEffect(() => {
-    setPrevText(subtask)
-    setText(subtask)
+    setPrevText(subtask.name)
+    setText(subtask.name)
   }, [subtask])
 
   return (
@@ -63,12 +64,12 @@ const CreateInput = ({ subtask }) => {
         <div className='flex flex-row mt-[1px]'>
           <ModalButton svg={<Edit />} onClick={handleFocus} />
         </div>
-        <div className='flex flex-row mt-[1px]'>
-          <ModalButton svg={<Close />} />
+        <div className='flex flex-row mt-[1px] hover:bg-redBg hover:text-redTag'>
+          <ModalButton svg={<Close />} onClick={onDelete} />
         </div>
       </div>
     </div>
   )
 }
 
-export default CreateInput
+export default Subtask

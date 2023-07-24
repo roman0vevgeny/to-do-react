@@ -8,7 +8,10 @@ const initialState = {
       description: 'Описание первой задачи',
       creationDate: '20.02.2022',
       expirationDate: null,
-      subtasks: [{ id: 1, name: 'Подзадача 1', checked: false }],
+      subtasks: [
+        { id: 1, name: 'Подзадача 1', checked: false },
+        { id: 2, name: 'Подзадача 2', checked: false },
+      ],
       favorite: false,
       tags: [],
       project: null,
@@ -101,6 +104,21 @@ const tasksSlice = createSlice({
       }
     },
 
+    // updateTaskSubtaskName(state, action) {
+    //   const index = state.tasks.findIndex(
+    //     (task) => task.id === action.payload.id
+    //   )
+    //   if (index > -1) {
+    //     const subtaskIndex = state.tasks[index].subtasks.findIndex(
+    //       (subtask) => subtask.id === action.payload.subtaskId
+    //     )
+    //     if (subtaskIndex > -1) {
+    //       state.tasks[index].subtasks[subtaskIndex].name =
+    //         action.payload.subtaskName
+    //     }
+    //   }
+    // },
+
     updateTaskSubtaskName(state, action) {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
@@ -110,8 +128,8 @@ const tasksSlice = createSlice({
           (subtask) => subtask.id === action.payload.subtaskId
         )
         if (subtaskIndex > -1) {
-          state.tasks[index].subtasks[subtaskIndex].name =
-            action.payload.subtaskName
+          const newSubtaskName = action.payload.subtaskName
+          state.tasks[index].subtasks[subtaskIndex].name = newSubtaskName
         }
       }
     },

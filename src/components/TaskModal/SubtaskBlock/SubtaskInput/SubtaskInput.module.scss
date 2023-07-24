@@ -6,11 +6,15 @@
   }
 
   &::placeholder {
-    @apply text-placeholder;
+    @apply text-gray;
   }
 
   &:focus {
     @apply outline-none bg-inputFocus text-inputFocus cursor-auto border-none pl-[9px] py-[5px] box-border;
+
+    &::placeholder {
+      @apply text-inputFocus;
+    }
   }
 }
 
@@ -19,5 +23,13 @@
 
   &:focus {
     @apply outline-none filter-none;
+  }
+}
+
+.close {
+  @apply box-border pl-[7px] pr-[7px] pt-[6px] pb-[7px] absolute top-[7px] right-[11px] rounded-[3px] text-inputFocus;
+
+  &:hover {
+    @apply bg-inputFocus text-inputFocus;
   }
 }

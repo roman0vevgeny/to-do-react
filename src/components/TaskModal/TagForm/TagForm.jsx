@@ -22,7 +22,7 @@ const TagForm = ({ value, onChange, taskId }) => {
   const handleNameChange = (value) => {
     setName(value)
     if (value.length > 20) {
-      setError('20 charecters max')
+      setError('20 characters max')
     } else {
       setError('')
     }
@@ -37,7 +37,7 @@ const TagForm = ({ value, onChange, taskId }) => {
     e.preventDefault()
     if (name && color) {
       if (name.length > 20) {
-        setError('20 charecters max')
+        setError('20 characters max')
         return false
       }
       const newTag = {
