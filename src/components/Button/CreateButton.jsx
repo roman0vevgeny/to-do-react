@@ -1,25 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
 import Plus from '../svgs/Plus'
 import Modal from '../Modal/Modal'
+import CreateTaskModal from '../TaskModal/CreateTaskModal'
 
 const CreateButton = ({ children }) => {
-  const handleOpen = () => {
-    // dispatch(openModal())
+  const [open, setOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    console.log('Button clicked')
+    setOpen(true)
   }
 
-  const handleClose = () => {
-    // dispatch(closeModal())
+  const handleCloseModal = () => {
+    setOpen(false)
   }
 
   return (
     <>
-      <Button svgLeft={<Plus />} onClick={handleOpen} />
+      <Button svgLeft={<Plus />} onClick={handleOpenModal} />
       <Modal
-        // isOpen={modalState.open}
-        // onClose={handleClose}
-        children={children}
-        contentLabel='Create new task'
+        open={open}
+        onClose={handleCloseModal}
+        children={<CreateTaskModal onClose={handleCloseModal} />}
       />
     </>
   )

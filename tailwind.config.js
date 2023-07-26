@@ -177,6 +177,7 @@ export default {
         grayTag: 'var(--color-gray)',
         seaTag: 'var(--color-sea)',
         pinkTag: 'var(--color-pink)',
+        scroll: 'var(--bg-scroll)',
       },
       borderColor: {
         header: 'var(--border-header)',

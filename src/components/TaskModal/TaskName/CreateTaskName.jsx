@@ -2,17 +2,9 @@ import React, { useRef, useEffect } from 'react'
 import Edit from '../../svgs/Edit'
 import styles from './TaskNameModal.module.scss'
 import ModalButton from '../../Button/ModalButton'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateTaskName } from '../../../features/tasksSlice'
 
-const TaskNameModal = ({ id }) => {
-  const name = useSelector(
-    (state) => state.tasks.tasks.find((t) => t.id === id).name
-  )
-
+const CreateTaskName = ({ name, setName }) => {
   const inputRef = useRef(null)
-
-  const dispatch = useDispatch()
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -31,7 +23,7 @@ const TaskNameModal = ({ id }) => {
     if (!newText) {
       inputRef.current.textContent = name
     } else if (newText !== name) {
-      dispatch(updateTaskName({ id, name: newText }))
+      setName(newText)
     }
   }
 
@@ -63,4 +55,4 @@ const TaskNameModal = ({ id }) => {
   )
 }
 
-export default TaskNameModal
+export default CreateTaskName

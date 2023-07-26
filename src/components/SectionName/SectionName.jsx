@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import Edit from '../svgs/Edit'
 import styles from './SectionName.module.scss'
 
-const SectionName = ({ name, editable }) => {
+const SectionName = ({ name, editable, onClick }) => {
   const [text, setText] = useState(name)
   const inputRef = useRef(null)
 

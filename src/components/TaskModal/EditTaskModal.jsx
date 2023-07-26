@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './EditTaskModal.module.scss'
 import TaskNameModal from './TaskName/TaskNameModal'
 import TaskDescription from './TaskDescription/TaskDescription'
@@ -7,34 +7,26 @@ import Tag from '../Tag/Tag'
 import Calend from './Calendar/Calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  updateTaskName,
-  updateTaskDescription,
+  addTask,
   addTaskTag,
   deleteTaskTag,
+  updateTaskExpirationDate,
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
 
-const EditTaskModal = ({ handleCloseModal, task }) => {
-  const { id, name, description, tags } = task
-
-  const expirationDate = useSelector(
-    (state) => state.tasks.tasks.find((t) => t.id === id).expirationDate
-  )
+const EditTaskModal = ({ handleCloseModal, task, isNewTask }) => {
+  const { id, description, tags, expirationDate } = task
 
   const [selectedTags, setSelectedTags] = useState(tags)
 
   const dispatch = useDispatch()
 
-  const handleNameChange = (e) => {
-    dispatch(updateTaskName({ id: task.id, name: e.target.value }))
-  }
-
-  const handleDescriptionChange = (e) => {
-    dispatch(
-      updateTaskDescription({ id: task.id, description: e.target.value })
-    )
-  }
+  useEffect(() => {
+    if (isNewTask) {
+      dispatch(addTask(task))
+    }
+  }, [dispatch, task, isNewTask])
 
   const allTags = useSelector((state) => state.tags)
 
@@ -59,17 +51,11 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
     dispatch(updateTaskTags({ id: task.id, tags: selectedTags }))
   }
 
-  console.log(expirationDate)
-
   return (
     <div onClose={handleCloseModal}>
       <TaskHeader taskId={id} />
-      <TaskNameModal name={name} onChange={handleNameChange} />
-      <TaskDescription
-        description={description}
-        onChange={handleDescriptionChange}
-      />
-
+      <TaskNameModal id={id} />
+      <TaskDescription id={id} />
       {tags && (
         <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
           {tags.map((tagId, index) => {
@@ -91,7 +77,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
       <SubtaskBlock task={task} />
       <div className='flex ml-2'>
         <Calend
-          expirationDate={expirationDate}
+          expirationDate={task.expirationDate}
           dispatch={dispatch}
           task={task}
         />

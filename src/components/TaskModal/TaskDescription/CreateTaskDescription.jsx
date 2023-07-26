@@ -1,18 +1,10 @@
 import React, { useRef, useEffect } from 'react'
 import Edit from '../../svgs/Edit'
-import styles from './TaskNameModal.module.scss'
+import styles from './TaskDescription.module.scss'
 import ModalButton from '../../Button/ModalButton'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateTaskName } from '../../../features/tasksSlice'
 
-const TaskNameModal = ({ id }) => {
-  const name = useSelector(
-    (state) => state.tasks.tasks.find((t) => t.id === id).name
-  )
-
+const CreateTaskDescription = ({ description, setDescription }) => {
   const inputRef = useRef(null)
-
-  const dispatch = useDispatch()
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -28,10 +20,8 @@ const TaskNameModal = ({ id }) => {
 
   const handleBlur = () => {
     const newText = inputRef.current.textContent.trim()
-    if (!newText) {
-      inputRef.current.textContent = name
-    } else if (newText !== name) {
-      dispatch(updateTaskName({ id, name: newText }))
+    if (newText !== description) {
+      setDescription(newText)
     }
   }
 
@@ -43,14 +33,14 @@ const TaskNameModal = ({ id }) => {
   }
 
   useEffect(() => {
-    inputRef.current.textContent = name || 'Untitled'
-  }, [name])
+    inputRef.current.textContent = description || '+ Add a description'
+  }, [description])
 
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
       <div
         className={styles.input}
-        placeholder={name}
+        placeholder={description}
         ref={inputRef}
         contentEditable='true'
         onKeyDown={handleKeyDown}
@@ -63,4 +53,4 @@ const TaskNameModal = ({ id }) => {
   )
 }
 
-export default TaskNameModal
+export default CreateTaskDescription

@@ -14,29 +14,28 @@ import {
   updateTaskChecked,
   updateTaskIsFavorite,
 } from '../../features/tasksSlice'
+import { selectTaskById } from '../../helpers/selectTaskById'
 import Modal from '../Modal/Modal'
 import { formatDate } from '../../helpers/formatDate'
 
-const ListItem = ({ task }) => {
+const ListItem = ({ taskId }) => {
+  const task = useSelector((state) => selectTaskById(state, taskId))
+  console.log(task)
+
   const [open, setOpen] = useState(false)
 
   const dispatch = useDispatch()
 
-  const checked = useSelector(
-    (state) => state.tasks.tasks.find((t) => t.id === task.id).checked
-  )
-
-  const favorite = useSelector(
-    (state) => state.tasks.tasks.find((t) => t.id === task.id).favorite
-  )
+  const checked = task.checked
+  const favorite = task.favorite
 
   const handleToggleFavorite = (e) => {
-    dispatch(updateTaskIsFavorite(task.id))
+    dispatch(updateTaskIsFavorite(taskId))
     e.stopPropagation()
   }
 
   const toggleChecked = () => {
-    dispatch(updateTaskChecked(task.id))
+    dispatch(updateTaskChecked(taskId))
   }
 
   const handleOpenModal = () => {

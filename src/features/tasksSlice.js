@@ -38,7 +38,7 @@ const tasksSlice = createSlice({
       state.tasks.push({
         ...action.payload,
         creationDate: new Date().toISOString(),
-        expirationDate: null,
+        expirationDate: action.payload.expirationDate,
       })
     },
 
@@ -104,21 +104,6 @@ const tasksSlice = createSlice({
       }
     },
 
-    // updateTaskSubtaskName(state, action) {
-    //   const index = state.tasks.findIndex(
-    //     (task) => task.id === action.payload.id
-    //   )
-    //   if (index > -1) {
-    //     const subtaskIndex = state.tasks[index].subtasks.findIndex(
-    //       (subtask) => subtask.id === action.payload.subtaskId
-    //     )
-    //     if (subtaskIndex > -1) {
-    //       state.tasks[index].subtasks[subtaskIndex].name =
-    //         action.payload.subtaskName
-    //     }
-    //   }
-    // },
-
     updateTaskSubtaskName(state, action) {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
@@ -148,14 +133,6 @@ const tasksSlice = createSlice({
         }
       }
     },
-
-    // updateTaskExpirationDate(state, action) {
-    //   const { id, expirationDate } = action.payload
-    //   const task = state.tasks.findIndex((task) => task.id === id)
-    //   if (task) {
-    //     task.expirationDate = expirationDate
-    //   }
-    // },
 
     updateTaskExpirationDate(state, action) {
       const { id, expirationDate } = action.payload

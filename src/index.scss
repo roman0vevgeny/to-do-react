@@ -36,7 +36,7 @@ nav::-webkit-scrollbar-track {
 }
 
 nav::-webkit-scrollbar-thumb {
-  @apply bg-grayHover rounded-md;
+  @apply bg-scroll rounded-md;
 }
 
 main::-webkit-scrollbar {
@@ -100,6 +100,7 @@ main::-webkit-scrollbar-thumb {
   --tag-delete: #000000;
   --calendar-disable: #e6e6e6;
   --calendar-text: #ffffff;
+  --bg-scroll: #e9e9e9;
 }
 
 .dark {
@@ -142,6 +143,7 @@ main::-webkit-scrollbar-thumb {
   --tag-delete: #dcdcdc;
   --calendar-disable: #636363;
   --calendar-text: #dcdcdc;
+  --bg-scroll: #4b4b4b;
 }
 
 .react-calendar {
