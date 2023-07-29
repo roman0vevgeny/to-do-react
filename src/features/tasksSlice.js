@@ -155,6 +155,22 @@ const tasksSlice = createSlice({
         state.tasks[index].favorite = !state.tasks[index].favorite
       }
     },
+
+    updateTask(state, action) {
+      const index = state.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      )
+      if (index > -1) {
+        state.tasks[index] = action.payload
+      }
+    },
+    updateTaskTags(state, action) {
+      const { id, tags } = action.payload
+      const task = state.tasks.find((task) => task.id === id)
+      if (task) {
+        task.tags = tags
+      }
+    },
   },
 })
 
@@ -174,4 +190,6 @@ export const {
   updateTaskExpirationDate,
   updateTaskChecked,
   updateTaskIsFavorite,
+  updateTask,
+  updateTaskTags,
 } = tasksSlice.actions
