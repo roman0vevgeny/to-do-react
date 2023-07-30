@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './TaskName.module.scss'
 
-const TaskName = ({ name }) => {
+const TaskName = ({ name, checked }) => {
   return (
-    <div className={styles.textSmall}>
+    <div className={checked ? styles.textSmallChecked : styles.textSmall}>
       <h3>{name}</h3>
     </div>
   )

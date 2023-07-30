@@ -5,7 +5,7 @@ import ModalButton from '../../Button/ModalButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateTaskName } from '../../../features/tasksSlice'
 
-const TaskNameModal = ({ id }) => {
+const TaskNameModal = ({ id, checked }) => {
   const name = useSelector(
     (state) => state.tasks.tasks.find((t) => t.id === id).name
   )
@@ -49,7 +49,7 @@ const TaskNameModal = ({ id }) => {
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
       <div
-        className={styles.input}
+        className={checked ? styles.inputChecked : styles.input}
         placeholder={name}
         ref={inputRef}
         contentEditable='true'

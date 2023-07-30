@@ -19,6 +19,7 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
         {!isNewTask && creationDate && (
           <p className='text-12'>Created at {creationDate}</p>
         )}
+        {isNewTask && <p className='text-12'> </p>}
         <div className='flex flex-row justify-end'>
           {expirationDate && (
             <InfoCard svg={<Cal />} children={formatDate(expirationDate)} />

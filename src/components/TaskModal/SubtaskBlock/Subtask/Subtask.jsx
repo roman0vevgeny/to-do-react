@@ -4,7 +4,7 @@ import styles from './Subtask.module.scss'
 import Close from '../../../svgs/Close'
 import ModalButton from '../../../Button/ModalButton'
 
-const Subtask = ({ subtask, onDelete, onChange }) => {
+const Subtask = ({ subtask, onDelete, onChange, checked }) => {
   const [text, setText] = useState(subtask.name)
   const [prevText, setPrevText] = useState(subtask.name)
   const inputRef = useRef(null)
@@ -52,7 +52,7 @@ const Subtask = ({ subtask, onDelete, onChange }) => {
   return (
     <div className='flex flex-row justify-between items-start w-full mt-[1px]'>
       <div
-        className={styles.input}
+        className={checked ? styles.inputChecked : styles.input}
         placeholder={subtask}
         ref={inputRef}
         contentEditable='true'

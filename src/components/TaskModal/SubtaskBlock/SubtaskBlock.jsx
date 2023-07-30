@@ -4,7 +4,7 @@ import Subtask from './Subtask/Subtask'
 import SubtaskInput from './SubtaskInput/SubtaskInput'
 import styles from './SubtaskBlock.module.scss'
 
-const SubtaskBlock = ({ subtasks, onSubtasksChange }) => {
+const SubtaskBlock = ({ subtasks, onSubtasksChange, checked }) => {
   const [subtaskInput, setSubtaskInput] = useState('')
   const inputRef = useRef(null)
 
@@ -63,21 +63,22 @@ const SubtaskBlock = ({ subtasks, onSubtasksChange }) => {
                 }
               />
             </button>
-
             <Subtask
               subtask={subtask}
+              checked={checked}
               onChange={handleSubtaskNameChange}
               onDelete={() => handleDeleteSubtask(subtask.id)}
             />
           </div>
         ))}
-
-      <SubtaskInput
-        value={subtaskInput}
-        onChange={(e) => setSubtaskInput(e.target.value)}
-        onSubmit={handleSubtaskSubmit}
-        inputRef={inputRef}
-      />
+      {!checked && (
+        <SubtaskInput
+          value={subtaskInput}
+          onChange={(e) => setSubtaskInput(e.target.value)}
+          onSubmit={handleSubtaskSubmit}
+          inputRef={inputRef}
+        />
+      )}
     </div>
   )
 }

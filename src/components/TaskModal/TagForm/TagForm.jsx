@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTag } from '../../../features/tagsSlice'
 import { addTaskTag, deleteTaskTag } from '../../../features/tasksSlice'
@@ -48,6 +48,19 @@ const TagForm = ({ value, onChange, isNewTask, taskId }) => {
       setError('Enter a name and select a color')
     }
   }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && name) {
+        e.preventDefault()
+        handleSubmit(e)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [name])
 
   const tags = useSelector((state) => state.tags)
 

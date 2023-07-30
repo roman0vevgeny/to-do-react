@@ -63,7 +63,7 @@ const ListItem = ({ taskId }) => {
         <div className={styles.clickable}>
           <div className='flex flex-raw justify-between items-start w-full'>
             <div className='flex flex-grow'>
-              <TaskName name={task.name} />
+              <TaskName name={task.name} checked={task.checked} />
             </div>
             <div className='flex mt-[2px]'>
               {task.expirationDate && (

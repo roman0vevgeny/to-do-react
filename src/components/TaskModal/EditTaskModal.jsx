@@ -39,8 +39,8 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
           dispatch(updateTaskIsFavorite({ id: task.id, favorite: newFavorite }))
         }
       />
-      <TaskNameModal id={id} />
-      <TaskDescription id={id} />
+      <TaskNameModal id={id} checked={task.checked} />
+      <TaskDescription id={id} checked={task.checked} />
       {tags && (
         <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
           {tags.map((tagId, index) => {
@@ -50,7 +50,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                 <Tag
                   color={tag.color}
                   tagName={tag.name}
-                  deleteTag={true}
+                  deleteTag={!task.checked ? true : false}
                   key={index}
                   onDelete={() => handleDeleteTag(tagId)}
                 />
@@ -64,10 +64,12 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
         onSubtasksChange={(newSubtasks) =>
           dispatch(updateTaskSubtasks({ id: task.id, subtasks: newSubtasks }))
         }
+        checked={task.checked}
       />
       <div className='flex ml-2'>
         <Calend
           expirationDate={task.expirationDate}
+          checked={task.checked}
           onChange={(newExpirationDate) =>
             dispatch(
               updateTaskExpirationDate({
@@ -77,14 +79,17 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
             )
           }
         />
-        <TagForm
-          value={tags}
-          onChange={(newTags) =>
-            dispatch(updateTaskTags({ id: task.id, tags: newTags }))
-          }
-          isNewTask={false}
-          taskId={id}
-        />{' '}
+        {!task.checked && (
+          <TagForm
+            value={tags}
+            onChange={(newTags) =>
+              dispatch(updateTaskTags({ id: task.id, tags: newTags }))
+            }
+            isNewTask={false}
+            taskId={id}
+          />
+          // {' '}
+        )}
       </div>
     </div>
   )

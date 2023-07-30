@@ -5,14 +5,14 @@ import Close from '../../../svgs/Close'
 const TagInput = ({ name, onNameChange }) => {
   const inputRef = useRef(null)
 
-  const handleKeyUp = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      console.log(name)
-      onNameChange('')
-      inputRef.current.value = ''
-    }
-  }
+  // const handleKeyUp = (e) => {
+  //   if (e.key === 'Enter') {
+  //     e.preventDefault()
+  //     console.log(name)
+  //     onNameChange('')
+  //     inputRef.current.value = ''
+  //   }
+  // }
 
   const handleClearInput = () => {
     onNameChange('')
@@ -24,7 +24,7 @@ const TagInput = ({ name, onNameChange }) => {
       <input
         className={styles.input}
         placeholder='+ Add a tag'
-        onKeyUp={handleKeyUp}
+        // onKeyUp={handleKeyUp}
         onChange={(e) => onNameChange(e.target.value)}
         value={name}
         ref={inputRef}></input>
