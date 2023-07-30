@@ -30,7 +30,7 @@ const ListItem = ({ taskId }) => {
   const favorite = task.favorite
 
   const handleToggleFavorite = (e) => {
-    dispatch(updateTaskIsFavorite(taskId))
+    dispatch(updateTaskIsFavorite({ id: task.id, favorite: !task.favorite }))
     e.stopPropagation()
   }
 

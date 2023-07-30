@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './EditTaskModal.module.scss'
 import TaskNameModal from './TaskName/TaskNameModal'
 import TaskDescription from './TaskDescription/TaskDescription'
@@ -7,34 +7,38 @@ import Tag from '../Tag/Tag'
 import Calend from './Calendar/Calendar'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  addTask,
   updateTaskExpirationDate,
   updateTaskTags,
-  deleteTaskTag,
+  updateTaskSubtasks,
+  updateTaskIsFavorite,
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
 
-const EditTaskModal = ({ handleCloseModal, task, isNewTask }) => {
-  const { id, description, tags, expirationDate } = task
+const EditTaskModal = ({ handleCloseModal, task }) => {
+  const { id, tags } = task
 
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (isNewTask) {
-      dispatch(addTask(task))
-    }
-  }, [dispatch, task, isNewTask])
 
   const allTags = useSelector((state) => state.tags)
 
   const handleDeleteTag = (tagId) => {
-    dispatch(deleteTaskTag({ id: task.id, tagId }))
+    dispatch(
+      updateTaskTags({
+        id: task.id,
+        tags: task.tags.filter((id) => id !== tagId),
+      })
+    )
   }
 
   return (
     <div onClose={handleCloseModal}>
-      <TaskHeader taskId={id} />
+      <TaskHeader
+        task={task}
+        onFavoriteChange={(newFavorite) =>
+          dispatch(updateTaskIsFavorite({ id: task.id, favorite: newFavorite }))
+        }
+      />
       <TaskNameModal id={id} />
       <TaskDescription id={id} />
       {tags && (
@@ -55,19 +59,30 @@ const EditTaskModal = ({ handleCloseModal, task, isNewTask }) => {
           })}
         </div>
       )}
-      <SubtaskBlock task={task} />
+      <SubtaskBlock
+        subtasks={task.subtasks}
+        onSubtasksChange={(newSubtasks) =>
+          dispatch(updateTaskSubtasks({ id: task.id, subtasks: newSubtasks }))
+        }
+      />
       <div className='flex ml-2'>
         <Calend
           expirationDate={task.expirationDate}
-          dispatch={dispatch}
-          task={task}
+          onChange={(newExpirationDate) =>
+            dispatch(
+              updateTaskExpirationDate({
+                id: task.id,
+                expirationDate: newExpirationDate.toISOString(),
+              })
+            )
+          }
         />
         <TagForm
           value={tags}
           onChange={(newTags) =>
             dispatch(updateTaskTags({ id: task.id, tags: newTags }))
           }
-          isNewTask={isNewTask}
+          isNewTask={false}
           taskId={id}
         />{' '}
       </div>

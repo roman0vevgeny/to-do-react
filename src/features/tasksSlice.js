@@ -151,10 +151,19 @@ const tasksSlice = createSlice({
       }
     },
 
+    // updateTaskIsFavorite(state, action) {
+    //   const index = state.tasks.findIndex((task) => task.id === action.payload)
+    //   if (index > -1) {
+    //     state.tasks[index].favorite = !state.tasks[index].favorite
+    //   }
+    // },
+
     updateTaskIsFavorite(state, action) {
-      const index = state.tasks.findIndex((task) => task.id === action.payload)
+      const index = state.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      )
       if (index > -1) {
-        state.tasks[index].favorite = !state.tasks[index].favorite
+        state.tasks[index].favorite = action.payload.favorite
       }
     },
 
@@ -171,6 +180,14 @@ const tasksSlice = createSlice({
       const task = state.tasks.find((task) => task.id === id)
       if (task) {
         task.tags = tags
+      }
+    },
+    updateTaskSubtasks(state, action) {
+      const index = state.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      )
+      if (index > -1) {
+        state.tasks[index].subtasks = action.payload.subtasks
       }
     },
   },
@@ -194,4 +211,5 @@ export const {
   updateTaskIsFavorite,
   updateTask,
   updateTaskTags,
+  updateTaskSubtasks,
 } = tasksSlice.actions

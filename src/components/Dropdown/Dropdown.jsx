@@ -44,7 +44,7 @@ const Dropdown = ({ children, items, onDeleteTag, svg }) => {
         <ul className='divide-y divide-gray-500 py-2'>
           {items && items.length > 0 ? (
             items.map((item) => (
-              <li key={item.name} className='px-7 pt-[1px] hover:bg-gray-100'>
+              <li key={item.id} className='px-7 pt-[1px] hover:bg-gray-100'>
                 <Tag
                   color={item.color}
                   tagName={item.name}

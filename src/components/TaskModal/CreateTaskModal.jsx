@@ -8,71 +8,92 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addTask } from '../../features/tasksSlice'
 import Plus from '../svgs/Plus'
 import Tag from '../Tag/Tag'
+import TaskHeader from './TaskHeader/TaskHeader'
+import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 
 const CreateTaskModal = ({ handleCloseModal }) => {
-  const [taskName, setTaskName] = useState('')
-  const [taskDescription, setTaskDescription] = useState('')
-  const [selectedTags, setSelectedTags] = useState([])
-  const [expirationDate, setExpirationDate] = useState(null)
+  const [task, setTask] = useState({
+    id: Date.now(),
+    name: '',
+    description: '',
+    tags: [],
+    expirationDate: null,
+    subtasks: [],
+    checked: false,
+    favorite: false,
+  })
 
   const dispatch = useDispatch()
-
   const allTags = useSelector((state) => state.tags)
-  const handleCreateTask = () => {
-    const newTask = {
-      id: Date.now(),
-      checked: false,
-      name: taskName,
-      description: taskDescription,
-      tags: selectedTags,
-      expirationDate: expirationDate ? expirationDate.toISOString() : null,
-      subtasks: [],
-    }
-    dispatch(addTask(newTask))
-    handleCloseModal()
-  }
 
-  const handleDeleteTag = (tagId) => {
-    const newSelectedTags = selectedTags.filter((id) => id !== tagId)
-    setSelectedTags(newSelectedTags)
+  const handleCreateTask = () => {
+    dispatch(addTask(task))
+    handleCloseModal()
   }
 
   return (
     <div onClose={handleCloseModal}>
-      <div>
-        <CreateTaskName name={taskName} setName={setTaskName} />
-        <CreateTaskDescription
-          description={taskDescription}
-          setDescription={setTaskDescription}
-        />
-        <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
-          {selectedTags.map((tagId) => {
-            const tag = allTags.find((tag) => tag.id === tagId)
-            return (
-              tag && (
-                <Tag
-                  color={tag.color}
-                  tagName={tag.name}
-                  deleteTag={true}
-                  key={tagId}
-                  onDelete={() => handleDeleteTag(tagId)}
-                />
-              )
+      <TaskHeader
+        task={task}
+        onFavoriteChange={(newFavorite) =>
+          setTask({ ...task, favorite: newFavorite })
+        }
+        isNewTask={true}
+      />
+      <CreateTaskName
+        name={task.name}
+        setName={(newName) => setTask({ ...task, name: newName })}
+      />
+      <CreateTaskDescription
+        description={task.description}
+        setDescription={(newDescription) =>
+          setTask({ ...task, description: newDescription })
+        }
+      />
+      <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
+        {task.tags.map((tagId) => {
+          const tag = allTags.find((tag) => tag.id === tagId)
+          return (
+            tag && (
+              <Tag
+                color={tag.color}
+                tagName={tag.name}
+                deleteTag={true}
+                key={tagId}
+                onDelete={() =>
+                  setTask({
+                    ...task,
+                    tags: task.tags.filter((id) => id !== tagId),
+                  })
+                }
+              />
             )
-          })}
-        </div>
-        <div className='flex ml-2'>
-          <Calend
-            expirationDate={expirationDate}
-            onChange={setExpirationDate}
-          />
-          <TagForm
-            value={selectedTags}
-            onChange={setSelectedTags}
-            isNewTask={true}
-            taskId={null}
-          />
-        </div>
+          )
+        })}
+      </div>
+      <SubtaskBlock
+        subtasks={task.subtasks}
+        onSubtasksChange={(newSubtasks) =>
+          setTask({ ...task, subtasks: newSubtasks })
+        }
+        isNewTask={true}
+      />
+      <div className='flex ml-2'>
+        <Calend
+          expirationDate={task.expirationDate}
+          onChange={(newExpirationDate) =>
+            setTask({
+              ...task,
+              expirationDate: newExpirationDate.toISOString(),
+            })
+          }
+        />
+        <TagForm
+          value={task.tags}
+          onChange={(newTags) => setTask({ ...task, tags: newTags })}
+          isNewTask={true}
+          taskId={null}
+        />
       </div>
       <div className='flex w-full justify-center'>
         <button
