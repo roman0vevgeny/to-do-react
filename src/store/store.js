@@ -10,4 +10,3 @@ export const store = configureStore({
     navbar: navbarReducer,
   },
 })
-// console.log(store.getState())

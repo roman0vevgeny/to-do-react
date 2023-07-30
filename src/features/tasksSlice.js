@@ -4,12 +4,13 @@ const initialState = {
   tasks: [
     {
       id: 1,
+      checked: false,
       name: 'Первая задача с очень длинным текстом',
       description: 'Описание первой задачи',
       creationDate: '20.02.2022',
       expirationDate: null,
       subtasks: [
-        { id: 1, name: 'Подзадача 1', checked: false },
+        { id: 1, name: 'Подзадача 1', checked: true },
         { id: 2, name: 'Подзадача 2', checked: false },
       ],
       favorite: false,
@@ -18,6 +19,7 @@ const initialState = {
     },
     {
       id: 2,
+      checked: true,
       name: 'Вторая задача',
       description: 'Описание второй задачи',
       creationDate: '21.02.2022',
