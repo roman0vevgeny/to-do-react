@@ -7,13 +7,13 @@ import CreateTaskModal from '../TaskModal/CreateTaskModal'
 const CreateButton = ({ children }) => {
   const [open, setOpen] = useState(false)
 
-  const handleOpenModal = () => {
+  const onClose = () => {
     console.log('Button clicked')
-    setOpen(true)
+    setOpen(false)
   }
 
-  const handleCloseModal = () => {
-    setOpen(false)
+  const handleOpenModal = () => {
+    setOpen(true)
   }
 
   return (
@@ -21,8 +21,8 @@ const CreateButton = ({ children }) => {
       <Button svgLeft={<Plus />} onClick={handleOpenModal} />
       <Modal
         open={open}
-        onClose={handleCloseModal}
-        children={<CreateTaskModal onClose={handleCloseModal} />}
+        onClose={onClose}
+        children={<CreateTaskModal onClose={onClose} />}
       />
     </>
   )

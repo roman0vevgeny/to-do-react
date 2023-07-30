@@ -11,7 +11,7 @@ import Tag from '../Tag/Tag'
 import TaskHeader from './TaskHeader/TaskHeader'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 
-const CreateTaskModal = ({ handleCloseModal }) => {
+const CreateTaskModal = ({ onClose }) => {
   const [task, setTask] = useState({
     id: Date.now(),
     name: '',
@@ -28,11 +28,11 @@ const CreateTaskModal = ({ handleCloseModal }) => {
 
   const handleCreateTask = () => {
     dispatch(addTask(task))
-    handleCloseModal()
+    onClose()
   }
 
   return (
-    <div onClose={handleCloseModal}>
+    <div>
       <TaskHeader
         task={task}
         onFavoriteChange={(newFavorite) =>
