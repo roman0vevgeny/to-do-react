@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './InfoCard.module.scss'
+import styles from './InfoExpiration.module.scss'
 
-const InfoCard = ({ svg, children, checked }) => {
+const InfoExpiration = ({ svg, children, expirationDate }) => {
   return (
     <div className={styles.main}>
       <div className='flex w-[25px] h-[25px] justify-center items-center'>
@@ -12,4 +12,4 @@ const InfoCard = ({ svg, children, checked }) => {
   )
 }
 
-export default InfoCard
+export default InfoExpiration

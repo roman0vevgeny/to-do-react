@@ -5,6 +5,7 @@ import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
 import { formatDate } from '../../../helpers/formatDate'
+import InfoExpiration from '../../Info/InfoExpiration'
 
 const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
   const { subtasks, creationDate, expirationDate, favorite } = task
@@ -22,7 +23,11 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
         {isNewTask && <p className='text-12'> </p>}
         <div className='flex flex-row justify-end'>
           {expirationDate && (
-            <InfoCard svg={<Cal />} children={formatDate(expirationDate)} />
+            <InfoExpiration
+              svg={<Cal />}
+              children={formatDate(expirationDate)}
+              expirationDate={expirationDate}
+            />
           )}
           {subtasks && (
             <InfoCard
