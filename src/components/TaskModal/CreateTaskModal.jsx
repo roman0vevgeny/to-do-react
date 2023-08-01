@@ -23,12 +23,19 @@ const CreateTaskModal = ({ onClose }) => {
     favorite: false,
   })
 
+  const [error, setError] = useState(null)
+
   const dispatch = useDispatch()
   const allTags = useSelector((state) => state.tags)
 
   const handleCreateTask = () => {
-    dispatch(addTask(task))
-    onClose()
+    if (!task.name || task.name === 'Untitled') {
+      setError('Please enter a valid task name')
+    } else {
+      setError(null)
+      dispatch(addTask(task))
+      onClose()
+    }
   }
 
   return (
@@ -104,6 +111,11 @@ const CreateTaskModal = ({ onClose }) => {
           <p className='mx-1'>Create task</p>
         </button>
       </div>
+      {error && (
+        <p className='flex justify-center text-redTag text-14 bg-redTag rounded-md mt-2 py-1'>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

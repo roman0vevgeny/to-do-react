@@ -24,6 +24,9 @@ const TaskNameModal = ({ id, checked }) => {
     const selection = window.getSelection()
     selection.removeAllRanges()
     selection.addRange(range)
+    if (inputRef.current.textContent === 'Untitled') {
+      inputRef.current.textContent = ''
+    }
   }
 
   const handleBlur = () => {

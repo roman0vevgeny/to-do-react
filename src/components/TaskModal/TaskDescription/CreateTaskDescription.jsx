@@ -1,10 +1,14 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Edit from '../../svgs/Edit'
 import styles from './TaskDescription.module.scss'
 import ModalButton from '../../Button/ModalButton'
 
 const CreateTaskDescription = ({ description, setDescription }) => {
   const inputRef = useRef(null)
+
+  const [localDescription, setLocalDescription] = useState(
+    description || '+ Add a description'
+  )
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -22,6 +26,14 @@ const CreateTaskDescription = ({ description, setDescription }) => {
     const newText = inputRef.current.textContent.trim()
     if (newText !== description) {
       setDescription(newText)
+    } else if (newText === '') {
+      setLocalDescription('+ Add a description')
+    }
+  }
+
+  const handleClearInput = () => {
+    if (inputRef.current.textContent === '+ Add a description') {
+      setLocalDescription('')
     }
   }
 
@@ -33,7 +45,11 @@ const CreateTaskDescription = ({ description, setDescription }) => {
   }
 
   useEffect(() => {
-    inputRef.current.textContent = description || '+ Add a description'
+    inputRef.current.textContent = localDescription
+  }, [localDescription])
+
+  useEffect(() => {
+    setLocalDescription(description || '+ Add a description')
   }, [description])
 
   return (
@@ -45,6 +61,8 @@ const CreateTaskDescription = ({ description, setDescription }) => {
         contentEditable='true'
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
+        onClick={handleClearInput}
+        onFocus={handleClearInput}
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />

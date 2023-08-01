@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import Edit from '../../svgs/Edit'
 import styles from './TaskNameModal.module.scss'
 import ModalButton from '../../Button/ModalButton'
 
 const CreateTaskName = ({ name, setName }) => {
   const inputRef = useRef(null)
+
+  const [text, setText] = useState(name || 'Untitled')
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -16,6 +18,9 @@ const CreateTaskName = ({ name, setName }) => {
     const selection = window.getSelection()
     selection.removeAllRanges()
     selection.addRange(range)
+    if (inputRef.current.textContent === 'Untitled') {
+      setText('')
+    }
   }
 
   const handleBlur = () => {
@@ -24,6 +29,17 @@ const CreateTaskName = ({ name, setName }) => {
       inputRef.current.textContent = name
     } else if (newText !== name) {
       setName(newText)
+    } else if (newText === '') {
+      setText('Untitled')
+    }
+    if (inputRef.current.textContent === '') {
+      inputRef.current.textContent = 'Untitled'
+    }
+  }
+
+  const handleClearInput = () => {
+    if (inputRef.current.textContent === 'Untitled') {
+      inputRef.current.textContent = ''
     }
   }
 
@@ -35,7 +51,11 @@ const CreateTaskName = ({ name, setName }) => {
   }
 
   useEffect(() => {
-    inputRef.current.textContent = name || 'Untitled'
+    inputRef.current.textContent = text
+  }, [text])
+
+  useEffect(() => {
+    setText(name || 'Untitled')
   }, [name])
 
   return (
@@ -47,6 +67,7 @@ const CreateTaskName = ({ name, setName }) => {
         contentEditable='true'
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
+        onFocus={handleClearInput}
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />
