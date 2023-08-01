@@ -7,6 +7,7 @@ const SubtaskInput = ({ value, onChange, onSubmit, inputRef }) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       onSubmit(e)
+      handleClearInput()
     }
   }
 

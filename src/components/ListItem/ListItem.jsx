@@ -14,6 +14,7 @@ import {
   updateTaskChecked,
   updateTaskIsFavorite,
 } from '../../features/tasksSlice'
+import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
 import Modal from '../Modal/Modal'
 import { formatDate } from '../../helpers/formatDate'
@@ -67,9 +68,14 @@ const ListItem = ({ taskId }) => {
             </div>
             <div className='flex mt-[2px]'>
               {task.expirationDate && (
-                <InfoCard
+                // <InfoCard
+                //   svg={<Cal />}
+                //   children={formatDate(task.expirationDate)}
+                // />
+                <InfoExpiration
                   svg={<Cal />}
                   children={formatDate(task.expirationDate)}
+                  expirationDate={task.expirationDate}
                 />
               )}
               {task.subtasks && (
