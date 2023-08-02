@@ -133,6 +133,13 @@ export default {
       //       theme => ({
       // ...theme('colors'),
     },
+    variants: {
+      extend: {
+        backgroundColor: ['current'],
+        textColor: ['current'],
+        boxShadow: ['current'],
+      },
+    },
     extend: {
       colors: {
         current: 'currentColor',

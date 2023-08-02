@@ -130,7 +130,7 @@ const Home = () => {
       ) : (
         <section className='mb-8'>
           <div className={styles.listContainer}>
-            <SectionName name={'Tasks'} />
+            <SectionName name={'Today'} />
             {tasks.map((task) => (
               <ListItem key={task.id} taskId={task.id} />
             ))}

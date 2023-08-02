@@ -33,9 +33,19 @@ const Navbar = () => {
 
   return (
     <div className={styles.main}>
-      <NavButton children={'All tasks'} svgLeft={<AllTasks />} counter={'6'} />
-      <NavButton children={'Today'} svgLeft={<Today />} counter={'99'} />
-      <NavButton children={'Projects'} svgLeft={<Projects />} />
+      <NavButton
+        children={'All tasks'}
+        svgLeft={<AllTasks />}
+        counter={'6'}
+        to='/'
+      />
+      <NavButton
+        children={'Today'}
+        svgLeft={<Today />}
+        counter={'99'}
+        to='/today'
+      />
+      {/* <NavButton children={'Projects'} svgLeft={<Projects />} /> */}
       <DropdownFavorites
         children={'Favorites'}
         items={favorites}
