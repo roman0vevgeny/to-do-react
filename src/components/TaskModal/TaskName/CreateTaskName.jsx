@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useLayoutEffect } from 'react'
 import Edit from '../../svgs/Edit'
 import styles from './TaskNameModal.module.scss'
 import ModalButton from '../../Button/ModalButton'
@@ -6,7 +6,7 @@ import ModalButton from '../../Button/ModalButton'
 const CreateTaskName = ({ name, setName }) => {
   const inputRef = useRef(null)
 
-  const [text, setText] = useState(name || 'Untitled')
+  const [text, setText] = useState(name || '')
 
   const handleFocus = () => {
     inputRef.current.focus()
@@ -18,28 +18,12 @@ const CreateTaskName = ({ name, setName }) => {
     const selection = window.getSelection()
     selection.removeAllRanges()
     selection.addRange(range)
-    if (inputRef.current.textContent === 'Untitled') {
-      setText('')
-    }
   }
 
   const handleBlur = () => {
     const newText = inputRef.current.textContent.trim()
-    if (!newText) {
-      inputRef.current.textContent = name
-    } else if (newText !== name) {
+    if (newText !== name) {
       setName(newText)
-    } else if (newText === '') {
-      setText('Untitled')
-    }
-    if (inputRef.current.textContent === '') {
-      inputRef.current.textContent = 'Untitled'
-    }
-  }
-
-  const handleClearInput = () => {
-    if (inputRef.current.textContent === 'Untitled') {
-      inputRef.current.textContent = ''
     }
   }
 
@@ -55,8 +39,12 @@ const CreateTaskName = ({ name, setName }) => {
   }, [text])
 
   useEffect(() => {
-    setText(name || 'Untitled')
+    setText(name || '')
   }, [name])
+
+  useLayoutEffect(() => {
+    inputRef.current.focus()
+  }, [inputRef])
 
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
@@ -67,7 +55,7 @@ const CreateTaskName = ({ name, setName }) => {
         contentEditable='true'
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        onFocus={handleClearInput}
+        onFocus={handleFocus}
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />

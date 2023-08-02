@@ -30,7 +30,7 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
               checked={task.checked}
             />
           )}
-          {subtasks && (
+          {subtasks && subtasks.length > 0 && (
             <InfoCard
               svg={<Subtasks />}
               children={`${

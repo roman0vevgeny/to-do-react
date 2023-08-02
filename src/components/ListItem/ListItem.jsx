@@ -55,6 +55,11 @@ const ListItem = ({ taskId }) => {
   ).length
   const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
 
+  var dateNow = new Date()
+  var dateString = dateNow.toDateString()
+  var timeString = dateNow.toTimeString()
+  console.log(dateString + ' ' + timeString)
+
   return (
     <div className='relative overflow-hidden'>
       <div className={styles.body} onClick={handleOpenModal}>
@@ -75,7 +80,7 @@ const ListItem = ({ taskId }) => {
                   checked={task.checked}
                 />
               )}
-              {task.subtasks && (
+              {task.subtasks && task.subtasks.length > 0 && (
                 <InfoCard svg={<Subtasks />} children={subtasksCounter} />
               )}
               {task.project && (
