@@ -55,7 +55,11 @@ const CreateTaskDescription = ({ description, setDescription }) => {
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
       <div
-        className={styles.input}
+        className={
+          localDescription === '+ Add a description'
+            ? styles.inputGray
+            : styles.input
+        }
         placeholder={description}
         ref={inputRef}
         contentEditable='true'

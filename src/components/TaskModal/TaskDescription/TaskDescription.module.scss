@@ -1,9 +1,17 @@
 .input {
   @apply flex text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-task rounded-[5px] w-[500px] cursor-pointer;
 
-  // &:hover {
-  //   @apply text-gray;
-  // }
+  &::placeholder {
+    @apply text-gray;
+  }
+
+  &:focus {
+    @apply outline-none bg-inputFocus text-inputFocus cursor-auto;
+  }
+}
+
+.inputGray {
+  @apply flex text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-gray rounded-[5px] w-[500px] cursor-pointer;
 
   &::placeholder {
     @apply text-gray;
@@ -16,10 +24,6 @@
 
 .inputChecked {
   @apply flex text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-gray rounded-[5px] w-[500px] cursor-pointer;
-
-  // &:hover {
-  //   @apply text-gray;
-  // }
 
   &::placeholder {
     @apply text-gray;

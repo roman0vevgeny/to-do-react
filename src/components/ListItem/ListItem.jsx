@@ -56,7 +56,7 @@ const ListItem = ({ taskId }) => {
   const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
 
   return (
-    <div>
+    <div className='relative overflow-hidden'>
       <div className={styles.body} onClick={handleOpenModal}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />
@@ -68,14 +68,11 @@ const ListItem = ({ taskId }) => {
             </div>
             <div className='flex mt-[2px]'>
               {task.expirationDate && (
-                // <InfoCard
-                //   svg={<Cal />}
-                //   children={formatDate(task.expirationDate)}
-                // />
                 <InfoExpiration
                   svg={<Cal />}
                   children={formatDate(task.expirationDate)}
                   expirationDate={task.expirationDate}
+                  checked={task.checked}
                 />
               )}
               {task.subtasks && (

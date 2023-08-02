@@ -27,6 +27,7 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
               svg={<Cal />}
               children={formatDate(expirationDate)}
               expirationDate={expirationDate}
+              checked={task.checked}
             />
           )}
           {subtasks && (

@@ -1,4 +1,8 @@
-export const isNotExpired = (expirationDate) => {
+export const isNotExpired = (expirationDate, checked) => {
   const today = new Date().toISOString().slice(0, 10)
-  return expirationDate >= today
+  if (!checked) {
+    return expirationDate >= today
+  } else {
+    return true
+  }
 }
