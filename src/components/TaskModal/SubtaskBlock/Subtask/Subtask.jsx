@@ -9,6 +9,8 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
   const [prevText, setPrevText] = useState(subtask.name)
   const inputRef = useRef(null)
 
+  const [hovered, setHovered] = useState(false)
+
   const handleFocus = () => {
     inputRef.current.focus()
 
@@ -26,6 +28,8 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
       setText(prevText)
     }
     onChange(subtask.id, text)
+
+    setHovered(false)
   }
 
   const handleKeyDown = (e) => {
@@ -50,7 +54,10 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
   }, [subtask])
 
   return (
-    <div className='flex flex-row justify-between items-start w-full mt-[1px]'>
+    <div
+      className='flex flex-row justify-between items-start w-full mt-[1px]'
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
       <div
         className={checked ? styles.inputChecked : styles.input}
         placeholder={subtask}
@@ -59,14 +66,19 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         onInput={handleInput}
+        onFocus={() => setHovered(true)}
       />
       <div className='flex'>
-        <div className='flex flex-row mt-[1px]'>
-          <ModalButton svg={<Edit />} onClick={handleFocus} />
-        </div>
-        <div className='flex flex-row mt-[1px] hover:bg-redBg hover:text-redTag'>
-          <ModalButton svg={<Close />} onClick={onDelete} />
-        </div>
+        {(hovered || inputRef.current === document.activeElement) && (
+          <div className='flex flex-row mt-[1px]'>
+            <ModalButton svg={<Edit />} onClick={handleFocus} />
+          </div>
+        )}
+        {(hovered || inputRef.current === document.activeElement) && (
+          <div className='flex flex-row mt-[1px] hover:bg-redBg hover:text-redTag'>
+            <ModalButton svg={<Close />} onClick={onDelete} />
+          </div>
+        )}
       </div>
     </div>
   )

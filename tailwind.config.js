@@ -185,6 +185,7 @@ export default {
         checkbox: 'var(--color-text-gray)',
         stroke: 'var(--stroke)',
         checkboxActive: 'var(--checkbox-active)',
+        input: 'var(--color-main-bg)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',

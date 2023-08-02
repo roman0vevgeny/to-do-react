@@ -1,9 +1,9 @@
 .modal {
-  @apply fixed top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] bg-mainBg px-10 pt-8 pb-8 rounded-[10px] shadow-lg z-[9000] overflow-y-auto max-h-[calc(100vh-140px)];
+  @apply flex justify-center bg-mainBg px-10 pt-8 pb-8 rounded-[10px] shadow-lg z-[9000] overflow-y-auto max-h-[calc(100vh-140px)] w-[650px];
 }
 
 .overlay {
-  @apply fixed inset-0 z-[200] bg-black/20;
+  @apply fixed inset-0 flex items-center justify-center z-[200] bg-black/20;
 }
 
 ::-webkit-scrollbar {
