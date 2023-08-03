@@ -109,8 +109,8 @@ const Home = () => {
   const tasks = useSelector((state) => state.tasks.tasks)
 
   return (
-    <div>
-      <div className={styles.startDevider}></div>
+    <div className='w-full'>
+      {/* <div className='sticky top-0 z-[10] h-[30px] bg-mainBg'></div> */}
 
       {tasks.length === 0 ? (
         <div className={styles.emptyStateContainer}>
@@ -128,17 +128,39 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <section className='mb-8'>
-          <div className={styles.listContainer}>
-            <SectionName name={'Tasks'} />
+        <div className='relative z-[10] bg-mainBg overflow-auto h-[calc(100vh-110px)]'>
+          <div className='sticky top-0 z-[10] h-[30px] bg-mainBg'></div>
+          <section className='mb-8'>
+            <div className='sticky top-0 z-[10]'>
+              <SectionName name={'Tasks'} />
+            </div>
+            <div className='mt-[0px]'>
+              {tasks.map((task) => (
+                <div className='mt-[0px]' key={task.id}>
+                  <ListItem taskId={task.id} />
+                </div>
+              ))}
+            </div>
+
+            <div className='h-[30px]'></div>
+          </section>
+          <section className='mb-8 overflow-y-auto'>
+            <div className='sticky top-0 z-[10]'>
+              <SectionName name={'Tasks'} />
+            </div>
+
             {tasks.map((task) => (
-              <ListItem key={task.id} taskId={task.id} />
+              <div className='mt-[0px]' key={task.id}>
+                <ListItem taskId={task.id} />
+              </div>
             ))}
-          </div>
-        </section>
+            <div className='h-[30px]'></div>
+          </section>
+          {/* <div className='h-[60px]'></div> */}
+        </div>
       )}
 
-      <div className='h-20'></div>
+      {/* <div className='h-20'></div> */}
     </div>
   )
 }

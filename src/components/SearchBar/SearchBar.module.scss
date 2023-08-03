@@ -10,17 +10,26 @@
   @apply relative flex items-center;
 }
 
-.input {
-  @apply flex absolute left-0 top-0 w-[240px] box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
-  font-medium placeholder-search cursor-pointer;
+.inputActive {
+  @apply flex absolute left-0 top-0 w-[470px] box-border items-center rounded-l-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
+  placeholder-search cursor-text;
+}
 
-  &:focus {
-    @apply cursor-text w-[500px];
+.inputInactive {
+  @apply flex absolute left-0 top-0 w-[240px] box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
+  placeholder-search cursor-pointer;
+}
+
+.clear {
+  @apply px-[7px] pt-[6px] pb-[5px] absolute top-[4px] left-[440px] rounded-[3px] z-5;
+
+  &:hover {
+    @apply bg-menu;
   }
 }
 
 .close {
-  @apply px-[7px] pt-[6px] pb-[5px] absolute top-[4px] left-[471px] rounded-[3px] z-5;
+  @apply px-[7px] absolute top-[0px] left-[469px] rounded-r-[5px] z-5 border-1 border-search h-[30px];
 
   &:hover {
     @apply bg-menu;
@@ -37,21 +46,9 @@
 }
 
 .searchPopup {
-  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[201] rounded-[5px];
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search;
 }
 
 .item {
   @apply flex flex-row items-center justify-between w-full px-2 py-2 cursor-pointer;
-
-  &:hover {
-    @apply bg-navButtonHover text-grayHover;
-  }
-}
-
-.infoBlock {
-  @apply flex flex-row items-center font-medium;
-}
-
-.searchText {
-  @apply text-14 text-start flex-grow truncate;
 }

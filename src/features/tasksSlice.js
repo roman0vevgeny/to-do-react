@@ -151,13 +151,6 @@ const tasksSlice = createSlice({
       }
     },
 
-    // updateTaskIsFavorite(state, action) {
-    //   const index = state.tasks.findIndex((task) => task.id === action.payload)
-    //   if (index > -1) {
-    //     state.tasks[index].favorite = !state.tasks[index].favorite
-    //   }
-    // },
-
     updateTaskIsFavorite(state, action) {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id

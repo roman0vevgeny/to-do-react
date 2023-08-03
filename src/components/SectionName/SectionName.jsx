@@ -37,7 +37,7 @@ const SectionName = ({ name, editable, onClick }) => {
 
   return (
     <>
-      <div className='relative flex flex-row justify-between mx-2 items-center mb-2 bg-mainBg z-30'>
+      <div className='relative flex flex-row justify-between mx-2 items-center bg-mainBg z-30'>
         <input
           className={styles.input}
           placeholder={name}

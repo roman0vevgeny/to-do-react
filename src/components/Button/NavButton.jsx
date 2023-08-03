@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styles from './NavButton.module.scss'
-import Arrow from '../svgs/Arrow'
 
 const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
@@ -18,10 +17,7 @@ const NavButton = ({ children, svgLeft, counter, to }) => {
           ? capitalizeFirstLetter(children)
           : children}
       </div>
-      <div className={styles.counter}>
-        {!counter && <div>{<Arrow />}</div>}
-        {counter && <p>{counter}</p>}
-      </div>
+      <div className={styles.counter}>{counter && <p>{counter}</p>}</div>
     </NavLink>
   )
 }

@@ -1,7 +1,15 @@
 .listContainer {
-  @apply sticky top-[30px] z-10 bg-mainBg;
+  @apply relative z-[10] bg-mainBg overflow-auto;
 }
 
 .startDevider {
   @apply sticky top-0 z-[10] h-[30px] bg-mainBg;
+}
+
+.sectionName {
+  @apply sticky top-0 z-[10];
+}
+
+.listItem {
+  @apply mt-[0px];
 }

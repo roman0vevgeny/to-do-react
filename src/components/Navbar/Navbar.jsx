@@ -12,11 +12,15 @@ import Dropdown from '../Dropdown/Dropdown'
 import TagSvg from '../svgs/TagSvg'
 import DropdownFavorites from '../Dropdown/DropdownFavorites'
 import { createSelector } from '@reduxjs/toolkit'
+import { selectTotalTasks, selectDueTasks } from '../../features/tasksSelectors'
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const allTags = useSelector((state) => state.tags)
   const selectTasks = (state) => state.tasks.tasks
+
+  const totalTasks = useSelector(selectTotalTasks)
+  const dueTasks = useSelector(selectDueTasks)
 
   const selectFavoriteTasks = createSelector([selectTasks], (tasks) =>
     tasks.filter((task) => task.favorite)
@@ -36,13 +40,13 @@ const Navbar = () => {
       <NavButton
         children={'All tasks'}
         svgLeft={<AllTasks />}
-        counter={'6'}
+        counter={totalTasks}
         to='/'
       />
       <NavButton
         children={'Today'}
         svgLeft={<Today />}
-        counter={'99'}
+        counter={dueTasks}
         to='/today'
       />
       {/* <NavButton children={'Projects'} svgLeft={<Projects />} /> */}
