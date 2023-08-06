@@ -18,7 +18,11 @@ const CreateButton = ({ children }) => {
 
   return (
     <div>
-      <Button svgLeft={<Plus />} onClick={handleOpenModal} />
+      <Button
+        svgLeft={<Plus />}
+        onClick={handleOpenModal}
+        children={'Add task'}
+      />
       <Modal
         open={open}
         onClose={onClose}

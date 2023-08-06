@@ -104,6 +104,7 @@ import SectionName from '../components/SectionName/SectionName'
 import NoTasks from '../components/svgs/NoTasks'
 import styles from './Home.module.scss'
 import { useSelector } from 'react-redux'
+import CreateButton from '../components/Button/CreateButton'
 
 const Home = () => {
   const tasks = useSelector((state) => state.tasks.tasks)
@@ -126,23 +127,35 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <section className='relative flex flex-col items-center bg-mainBg overflow-y-auto h-[calc(100vh-100px)] w-full pb-10'>
-          <div className='mb-10 relative'>
-            <div className='sticky top-0 z-[1]'>
+        <section className='flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10'>
+          <div className='mb-[50px]'>
+            <div className='sticky top-0 z-[1] bg-mainBg'>
               <SectionName name={'Tasks'} />
             </div>
-            {tasks.map((task) => (
-              <ListItem key={task.id} taskId={task.id} />
-            ))}
+            <div className='z-[0]'>
+              {tasks.map((task) => (
+                <ListItem key={task.id} taskId={task.id} />
+              ))}
+              <div className='flex justify-between mr-5 mt-5'>
+                <div></div>
+                <CreateButton />
+              </div>
+            </div>
           </div>
 
-          <div className='mb-10 relative'>
-            <div className='sticky top-0 z-[1]'>
+          <div className='mb-[50px]'>
+            <div className='sticky top-0 z-[1] bg-mainBg'>
               <SectionName name={'Another Tasks'} />
             </div>
-            {tasks.map((task) => (
-              <ListItem key={task.id} taskId={task.id} />
-            ))}
+            <div className='z-[0]'>
+              {tasks.map((task) => (
+                <ListItem key={task.id} taskId={task.id} />
+              ))}
+              <div className='flex justify-between mr-5 mt-5'>
+                <div></div>
+                <CreateButton />
+              </div>
+            </div>
           </div>
         </section>
       )}

@@ -36,8 +36,8 @@ const SectionName = ({ name, editable }) => {
   }
 
   return (
-    <div className='bg-mainBg'>
-      <div className='flex flex-row justify-between mx-2 items-center mb-2 bg-mainBg'>
+    <div className=''>
+      <div className='flex flex-row justify-between mx-2 items-center mb-2'>
         <input
           className={styles.input}
           placeholder={name}
@@ -51,7 +51,7 @@ const SectionName = ({ name, editable }) => {
           onBlur={handleBlur}
         />
         <div className='flex flex-row'>
-          <CreateButton children={'Hello'} />
+          {/* <CreateButton children={'Hello'} /> */}
           {editable && <Button svgLeft={<Edit />} onClick={handleFocus} />}
         </div>
       </div>
