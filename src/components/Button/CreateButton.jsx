@@ -17,14 +17,14 @@ const CreateButton = ({ children }) => {
   }
 
   return (
-    <>
+    <div>
       <Button svgLeft={<Plus />} onClick={handleOpenModal} />
       <Modal
         open={open}
         onClose={onClose}
         children={<CreateTaskModal onClose={onClose} />}
       />
-    </>
+    </div>
   )
 }
 

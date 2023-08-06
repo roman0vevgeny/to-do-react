@@ -11,10 +11,10 @@
 }
 
 .devider {
-  @apply flex items-center flex-grow bg-mainBg h-[10px] border-b-1 border-header;
+  @apply flex items-center flex-grow;
 
   &::after {
-    @apply flex-grow h-[10px] bg-mainBg;
+    @apply flex-grow h-[1px] bg-devider;
     content: '';
   }
 }

@@ -22,7 +22,7 @@ const Layout = () => {
             <Navbar className='sticky top-0' />
           </nav>
         )}
-        <main className='flex relative justify-center overflow-y-scroll h-[calc(100vh-50px)] w-full'>
+        <main className='flex relative justify-center h-[calc(100vh-50px)] w-full'>
           <Outlet />
         </main>
       </div>

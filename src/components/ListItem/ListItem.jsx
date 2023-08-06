@@ -56,7 +56,7 @@ const ListItem = ({ taskId }) => {
   const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
 
   return (
-    <div className='relative overflow-hidden'>
+    <div className='relative w-full'>
       <div className={styles.body} onClick={handleOpenModal}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />

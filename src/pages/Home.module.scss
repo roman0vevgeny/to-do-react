@@ -1,13 +1,13 @@
 .listContainer {
-  @apply relative z-[10] bg-mainBg overflow-auto;
+  @apply relative bg-mainBg overflow-visible;
 }
 
-.startDevider {
-  @apply sticky top-0 z-[10] h-[30px] bg-mainBg;
-}
+// .startDevider {
+//   @apply relative z-[11] h-[30px] bg-mainBg;
+// }
 
 .sectionName {
-  @apply sticky top-0 z-[10];
+  @apply relative;
 }
 
 .listItem {

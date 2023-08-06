@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import Edit from '../svgs/Edit'
 import styles from './SectionName.module.scss'
 
-const SectionName = ({ name, editable, onClick }) => {
+const SectionName = ({ name, editable }) => {
   const [text, setText] = useState(name)
   const inputRef = useRef(null)
 
@@ -36,8 +36,8 @@ const SectionName = ({ name, editable, onClick }) => {
   }
 
   return (
-    <>
-      <div className='relative flex flex-row justify-between mx-2 items-center bg-mainBg z-30'>
+    <div className='bg-mainBg'>
+      <div className='flex flex-row justify-between mx-2 items-center mb-2 bg-mainBg'>
         <input
           className={styles.input}
           placeholder={name}
@@ -56,7 +56,7 @@ const SectionName = ({ name, editable, onClick }) => {
         </div>
       </div>
       <div className={styles.devider}></div>
-    </>
+    </div>
   )
 }
 

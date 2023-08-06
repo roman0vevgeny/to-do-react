@@ -109,9 +109,7 @@ const Home = () => {
   const tasks = useSelector((state) => state.tasks.tasks)
 
   return (
-    <div className='w-full'>
-      {/* <div className='sticky top-0 z-[10] h-[30px] bg-mainBg'></div> */}
-
+    <div className='h-[calc(100vh-50px)] w-full flex justify-center pt-10'>
       {tasks.length === 0 ? (
         <div className={styles.emptyStateContainer}>
           <div className='my-10 flex justify-center text-imageColor'>
@@ -128,39 +126,26 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <div className='relative z-[10] bg-mainBg overflow-auto h-[calc(100vh-110px)]'>
-          <div className='sticky top-0 z-[10] h-[30px] bg-mainBg'></div>
-          <section className='mb-8'>
-            <div className='sticky top-0 z-[10]'>
+        <section className='relative flex flex-col items-center bg-mainBg overflow-y-auto h-[calc(100vh-100px)] w-full pb-10'>
+          <div className='mb-10 relative'>
+            <div className='sticky top-0 z-[1]'>
               <SectionName name={'Tasks'} />
             </div>
-            <div className='mt-[0px]'>
-              {tasks.map((task) => (
-                <div className='mt-[0px]' key={task.id}>
-                  <ListItem taskId={task.id} />
-                </div>
-              ))}
-            </div>
-
-            <div className='h-[30px]'></div>
-          </section>
-          <section className='mb-8 overflow-y-auto'>
-            <div className='sticky top-0 z-[10]'>
-              <SectionName name={'Tasks'} />
-            </div>
-
             {tasks.map((task) => (
-              <div className='mt-[0px]' key={task.id}>
-                <ListItem taskId={task.id} />
-              </div>
+              <ListItem key={task.id} taskId={task.id} />
             ))}
-            <div className='h-[30px]'></div>
-          </section>
-          {/* <div className='h-[60px]'></div> */}
-        </div>
-      )}
+          </div>
 
-      {/* <div className='h-20'></div> */}
+          <div className='mb-10 relative'>
+            <div className='sticky top-0 z-[1]'>
+              <SectionName name={'Another Tasks'} />
+            </div>
+            {tasks.map((task) => (
+              <ListItem key={task.id} taskId={task.id} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }
