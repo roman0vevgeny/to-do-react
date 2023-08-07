@@ -36,7 +36,7 @@ const CreateTaskModal = ({ onClose }) => {
       dispatch(
         addTask({
           ...task,
-          expirationDate: expirationDateString,
+          expirationDate: expirationDate,
         })
       )
       onClose()
@@ -94,12 +94,12 @@ const CreateTaskModal = ({ onClose }) => {
       />
       <div className='flex ml-2'>
         <Calend
-          expirationDate={expirationDate.toISOString()}
+          expirationDate={expirationDate}
           task={task}
           onChange={(newExpirationDate) =>
             setTask({
               ...task,
-              expirationDate: newExpirationDate.toISOString(),
+              expirationDate: newExpirationDate,
             })
           }
         />

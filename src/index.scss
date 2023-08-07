@@ -176,11 +176,11 @@ main::-webkit-scrollbar-thumb {
 }
 
 .react-calendar__navigation__next-button {
-  @apply transform -rotate-90;
+  @apply -rotate-90;
 }
 
 .react-calendar__navigation__prev-button {
-  @apply transform rotate-90;
+  @apply rotate-90;
 }
 
 .react-calendar__month-view__weekdays {

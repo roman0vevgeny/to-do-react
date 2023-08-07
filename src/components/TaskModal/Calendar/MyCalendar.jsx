@@ -27,28 +27,22 @@ function MyCalendar({
     value ? new Date(value).getFullYear() : new Date().getFullYear()
   )
 
-  const getDaysInMonth = (year, month) => {
-    let date = new Date(year, month + 1, 0)
-    return date.getDate()
-  }
-
-  const getFirstDayOfWeek = (year, month) => {
-    let date = new Date(year, month, 1)
-    return date.getDay()
-  }
-
   const getDaysArray = (year, month) => {
-    let daysInMonth = getDaysInMonth(year, month)
-    let firstDayOfWeek = getFirstDayOfWeek(year, month)
     let daysArray = []
-    for (let i = 0; i < firstDayOfWeek; i++) {
-      daysArray.push('')
+    for (let i = 1; i <= new Date(year, month + 1, 0).getDate(); i++) {
+      daysArray.push(new Date(year, month, i))
     }
-    for (let i = 1; i <= daysInMonth; i++) {
-      daysArray.push(i)
+
+    let firstDay = new Date(year, month, 1)
+    while (firstDay.getDay() !== 1) {
+      firstDay.setDate(firstDay.getDate() - 1)
+      daysArray.unshift(new Date(firstDay))
     }
-    while (daysArray.length % 7 !== 0) {
-      daysArray.push('')
+
+    let lastDay = new Date(year, month + 1, 0)
+    while (lastDay.getDay() !== 0) {
+      lastDay.setDate(lastDay.getDate() + 1)
+      daysArray.push(new Date(lastDay))
     }
     return daysArray
   }
@@ -72,24 +66,27 @@ function MyCalendar({
     }
   }
 
-  const handleDateSelect = (day) => {
-    let date = new Date(currentYear, currentMonth, day)
+  const handleDateSelect = (date) => {
     let dateString = date.toISOString()
-    onChange(dateString)
-    dispatch(
-      updateTaskExpirationDate({
-        id: task.id,
-        expirationDate: dateString,
-      })
-    )
+    if (task.id && dispatch) {
+      dispatch(
+        updateTaskExpirationDate({
+          id: task.id,
+          expirationDate: dateString,
+        })
+      )
+    } else {
+      onChange(dateString)
+    }
   }
 
-  const isCurrentDate = (year, month, day) => {
+  const isCurrentDate = (date) => {
     let currentDate = new Date()
-    let currentYear = currentDate.getFullYear()
-    let currentMonth = currentDate.getMonth()
-    let currentDay = currentDate.getDate()
-    if (year === currentYear && month === currentMonth && day === currentDay) {
+    if (
+      date.getFullYear() === currentDate.getFullYear() &&
+      date.getMonth() === currentDate.getMonth() &&
+      date.getDate() === currentDate.getDate()
+    ) {
       return true
     } else {
       return false
@@ -109,24 +106,28 @@ function MyCalendar({
   }
 
   return (
-    <div className='text-12 text-task w-[200px]'>
+    <div className='text-12 text-task w-[175px] h-[230px] mr-5'>
       {showNavigation && (
         <div className='flex w-full justify-between'>
-          <button onClick={() => handleMonthChange('prev')}>{prevLabel}</button>
-          <span>
+          <button
+            className='flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center'
+            onClick={() => handleMonthChange('prev')}>
+            {prevLabel}
+          </button>
+          <span className='text-14 flex py-[2px] mb-[5px] h-[25px] rounded-md text-gray justify-center items-cente'>
             {new Date(currentYear, currentMonth).toLocaleString(locale, {
               month: 'long',
               year: 'numeric',
             })}
           </span>
           <button
-            className='rotate-180'
+            className='rotate-180 flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center'
             onClick={() => handleMonthChange('next')}>
             {nextLabel}
           </button>
         </div>
       )}
-      <div className='grid gap-1 grid-cols-7 grid-rows-1 mt-2'>
+      <div className='grid gap-0 grid-cols-7 mt-2 justify-items-center'>
         {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((dayName) => (
           <div className='mt-[8px] h-[20px]' key={dayName}>
             {dayName}
@@ -134,21 +135,22 @@ function MyCalendar({
         ))}
         {getDaysArray(currentYear, currentMonth).map((day, index) => (
           <div
-            className={`mx-1 bg-main p-1 w-[25px] h-[25px] rounded-full ${
-              day === '' ? '' : 'px-1'
+            className={`text-gray pt-[6px] w-[25px] h-[25px] rounded-full text-center cursor-pointer justify-self-center hover:bg-gray ${
+              isCurrentDate(day)
+                ? 'bg-blueTag text-blueTag hover:text-gray'
+                : ''
             } ${
-              isCurrentDate(currentYear, currentMonth, day) ? 'bg-red-300' : ''
+              isEqualDate(new Date(value), day)
+                ? 'bg-main text-white hover:text-gray'
+                : ''
             } ${
-              isEqualDate(
-                new Date(value),
-                new Date(currentYear, currentMonth, day)
-              )
-                ? 'bg-red-500'
+              day.getMonth() !== currentMonth
+                ? 'text-[var(--calendar-disable)] hover:text-gray'
                 : ''
             }`}
             key={index}
             onClick={() => handleDateSelect(day)}>
-            {formatDay(new Date(currentYear, currentMonth, day)).slice(0, 2)}
+            {formatDay(day)}
           </div>
         ))}
       </div>

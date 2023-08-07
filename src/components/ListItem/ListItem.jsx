@@ -17,7 +17,7 @@ import {
 import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
 import Modal from '../Modal/Modal'
-// import { formatDate } from '../../helpers/formatDate'
+import { formatedDate } from '../../helpers/formatDate'
 
 const ListItem = ({ taskId }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
@@ -70,7 +70,10 @@ const ListItem = ({ taskId }) => {
               {task.expirationDate && (
                 <InfoExpiration
                   svg={<Cal />}
-                  children={task.expirationDate}
+                  children={formatedDate(new Date(task.expirationDate)).slice(
+                    0,
+                    10
+                  )}
                   expirationDate={task.expirationDate}
                   checked={task.checked}
                 />

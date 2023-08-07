@@ -5,6 +5,7 @@ import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
 import InfoExpiration from '../../Info/InfoExpiration'
+import { formatedDate } from '../../../helpers/formatDate'
 
 const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
   const { subtasks, creationDate, expirationDate, favorite, checked } = task
@@ -24,7 +25,7 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
           {expirationDate && (
             <InfoExpiration
               svg={<Cal />}
-              children={expirationDate}
+              children={formatedDate(new Date(expirationDate)).slice(0, 10)}
               expirationDate={expirationDate}
               checked={checked}
             />

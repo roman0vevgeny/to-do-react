@@ -64,7 +64,7 @@ const Calend = ({ expirationDate, dispatch, task, onChange, checked }) => {
   const expirationDateObject = expirationDate ? new Date(expirationDate) : null
 
   const handleDateChange = (value) => {
-    const newExpirationDate = value.toISOString()
+    const newExpirationDate = value
     if (task.id && dispatch) {
       dispatch(
         updateTaskExpirationDate({
