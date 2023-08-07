@@ -7,7 +7,14 @@ const initialState = {
       checked: false,
       name: 'Первая задача с очень длинным текстом',
       description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
+      creationDate: new Date().toLocaleString('us-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
       expirationDate: null,
       subtasks: [
         { id: 1, name: 'Подзадача 1', checked: true },
@@ -18,101 +25,18 @@ const initialState = {
       project: null,
     },
     {
-      id: 2,
-      checked: false,
-      name: 'Первая задача',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 3, name: 'Подзадача 1', checked: true },
-        { id: 4, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
-      id: 3,
-      checked: false,
-      name: 'Первая задача с текстом',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 5, name: 'Подзадача 1', checked: true },
-        { id: 62, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
-      id: 4,
-      checked: false,
-      name: 'Первая задача с очень длинным текстом',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 7, name: 'Подзадача 1', checked: true },
-        { id: 8, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
-      id: 5,
-      checked: false,
-      name: 'Первая задача с очень длинным текстом',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 9, name: 'Подзадача 1', checked: true },
-        { id: 10, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
-      id: 6,
-      checked: false,
-      name: 'Первая задача',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 11, name: 'Подзадача 1', checked: true },
-        { id: 12, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
-      id: 7,
-      checked: false,
-      name: 'Первая задача',
-      description: 'Описание первой задачи',
-      creationDate: '20.02.2022',
-      expirationDate: null,
-      subtasks: [
-        { id: 13, name: 'Подзадача 1', checked: true },
-        { id: 14, name: 'Подзадача 2', checked: false },
-      ],
-      favorite: false,
-      tags: [],
-      project: null,
-    },
-    {
       id: 8,
       checked: true,
       name: 'Вторая задача',
       description: 'Описание второй задачи',
-      creationDate: '21.02.2022',
+      creationDate: new Date().toLocaleString('us-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
       expirationDate: null,
       subtasks: [],
       favorite: false,
@@ -129,13 +53,28 @@ const tasksSlice = createSlice({
     addTask(state, action) {
       state.tasks.push({
         ...action.payload,
-        creationDate: new Date().toISOString(),
-        expirationDate: action.payload.expirationDate,
+        creationDate: new Date().toLocaleString('us-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }),
+        // expirationDate: action.payload.expirationDate,
       })
     },
 
     deleteTask(state, action) {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload)
+    },
+
+    updateTaskExpirationDate(state, action) {
+      const { id, expirationDate } = action.payload
+      const task = state.tasks.find((task) => task.id === id)
+      if (task) {
+        task.expirationDate = expirationDate
+      }
     },
 
     updateTaskName(state, action) {
@@ -223,14 +162,6 @@ const tasksSlice = createSlice({
           state.tasks[index].subtasks[subtaskIndex].checked =
             action.payload.checked
         }
-      }
-    },
-
-    updateTaskExpirationDate(state, action) {
-      const { id, expirationDate } = action.payload
-      const task = state.tasks.find((task) => task.id === id)
-      if (task) {
-        task.expirationDate = expirationDate
       }
     },
 

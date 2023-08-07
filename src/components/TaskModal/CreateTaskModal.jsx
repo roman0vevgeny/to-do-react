@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from './EditTaskModal.module.scss'
 import CreateTaskName from './TaskName/CreateTaskName'
 import CreateTaskDescription from './TaskDescription/CreateTaskDescription'
 import TagForm from './TagForm/TagForm'
@@ -24,8 +23,9 @@ const CreateTaskModal = ({ onClose }) => {
   })
 
   const [error, setError] = useState(null)
-
   const dispatch = useDispatch()
+  const { expirationDate } = task
+
   const allTags = useSelector((state) => state.tags)
 
   const handleCreateTask = () => {
@@ -33,10 +33,17 @@ const CreateTaskModal = ({ onClose }) => {
       setError('Please enter a valid task name')
     } else {
       setError(null)
-      dispatch(addTask(task))
+      dispatch(
+        addTask({
+          ...task,
+          expirationDate: expirationDateString,
+        })
+      )
       onClose()
     }
   }
+
+  console.log(task.expirationDate ? task.expirationDate : null)
 
   return (
     <div>
@@ -87,7 +94,8 @@ const CreateTaskModal = ({ onClose }) => {
       />
       <div className='flex ml-2'>
         <Calend
-          expirationDate={task.expirationDate}
+          expirationDate={expirationDate.toISOString()}
+          task={task}
           onChange={(newExpirationDate) =>
             setTask({
               ...task,
@@ -95,6 +103,7 @@ const CreateTaskModal = ({ onClose }) => {
             })
           }
         />
+
         <TagForm
           value={task.tags}
           onChange={(newTags) => setTask({ ...task, tags: newTags })}
@@ -102,20 +111,13 @@ const CreateTaskModal = ({ onClose }) => {
           taskId={null}
         />
       </div>
-      <div className='flex w-full justify-center'>
-        <button
-          type={'submit'}
-          className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 ml-2'
-          onClick={handleCreateTask}>
+      <div className='flex'>
+        <button type={'submit'} className='flex' onClick={handleCreateTask}>
           <Plus />
           <p className='mx-1'>Create task</p>
         </button>
       </div>
-      {error && (
-        <p className='flex justify-center text-redTag text-14 bg-redTag rounded-md mt-2 py-1'>
-          {error}
-        </p>
-      )}
+      {error && <p className='flex'>{error}</p>}
     </div>
   )
 }

@@ -5,7 +5,6 @@ import Subtasks from '../../svgs/Subtasks'
 import Cal from '../../svgs/Cal'
 import Modal from '../../Modal/Modal'
 import EditTaskModal from '../../TaskModal/EditTaskModal'
-import { formatDate } from '../../../helpers/formatDate'
 import InfoExpiration from '../../Info/InfoExpiration'
 
 const TaskCard = ({ task }) => {
@@ -24,6 +23,8 @@ const TaskCard = ({ task }) => {
 
   const completedSubtasks = subtasks.filter((subtask) => subtask.checked).length
 
+  console.log(expirationDate)
+
   return (
     <div className='font-medium'>
       <div className={styles.item} onClick={() => handleOpenModal(task)}>
@@ -31,7 +32,7 @@ const TaskCard = ({ task }) => {
         <div className={styles.infoBlock}>
           {expirationDate && (
             <InfoExpiration
-              children={expirationDate.slice(0, 10)}
+              children={expirationDate}
               svg={<Cal />}
               expirationDate={expirationDate}
             />
@@ -52,7 +53,7 @@ const TaskCard = ({ task }) => {
             <EditTaskModal
               task={task}
               onClose={(e) => handleCloseModal()}
-              formatDate={formatDate}
+              //   formatDate={formatDate}
             />
           }
         />

@@ -20,7 +20,7 @@ const Navbar = () => {
   const selectTasks = (state) => state.tasks.tasks
 
   const totalTasks = useSelector(selectTotalTasks)
-  const dueTasks = useSelector(selectDueTasks)
+  // const dueTasks = useSelector(selectDueTasks)
 
   const selectFavoriteTasks = createSelector([selectTasks], (tasks) =>
     tasks.filter((task) => task.favorite)
@@ -46,7 +46,7 @@ const Navbar = () => {
       <NavButton
         children={'Today'}
         svgLeft={<Today />}
-        counter={dueTasks}
+        // counter={dueTasks}
         to='/today'
       />
       {/* <NavButton children={'Projects'} svgLeft={<Projects />} /> */}

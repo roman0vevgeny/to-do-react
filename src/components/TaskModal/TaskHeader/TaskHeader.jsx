@@ -4,11 +4,10 @@ import Subtasks from '../../svgs/Subtasks'
 import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
-import { formatDate } from '../../../helpers/formatDate'
 import InfoExpiration from '../../Info/InfoExpiration'
 
 const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
-  const { subtasks, creationDate, expirationDate, favorite } = task
+  const { subtasks, creationDate, expirationDate, favorite, checked } = task
 
   const handleToggleFavorite = () => {
     onFavoriteChange(!favorite)
@@ -25,9 +24,9 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
           {expirationDate && (
             <InfoExpiration
               svg={<Cal />}
-              children={formatDate(expirationDate)}
+              children={expirationDate}
               expirationDate={expirationDate}
-              checked={task.checked}
+              checked={checked}
             />
           )}
           {subtasks && subtasks.length > 0 && (

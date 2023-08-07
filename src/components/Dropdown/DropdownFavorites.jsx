@@ -4,7 +4,6 @@ import Arrow from '../svgs/Arrow'
 import styles from './Dropdown.module.scss'
 import Modal from '../Modal/Modal'
 import EditTaskModal from '../TaskModal/EditTaskModal'
-import { formatDate } from '../../helpers/formatDate'
 import { getTaskById } from '../../helpers/getTaskById'
 
 const capitalizeFirstLetter = (string) => {
@@ -83,7 +82,7 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
             <EditTaskModal
               task={task}
               onClose={(e) => handleCloseModal()}
-              formatDate={formatDate}
+              // formatDate={formatDate}
             />
           }
         />

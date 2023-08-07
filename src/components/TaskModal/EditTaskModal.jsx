@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './EditTaskModal.module.scss'
 import TaskNameModal from './TaskName/TaskNameModal'
 import TaskDescription from './TaskDescription/TaskDescription'
 import TagForm from './TagForm/TagForm'
@@ -17,9 +16,7 @@ import TaskHeader from './TaskHeader/TaskHeader'
 
 const EditTaskModal = ({ handleCloseModal, task }) => {
   const { id, tags } = task
-
   const dispatch = useDispatch()
-
   const allTags = useSelector((state) => state.tags)
 
   const handleDeleteTag = (tagId) => {
@@ -30,6 +27,8 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
       })
     )
   }
+
+  console.log(task.expirationDate ? task.expirationDate : null)
 
   return (
     <div onClose={handleCloseModal}>
@@ -69,16 +68,19 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
       <div className='flex ml-2'>
         <Calend
           expirationDate={task.expirationDate}
-          checked={task.checked}
+          task={task}
+          dispatch={dispatch}
           onChange={(newExpirationDate) =>
             dispatch(
               updateTaskExpirationDate({
                 id: task.id,
-                expirationDate: newExpirationDate.toISOString(),
+                expirationDate: newExpirationDate,
               })
             )
           }
+          checked={task.checked}
         />
+
         {!task.checked && (
           <TagForm
             value={tags}
@@ -88,7 +90,6 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
             isNewTask={false}
             taskId={id}
           />
-          // {' '}
         )}
       </div>
     </div>
