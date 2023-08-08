@@ -8,7 +8,6 @@ const CreateButton = ({ children }) => {
   const [open, setOpen] = useState(false)
 
   const onClose = () => {
-    console.log('Button clicked')
     setOpen(false)
   }
 

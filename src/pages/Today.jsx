@@ -154,9 +154,10 @@ import NoTasks from '../components/svgs/NoTasks'
 import styles from './Home.module.scss'
 import { useSelector } from 'react-redux'
 import CreateButton from '../components/Button/CreateButton'
+import { todayTasksSelector } from '../features/tasksSelectors'
 
 const Home = () => {
-  const tasks = useSelector((state) => state.tasks.tasks)
+  const tasks = useSelector(todayTasksSelector)
 
   return (
     <div className='h-[calc(100vh-50px)] w-full flex justify-center pt-10'>

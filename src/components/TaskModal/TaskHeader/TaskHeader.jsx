@@ -18,9 +18,9 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
     <div>
       <div className='flex flex-row justify-between items-center text-gray mb-3'>
         {!isNewTask && creationDate && (
-          <p className='text-12'>Created at {creationDate}</p>
+          <p className='text-12'>Created at {creationDate.slice(0, 10)}</p>
         )}
-        {isNewTask && <p className='text-12'> </p>}
+        {isNewTask && <p className='text-12'>Create a new task</p>}
         <div className='flex flex-row justify-end'>
           {expirationDate && (
             <InfoExpiration

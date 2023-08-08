@@ -49,6 +49,7 @@ const Navbar = () => {
         counter={dueTasks}
         to='/today'
       />
+      <div className={styles.sectionDevider}></div>
       {/* <NavButton children={'Projects'} svgLeft={<Projects />} /> */}
       <DropdownFavorites
         children={'Favorites'}

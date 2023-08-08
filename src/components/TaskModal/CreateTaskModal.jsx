@@ -9,6 +9,7 @@ import Plus from '../svgs/Plus'
 import Tag from '../Tag/Tag'
 import TaskHeader from './TaskHeader/TaskHeader'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
+import Button from '../Button/Button'
 
 const CreateTaskModal = ({ onClose }) => {
   const [task, setTask] = useState({
@@ -42,8 +43,6 @@ const CreateTaskModal = ({ onClose }) => {
       onClose()
     }
   }
-
-  console.log(task.expirationDate ? task.expirationDate : null)
 
   return (
     <div>
@@ -111,13 +110,19 @@ const CreateTaskModal = ({ onClose }) => {
           taskId={null}
         />
       </div>
-      <div className='flex'>
-        <button type={'submit'} className='flex' onClick={handleCreateTask}>
-          <Plus />
-          <p className='mx-1'>Create task</p>
-        </button>
+      <div className='flex justify-center'>
+        <Button
+          type={'submit'}
+          children={'Create task'}
+          onClick={handleCreateTask}
+          svgLeft={<Plus />}
+        />
       </div>
-      {error && <p className='flex'>{error}</p>}
+      {error && (
+        <p className='flex p-2 mt-2 rounded-md text-redTag bg-redTag text-14 justify-center'>
+          {error}
+        </p>
+      )}
     </div>
   )
 }

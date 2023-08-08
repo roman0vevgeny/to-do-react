@@ -28,8 +28,6 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
     )
   }
 
-  console.log(task.expirationDate ? task.expirationDate : null)
-
   return (
     <div onClose={handleCloseModal}>
       <TaskHeader
