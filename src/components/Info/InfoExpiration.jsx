@@ -14,7 +14,7 @@ const InfoExpiration = ({ svg, children, expirationDate, checked }) => {
           className={
             notExpired
               ? 'whitespace-nowrap text-gray'
-              : 'whitespace-nowrap text-redTag'
+              : 'whitespace-nowrap text-expired'
           }>
           {children}
         </div>

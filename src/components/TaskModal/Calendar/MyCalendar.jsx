@@ -106,7 +106,7 @@ function MyCalendar({
   }
 
   return (
-    <div className='text-12 text-task w-[175px] h-[230px] mr-5'>
+    <div className='text-12 text-task w-[175px] h-[210px] mr-5'>
       {showNavigation && (
         <div className='flex w-full justify-between'>
           <button
@@ -115,7 +115,7 @@ function MyCalendar({
             {prevLabel}
           </button>
           <span className='text-14 flex py-[2px] mb-[5px] h-[25px] rounded-md text-gray justify-center items-cente'>
-            {new Date(currentYear, currentMonth).toLocaleString(locale, {
+            {new Date(currentYear, currentMonth).toLocaleString('en-US', {
               month: 'long',
               year: 'numeric',
             })}
@@ -127,25 +127,23 @@ function MyCalendar({
           </button>
         </div>
       )}
-      <div className='grid gap-0 grid-cols-7 mt-2 justify-items-center'>
-        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((dayName) => (
+      <div className='grid gap-0 grid-cols-7 mt-0 justify-items-center'>
+        {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((dayName) => (
           <div className='mt-[8px] h-[20px]' key={dayName}>
             {dayName}
           </div>
         ))}
         {getDaysArray(currentYear, currentMonth).map((day, index) => (
           <div
-            className={`text-gray pt-[6px] w-[25px] h-[25px] rounded-full text-center cursor-pointer justify-self-center hover:bg-gray ${
-              isCurrentDate(day)
-                ? 'bg-blueTag text-blueTag hover:text-gray'
-                : ''
+            className={`pt-[6px] w-[25px] h-[25px] rounded-full text-center cursor-pointer justify-self-center hover:bg-gray ${
+              isCurrentDate(day) ? 'bg-blueTag text-blueTag' : 'text-gray'
             } ${
               isEqualDate(new Date(value), day)
                 ? 'bg-main text-white hover:text-gray'
                 : ''
             } ${
               day.getMonth() !== currentMonth
-                ? 'text-[var(--calendar-disable)] hover:text-gray'
+                ? 'text-[var(--color-text-gray)] hover:text-gray'
                 : ''
             }`}
             key={index}

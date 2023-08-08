@@ -1,5 +1,5 @@
 .textSmall {
-  @apply flex text-14 max-w-[320px] pt-[4px] text-task text-start leading-1.5 flex-grow mr-10;
+  @apply flex text-14 min-w-[200px] max-w-[320px] pt-[4px] text-task text-start leading-1.5 flex-grow mr-10;
 }
 
 .textSmallChecked {

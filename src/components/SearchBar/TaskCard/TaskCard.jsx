@@ -6,7 +6,6 @@ import Cal from '../../svgs/Cal'
 import Modal from '../../Modal/Modal'
 import EditTaskModal from '../../TaskModal/EditTaskModal'
 import InfoExpiration from '../../Info/InfoExpiration'
-import { formatedDate } from '../../../helpers/formatDate'
 
 const TaskCard = ({ task }) => {
   const [openModal, setOpenModal] = useState(null)
@@ -33,7 +32,14 @@ const TaskCard = ({ task }) => {
         <div className={styles.infoBlock}>
           {expirationDate && (
             <InfoExpiration
-              children={formatedDate(new Date(expirationDate)).slice(0, 10)}
+              children={new Date(expirationDate).toLocaleDateString(
+                navigator.language,
+                {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: '2-digit',
+                }
+              )}
               svg={<Cal />}
               expirationDate={expirationDate}
             />

@@ -172,8 +172,8 @@ const Home = () => {
               Let's create a new one
             </p>
           </div>
-          <div className='flex flex-row my-2 justify-center items-center'>
-            <Button children={'Create task'} svgLeft={<Plus />} />
+          <div className='flex justify-center'>
+            <CreateButton today={true} />
           </div>
         </div>
       ) : (
@@ -188,7 +188,7 @@ const Home = () => {
               ))}
               <div className='flex justify-between mr-5 mt-5'>
                 <div></div>
-                <CreateButton />
+                <CreateButton today={true} />
               </div>
             </div>
           </div>

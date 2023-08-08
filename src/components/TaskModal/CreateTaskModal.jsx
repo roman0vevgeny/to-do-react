@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CreateTaskName from './TaskName/CreateTaskName'
 import CreateTaskDescription from './TaskDescription/CreateTaskDescription'
 import TagForm from './TagForm/TagForm'
@@ -11,7 +11,7 @@ import TaskHeader from './TaskHeader/TaskHeader'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import Button from '../Button/Button'
 
-const CreateTaskModal = ({ onClose }) => {
+const CreateTaskModal = ({ onClose, today }) => {
   const [task, setTask] = useState({
     id: Date.now(),
     name: '',
@@ -24,6 +24,13 @@ const CreateTaskModal = ({ onClose }) => {
   })
 
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (today && !task.expirationDate) {
+      setTask({ ...task, expirationDate: new Date().toISOString() })
+    }
+  }, [today])
+
   const dispatch = useDispatch()
   const { expirationDate } = task
 

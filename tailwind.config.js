@@ -163,6 +163,7 @@ export default {
         pinkTag: 'var(--color-text-pink-tag)',
         imageColor: 'var(--image-color)',
         tagDelete: 'var(--tag-delete)',
+        expired: 'var(--expired)',
       },
       backgroundColor: {
         main: 'var(--color-main)',

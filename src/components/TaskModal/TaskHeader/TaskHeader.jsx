@@ -5,7 +5,6 @@ import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
 import InfoExpiration from '../../Info/InfoExpiration'
-import { formatedDate } from '../../../helpers/formatDate'
 
 const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
   const { subtasks, creationDate, expirationDate, favorite, checked } = task
@@ -18,14 +17,28 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
     <div>
       <div className='flex flex-row justify-between items-center text-gray mb-3'>
         {!isNewTask && creationDate && (
-          <p className='text-12'>Created at {creationDate.slice(0, 10)}</p>
+          <p className='text-12'>
+            Created at{' '}
+            {new Date(creationDate).toLocaleDateString(navigator.language, {
+              day: '2-digit',
+              month: '2-digit',
+              year: '2-digit',
+            })}
+          </p>
         )}
         {isNewTask && <p className='text-12'>Create a new task</p>}
         <div className='flex flex-row justify-end'>
           {expirationDate && (
             <InfoExpiration
               svg={<Cal />}
-              children={formatedDate(new Date(expirationDate)).slice(0, 10)}
+              children={new Date(expirationDate).toLocaleDateString(
+                navigator.language,
+                {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: '2-digit',
+                }
+              )}
               expirationDate={expirationDate}
               checked={checked}
             />
