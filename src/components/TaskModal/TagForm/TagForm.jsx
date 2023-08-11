@@ -82,7 +82,7 @@ const TagForm = ({ value, onChange, isNewTask, taskId }) => {
   }
 
   return (
-    <form className='flex flex-col mt-8 ml-8 w-full' onSubmit={handleSubmit}>
+    <form className='flex flex-col ml-8 w-full' onSubmit={handleSubmit}>
       <TagInput name={name} onNameChange={handleNameChange} />
       <div className='flex mt-2 mr-2'>
         <TagColorSection color={color} onColorSelect={handleColorSelect} />{' '}

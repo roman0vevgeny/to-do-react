@@ -12,7 +12,12 @@ import Dropdown from '../Dropdown/Dropdown'
 import TagSvg from '../svgs/TagSvg'
 import DropdownFavorites from '../Dropdown/DropdownFavorites'
 import { createSelector } from '@reduxjs/toolkit'
-import { selectTotalTasks, selectDueTasks } from '../../features/tasksSelectors'
+import {
+  selectTotalTasks,
+  selectDueTasks,
+  selectExpiredTasks,
+} from '../../features/tasksSelectors'
+import Expired from '../svgs/Expired'
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -21,6 +26,7 @@ const Navbar = () => {
 
   const totalTasks = useSelector(selectTotalTasks)
   const dueTasks = useSelector(selectDueTasks)
+  const expiredTasks = useSelector(selectExpiredTasks)
 
   const selectFavoriteTasks = createSelector([selectTasks], (tasks) =>
     tasks.filter((task) => task.favorite)
@@ -41,13 +47,19 @@ const Navbar = () => {
         children={'All tasks'}
         svgLeft={<AllTasks />}
         counter={totalTasks}
-        to='/'
+        to='/home'
       />
       <NavButton
         children={'Today'}
         svgLeft={<Today />}
         counter={dueTasks}
         to='/today'
+      />
+      <NavButton
+        children={'Expired'}
+        svgLeft={<Expired />}
+        counter={expiredTasks}
+        to='/expired'
       />
       <div className={styles.sectionDevider}></div>
       {/* <NavButton children={'Projects'} svgLeft={<Projects />} /> */}

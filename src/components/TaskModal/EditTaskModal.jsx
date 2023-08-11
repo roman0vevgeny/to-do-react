@@ -63,7 +63,12 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
         }
         checked={task.checked}
       />
-      <div className='flex ml-2'>
+      <div
+        className={
+          tags && tags.length > 0
+            ? 'flex ml-2 mt-[20px]'
+            : 'flex ml-2 mt-[47px]'
+        }>
         <Calend
           expirationDate={task.expirationDate}
           task={task}

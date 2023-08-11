@@ -194,6 +194,7 @@ export default {
         stroke: 'var(--stroke)',
         checkboxActive: 'var(--checkbox-active)',
         input: 'var(--color-main-bg)',
+        warning: 'var(--expired)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',

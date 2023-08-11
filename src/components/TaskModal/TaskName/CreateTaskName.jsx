@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useLayoutEffect } from 'react'
 import Edit from '../../svgs/Edit'
-import styles from './TaskNameModal.module.scss'
+import styles from './CreateTaskName.module.scss'
 import ModalButton from '../../Button/ModalButton'
 
 const CreateTaskName = ({ name, setName }) => {
@@ -49,13 +49,15 @@ const CreateTaskName = ({ name, setName }) => {
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
       <div
-        className={styles.input}
         placeholder={name}
         ref={inputRef}
         contentEditable='true'
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        className={
+          text === '' ? `${styles.input} border-warning` : styles.input
+        }
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />

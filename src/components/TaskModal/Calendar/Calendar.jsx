@@ -82,7 +82,7 @@ const Calend = ({ expirationDate, dispatch, task, onChange, checked }) => {
   }
 
   return (
-    <div className='flex mt-8'>
+    <div className='flex'>
       <MyCalendar
         className={
           !checked

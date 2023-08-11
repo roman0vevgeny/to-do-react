@@ -1,12 +1,12 @@
 .input {
-  @apply flex text-start text-20 font-bold flex-grow mr-2 px-2 py-1 bg-mainBg text-task rounded-[5px] w-[500px] cursor-pointer;
+  @apply flex text-start border-2 border-input text-20 font-bold flex-grow mr-2 px-2 py-1 bg-mainBg text-task rounded-[7px] w-[500px] cursor-pointer;
 
   &::placeholder {
     @apply text-placeholder;
   }
 
   &:focus {
-    @apply outline-none bg-inputFocus text-inputFocus cursor-auto;
+    @apply outline-none bg-inputFocus text-inputFocus cursor-auto border-2 border-input;
   }
 }
 

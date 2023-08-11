@@ -31,13 +31,17 @@ const CreateTaskModal = ({ onClose, today }) => {
     }
   }, [today])
 
+  useEffect(() => {
+    setError(null)
+  }, [task.name])
+
   const dispatch = useDispatch()
   const { expirationDate } = task
 
   const allTags = useSelector((state) => state.tags)
 
   const handleCreateTask = () => {
-    if (!task.name || task.name === 'Untitled') {
+    if (!task.name || task.name === '') {
       setError('Please enter a valid task name')
     } else {
       setError(null)
@@ -98,7 +102,12 @@ const CreateTaskModal = ({ onClose, today }) => {
         }
         isNewTask={true}
       />
-      <div className='flex ml-2'>
+      <div
+        className={
+          task.tags && task.tags.length > 0
+            ? 'flex ml-2 mt-[20px]'
+            : 'flex ml-2 mt-[47px]'
+        }>
         <Calend
           expirationDate={expirationDate}
           task={task}
