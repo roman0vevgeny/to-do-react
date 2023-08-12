@@ -23,7 +23,7 @@ const TaskSubtasks = ({ taskId, subtasks, checked }) => {
   }
 
   return (
-    <div>
+    <div className='mb-2'>
       {subtasks &&
         subtasks.map((subtask) => (
           <div key={subtask.id} className='flex items-start mr-2 mb-1'>

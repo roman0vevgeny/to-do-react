@@ -195,6 +195,7 @@ export default {
         checkboxActive: 'var(--checkbox-active)',
         input: 'var(--color-main-bg)',
         warning: 'var(--expired)',
+        borderHover: 'var(--border-hover)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',
