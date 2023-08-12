@@ -18,8 +18,7 @@ import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
 import Modal from '../Modal/Modal'
 import TaskDescription from '../TaskDescription/TaskDescription'
-import Subtask from '../TaskModal/SubtaskBlock/Subtask/Subtask'
-import SubtaskBlock from '../TaskModal/SubtaskBlock/SubtaskBlock'
+import TaskSubtasks from '../TaskSubtasks/TaskSubtasks'
 
 const CardItem = ({ taskId }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
@@ -58,7 +57,7 @@ const CardItem = ({ taskId }) => {
   const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
 
   return (
-    <div className='relative w-full my-2'>
+    <div className='relative w-full my-4'>
       <div className={styles.body} onClick={handleOpenModal}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />
@@ -66,7 +65,7 @@ const CardItem = ({ taskId }) => {
         <div className={styles.clickable}>
           <div className='flex flex-raw justify-between items-start w-full'>
             <div className='flex flex-grow'>
-              <TaskName name={task.name} checked={task.checked} />
+              <TaskName name={task.name} checked={task.checked} cards={true} />
             </div>
             <div className='flex mt-[2px]'>
               {task.expirationDate && (
@@ -105,15 +104,8 @@ const CardItem = ({ taskId }) => {
           </div>
           {task.subtasks.length > 0 && (
             <div className='flex flex-wrap'>
-              <SubtaskBlock subtasks={task.subtasks} />
+              <TaskSubtasks subtasks={task.subtasks} checked={task.checked} />
             </div>
-            // <div className='flex flex-wrap'>
-            //   {task.subtasks.map((subtask, index) => (
-            //     <div key={subtask.id} className='flex w-full'>
-            //       <Subtask subtask={subtask} />
-            //     </div>
-            //   ))}
-            // </div>
           )}
           <div className='flex'>
             {task.tags.length > 0 && (
