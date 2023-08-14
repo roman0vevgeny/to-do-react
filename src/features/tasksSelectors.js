@@ -15,7 +15,8 @@ export const selectDueTasks = createSelector(
   (state) => {
     const today = new Date()
     const offset = today.getTimezoneOffset()
-    today.setMinutes(today.getMinutes() + offset)
+    today.setMinutes(today.getMinutes() - offset)
+    // today.setDate(today.getDate() + 1)
     const todayString = today.toISOString().slice(0, 10)
     const dueTasks = state.tasks.tasks.filter((task) => {
       if (task.expirationDate) {
@@ -40,7 +41,8 @@ export const todayTasksSelector = createSelector(
   (state) => {
     const today = new Date()
     const offset = today.getTimezoneOffset()
-    today.setMinutes(today.getMinutes() + offset)
+    today.setMinutes(today.getMinutes() - offset)
+    // today.setDate(today.getDate() + 1)
     const todayString = today.toISOString().slice(0, 10)
 
     const dueTasks = state.tasks.tasks.filter((task) => {
@@ -63,28 +65,46 @@ export const todayTasksSelector = createSelector(
 )
 
 export const expiredTasksSelector = createSelector(
+  //   (state) => state,
+  //   (state) => {
+  //     const today = new Date()
+  //     const offset = today.getTimezoneOffset()
+  //     today.setMinutes(today.getMinutes() + offset)
+  //     today.setDate(today.getDate() - 1)
+  //     const previousDateString = today.toISOString().slice(0, 10)
+  //     const expiredTasks = state.tasks.tasks.filter((task) => {
+  //       if (task.expirationDate && task.checked === false) {
+  //         const expirationDateObject = new Date(task.expirationDate)
+  //         expirationDateObject.setMinutes(
+  //           expirationDateObject.getMinutes() - offset
+  //         )
+  //         const expirationDateString = expirationDateObject
+  //           .toISOString()
+  //           .slice(0, 10)
+  //         return expirationDateString <= previousDateString
+  //       } else {
+  //         return false
+  //       }
+  //     })
+
+  //     return expiredTasks
+  //   }
+  // )
   (state) => state,
   (state) => {
     const today = new Date()
     const offset = today.getTimezoneOffset()
     today.setMinutes(today.getMinutes() + offset)
     today.setDate(today.getDate() - 1)
-    const previousDateString = today.toISOString().slice(0, 10)
+    const previousDate = +today
     const expiredTasks = state.tasks.tasks.filter((task) => {
       if (task.expirationDate && task.checked === false) {
-        const expirationDateObject = new Date(task.expirationDate)
-        expirationDateObject.setMinutes(
-          expirationDateObject.getMinutes() - offset
-        )
-        const expirationDateString = expirationDateObject
-          .toISOString()
-          .slice(0, 10)
-        return expirationDateString <= previousDateString
+        const expirationDate = +new Date(task.expirationDate)
+        return expirationDate + offset * 60 * 1000 < previousDate
       } else {
         return false
       }
     })
-
     return expiredTasks
   }
 )

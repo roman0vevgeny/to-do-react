@@ -29,8 +29,11 @@ const Navbar = () => {
   // const navigate = useNavigate()
 
   const totalTasks = useSelector(selectTotalTasks)
+  console.log('totalTasks', totalTasks)
   const dueTasks = useSelector(selectDueTasks)
+  console.log('dueTasks', dueTasks)
   const expiredTasks = useSelector(selectExpiredTasks)
+  console.log('expiredTasks', expiredTasks)
 
   const selectFavoriteTasks = createSelector([selectTasks], (tasks) =>
     tasks.filter((task) => task.favorite)

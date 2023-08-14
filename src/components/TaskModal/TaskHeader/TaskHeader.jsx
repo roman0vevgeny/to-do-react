@@ -19,11 +19,12 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
         {!isNewTask && creationDate && (
           <p className='text-12'>
             Created at{' '}
-            {new Date(creationDate).toLocaleDateString(navigator.language, {
+            {/* {new Date(creationDate).toLocaleDateString(navigator.language, {
               day: '2-digit',
               month: '2-digit',
               year: '2-digit',
-            })}
+            })} */}
+            {creationDate.slice(0, 10)}
           </p>
         )}
         {isNewTask && <p className='text-12'>Create a new task</p>}

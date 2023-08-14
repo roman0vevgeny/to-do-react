@@ -1,4 +1,4 @@
-export const isNotExpired = (expirationDate, checked) => {
+export const isToday = (expirationDate, checked) => {
   const today = new Date()
   const offset = today.getTimezoneOffset()
   today.setMinutes(today.getMinutes() - offset)
@@ -7,7 +7,7 @@ export const isNotExpired = (expirationDate, checked) => {
   expirationDateObject.setMinutes(expirationDateObject.getMinutes() - offset)
   const expirationDateString = expirationDateObject.toISOString().slice(0, 10)
   if (!checked) {
-    return expirationDateString >= todayString
+    return expirationDateString === todayString
   } else {
     return true
   }

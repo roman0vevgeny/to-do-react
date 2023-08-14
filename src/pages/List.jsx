@@ -11,6 +11,7 @@ import {
 } from '../features/tasksSelectors'
 import InfoBlock from '../components/Info/IndoBlock'
 import ScrollButton from '../components/Button/ScrollButton'
+import { configureStore } from '@reduxjs/toolkit'
 
 const List = () => {
   const [showButton, setShowButton] = useState(false)
@@ -20,12 +21,15 @@ const List = () => {
   switch (location.pathname) {
     case '/home/list':
       tasks = useSelector(allTasksSelector)
+      console.log(tasks)
       break
     case '/today/list':
       tasks = useSelector(todayTasksSelector)
+      console.log(tasks)
       break
     case '/expired/list':
       tasks = useSelector(expiredTasksSelector)
+      console.log(tasks)
       break
     default:
       tasks = []
@@ -52,6 +56,13 @@ const List = () => {
       }
     }
   }, [sectionRef])
+
+  const today = new Date()
+  const offset = today.getTimezoneOffset()
+  console.log(offset)
+  today.setMinutes(today.getMinutes() - offset)
+  const todayString = today.toISOString()
+  console.log(todayString)
 
   return (
     <div className='relative h-[calc(100vh-50px)] w-full flex justify-center'>
