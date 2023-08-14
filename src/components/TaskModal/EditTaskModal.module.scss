@@ -39,11 +39,11 @@
   }
 }
 
-.sectionDevider {
-  @apply flex items-center flex-grow my-3;
+.verticalDevider {
+  @apply flex items-center flex-grow my-3 mx-3;
 
   &::after {
-    @apply flex-grow h-[1px] bg-devider;
+    @apply flex-grow h-full w-[1px] bg-devider;
     content: '';
   }
 }
