@@ -55,9 +55,7 @@ const CreateTaskName = ({ name, setName }) => {
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className={
-          text === '' ? `${styles.input} border-warning` : styles.input
-        }
+        className={text === '' ? `${styles.input} bg-redTag` : styles.input}
       />
       <div className='flex flex-row mt-1'>
         <ModalButton svg={<Edit />} onClick={handleFocus} />

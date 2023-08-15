@@ -40,7 +40,11 @@ const TaskSubtasks = ({ taskId, subtasks, checked }) => {
                 }
               />
             </button>
-            <TaskSubtask subtask={subtask} checked={subtask.checked} />
+            <TaskSubtask
+              subtask={subtask}
+              checked={subtask.checked}
+              taskChecked={checked}
+            />
           </div>
         ))}
     </div>

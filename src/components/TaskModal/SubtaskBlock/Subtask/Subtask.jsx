@@ -59,7 +59,11 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}>
       <div
-        className={checked ? styles.inputChecked : styles.input}
+        className={
+          (checked ? styles.inputChecked : styles.input) +
+          ' ' +
+          (subtask.checked ? styles.inputChecked : styles.input)
+        }
         placeholder={subtask}
         ref={inputRef}
         contentEditable='true'

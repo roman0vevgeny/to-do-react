@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styles from './EditTaskModal.module.scss'
 import CreateTaskName from './TaskName/CreateTaskName'
 import CreateTaskDescription from './TaskDescription/CreateTaskDescription'
 import TagForm from './TagForm/TagForm'
@@ -57,88 +58,102 @@ const CreateTaskModal = ({ onClose, today }) => {
 
   return (
     <div>
-      <TaskHeader
-        task={task}
-        onFavoriteChange={(newFavorite) =>
-          setTask({ ...task, favorite: newFavorite })
-        }
-        isNewTask={true}
-      />
-      <CreateTaskName
-        name={task.name}
-        setName={(newName) => setTask({ ...task, name: newName })}
-      />
-      <CreateTaskDescription
-        description={task.description}
-        setDescription={(newDescription) =>
-          setTask({ ...task, description: newDescription })
-        }
-      />
-      <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
-        {task.tags.map((tagId) => {
-          const tag = allTags.find((tag) => tag.id === tagId)
-          return (
-            tag && (
-              <Tag
-                color={tag.color}
-                tagName={tag.name}
-                deleteTag={true}
-                key={tagId}
-                onDelete={() =>
+      <div>
+        <TaskHeader
+          task={task}
+          onFavoriteChange={(newFavorite) =>
+            setTask({ ...task, favorite: newFavorite })
+          }
+          isNewTask={true}
+        />
+      </div>
+
+      <div className='flex flex-row'>
+        <div className='flex flex-col justify-between'>
+          <div>
+            <CreateTaskName
+              name={task.name}
+              setName={(newName) => setTask({ ...task, name: newName })}
+            />
+            <CreateTaskDescription
+              description={task.description}
+              setDescription={(newDescription) =>
+                setTask({ ...task, description: newDescription })
+              }
+            />
+            {task.tags && (
+              <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
+                {task.tags.map((tagId) => {
+                  const tag = allTags.find((tag) => tag.id === tagId)
+                  return (
+                    tag && (
+                      <Tag
+                        color={tag.color}
+                        tagName={tag.name}
+                        deleteTag={true}
+                        key={tagId}
+                        onDelete={() =>
+                          setTask({
+                            ...task,
+                            tags: task.tags.filter((id) => id !== tagId),
+                          })
+                        }
+                      />
+                    )
+                  )
+                })}
+              </div>
+            )}
+
+            <SubtaskBlock
+              subtasks={task.subtasks}
+              onSubtasksChange={(newSubtasks) =>
+                setTask({ ...task, subtasks: newSubtasks })
+              }
+              isNewTask={true}
+            />
+          </div>
+          <div className='m-2'>
+            <button
+              type={'submit'}
+              className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'
+              onClick={handleCreateTask}>
+              <div>
+                <Plus />
+              </div>
+              <p className='flex justify-center ml-1'>Create task</p>
+            </button>
+            {error && (
+              <p className='flex p-2 mt-2 rounded-md text-redTag bg-redTag text-14 justify-center'>
+                {error}
+              </p>
+            )}
+          </div>
+        </div>
+        <>
+          <div className={styles.verticalDevider}></div>
+          <div className='ml-5 mt-2'>
+            <div>
+              <Calend
+                expirationDate={expirationDate}
+                task={task}
+                onChange={(newExpirationDate) =>
                   setTask({
                     ...task,
-                    tags: task.tags.filter((id) => id !== tagId),
+                    expirationDate: newExpirationDate,
                   })
                 }
               />
-            )
-          )
-        })}
+              <TagForm
+                value={task.tags}
+                onChange={(newTags) => setTask({ ...task, tags: newTags })}
+                isNewTask={true}
+                taskId={null}
+              />
+            </div>
+          </div>
+        </>
       </div>
-      <SubtaskBlock
-        subtasks={task.subtasks}
-        onSubtasksChange={(newSubtasks) =>
-          setTask({ ...task, subtasks: newSubtasks })
-        }
-        isNewTask={true}
-      />
-      <div
-        className={
-          task.tags && task.tags.length > 0
-            ? 'flex ml-2 mt-[20px]'
-            : 'flex ml-2 mt-[47px]'
-        }>
-        <Calend
-          expirationDate={expirationDate}
-          task={task}
-          onChange={(newExpirationDate) =>
-            setTask({
-              ...task,
-              expirationDate: newExpirationDate,
-            })
-          }
-        />
-
-        <TagForm
-          value={task.tags}
-          onChange={(newTags) => setTask({ ...task, tags: newTags })}
-          isNewTask={true}
-          taskId={null}
-        />
-      </div>
-      <div className='flex justify-center'>
-        <Button
-          type={'submit'}
-          children={'Create task'}
-          onClick={handleCreateTask}
-          svgLeft={<Plus />}
-        />
-      </div>
-      {error && (
-        <p className='flex p-2 mt-2 rounded-md text-redTag bg-redTag text-14 justify-center'>
-          {error}
-        </p>
-      )}
     </div>
   )
 }

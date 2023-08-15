@@ -1,15 +1,15 @@
 .text {
-  @apply flex text-task;
+  @apply text-task;
 }
 
 .textChecked {
-  @apply flex text-gray;
+  @apply text-gray;
 }
 
 .textBig {
-  @apply flex min-w-[200px] font-bold pt-[3px] w-full text-task text-start leading-1.5 flex-grow mr-10 overflow-hidden;
+  @apply min-w-[200px] font-bold pt-[3px] w-full text-task text-start leading-1.5 flex-grow mr-10 break-words;
 }
 
 .textSmall {
-  @apply flex min-w-[200px] text-14 w-full pt-[5px] text-task text-start leading-1.5 flex-grow mr-10 overflow-hidden;
+  @apply min-w-[200px] text-14 w-full pt-[5px] text-task text-start leading-1.5 flex-grow mr-10 break-words;
 }

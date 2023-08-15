@@ -85,12 +85,14 @@ const TagForm = ({ value, onChange, isNewTask, taskId }) => {
       <TagInput name={name} onNameChange={handleNameChange} />
       <div className='flex flex-col mt-2'>
         <TagColorSection color={color} onColorSelect={handleColorSelect} />{' '}
-        <AllTags
-          tags={tags}
-          taskTags={value}
-          onAddTag={handleTagSelect}
-          onDeleteTag={handleTagSelect}
-        />
+        {tags && tags.length > 0 && (
+          <AllTags
+            tags={tags}
+            taskTags={value}
+            onAddTag={handleTagSelect}
+            onDeleteTag={handleTagSelect}
+          />
+        )}
       </div>
       <div className='mr-2 mt-1'>
         <button
