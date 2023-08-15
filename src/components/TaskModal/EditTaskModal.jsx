@@ -15,9 +15,10 @@ import {
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
+import History from '../svgs/History'
 
 const EditTaskModal = ({ handleCloseModal, task }) => {
-  const { id, tags } = task
+  const { id, tags, description, checked } = task
   const dispatch = useDispatch()
   const allTags = useSelector((state) => state.tags)
 
@@ -31,8 +32,8 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
   }
 
   return (
-    <div onClose={handleCloseModal}>
-      <div>
+    <div onClose={handleCloseModal} className='bg-mainBg mx-8 mb-8'>
+      <div className='sticky top-0 z-[1] bg-mainBg pt-8'>
         <TaskHeader
           task={task}
           onFavoriteChange={(newFavorite) =>
@@ -46,8 +47,13 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
       <div className='flex flex-row'>
         <div className='flex flex-col justify-between'>
           <div>
-            <TaskNameModal id={id} checked={task.checked} />
-            <TaskDescription id={id} checked={task.checked} />
+            <TaskNameModal id={id} checked={checked} />
+            {description === '' && checked ? (
+              ' '
+            ) : (
+              <TaskDescription id={id} checked={checked} />
+            )}
+
             {tags && (
               <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
                 {tags.map((tagId, index) => {
@@ -57,7 +63,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                       <Tag
                         color={tag.color}
                         tagName={tag.name}
-                        deleteTag={!task.checked ? true : false}
+                        deleteTag={!checked ? true : false}
                         key={index}
                         onDelete={() => handleDeleteTag(tagId)}
                       />
@@ -73,22 +79,22 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                   updateTaskSubtasks({ id: task.id, subtasks: newSubtasks })
                 )
               }
-              checked={task.checked}
+              checked={checked}
             />
           </div>
           <div className='m-2 flex'>
             <button
               type={'submit'}
               className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'>
-              <div>
-                <Plus />
+              <div className='mr-2'>
+                <History />
               </div>
               <p className='flex justify-center ml-1'>View history</p>
             </button>
           </div>
         </div>
 
-        {!task.checked && (
+        {!checked && (
           <>
             <div className={styles.verticalDevider}></div>
             <div className='ml-5 mt-2'>
@@ -105,7 +111,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                       })
                     )
                   }
-                  checked={task.checked}
+                  checked={checked}
                 />
                 <TagForm
                   value={tags}

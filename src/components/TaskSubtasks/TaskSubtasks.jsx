@@ -1,23 +1,13 @@
 import React from 'react'
 import CheckBox from '../CheckBox/CheckBox'
 import styles from './TaskSubtasks.module.scss'
-import { updateTaskSubtaskChecked } from '../../features/tasksSlice'
-import { useDispatch } from 'react-redux'
 import TaskSubtask from './TaskSubtask/TaskSubtask'
 
-const TaskSubtasks = ({ taskId, subtasks, checked }) => {
-  const dispatch = useDispatch()
-  console.log('subtasks', subtasks)
-
+const TaskSubtasks = ({ onSubtasksChange, subtasks, checked }) => {
   const handleSubtaskCheckedChange = (subtaskId, checked) => {
-    subtasks.map((subtask) =>
-      dispatch(
-        updateTaskSubtaskChecked(
-          taskId,
-          subtaskId,
-          checked,
-          subtask.id === subtaskId ? { ...subtask, checked: !checked } : subtask
-        )
+    onSubtasksChange(
+      subtasks.map((subtask) =>
+        subtask.id === subtaskId ? { ...subtask, checked: checked } : subtask
       )
     )
   }

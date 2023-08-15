@@ -6,7 +6,7 @@ export const isToday = (expirationDate, checked) => {
   const expirationDateObject = new Date(expirationDate)
   expirationDateObject.setMinutes(expirationDateObject.getMinutes() - offset)
   const expirationDateString = expirationDateObject.toISOString().slice(0, 10)
-  if (!checked) {
+  if (expirationDate) {
     return expirationDateString === todayString
   } else {
     return true

@@ -46,7 +46,7 @@ const SubtaskBlock = ({ subtasks, onSubtasksChange, checked }) => {
   }
 
   return (
-    <div>
+    <div className='mb-4'>
       {subtasks &&
         subtasks.map((subtask) => (
           <div key={subtask.id} className='flex items-start mx-2 mb-1'>

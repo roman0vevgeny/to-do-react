@@ -10,7 +10,6 @@ import Plus from '../svgs/Plus'
 import Tag from '../Tag/Tag'
 import TaskHeader from './TaskHeader/TaskHeader'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
-import Button from '../Button/Button'
 
 const CreateTaskModal = ({ onClose, today }) => {
   const [task, setTask] = useState({
@@ -57,8 +56,8 @@ const CreateTaskModal = ({ onClose, today }) => {
   }
 
   return (
-    <div>
-      <div>
+    <div className='bg-mainBg mx-8 mb-8'>
+      <div className='sticky top-0 z-[1] bg-mainBg pt-8'>
         <TaskHeader
           task={task}
           onFavoriteChange={(newFavorite) =>

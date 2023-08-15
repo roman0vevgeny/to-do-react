@@ -38,11 +38,7 @@ const Tag = ({ tagName, color, deleteTag, onDelete }) => {
       <p>{typeof tagName === 'string' ? capitalize(tagName) : tagName}</p>
       {deleteTag && (
         <div
-          className={
-            color
-              ? `${styles.tagBg} ${styles[tagType]} ${styles.delete}`
-              : styles.tagBg
-          }
+          className={`${styles.tagBg} ${styles[tagType]} ${styles.delete}`}
           onClick={onDelete}>
           <Delete />
         </div>

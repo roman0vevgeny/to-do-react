@@ -46,9 +46,20 @@
 }
 
 .searchPopup {
-  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search;
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search max-h-[686px] overflow-hidden;
+}
+
+.searchPopupLimited {
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search h-[686px] overflow-y-scroll;
 }
 
 .item {
   @apply flex flex-row items-center justify-between w-full px-2 py-2 cursor-pointer;
+}
+
+.limitButton {
+  @apply flex flex-row items-center justify-between w-full px-2 py-3 cursor-pointer;
+  &:hover {
+    @apply bg-gray;
+  }
 }

@@ -72,18 +72,20 @@ const Subtask = ({ subtask, onDelete, onChange, checked }) => {
         onInput={handleInput}
         onFocus={() => setHovered(true)}
       />
-      <div className='flex'>
-        {(hovered || inputRef.current === document.activeElement) && (
-          <div className='flex flex-row mt-[1px]'>
-            <ModalButton svg={<Edit />} onClick={handleFocus} />
-          </div>
-        )}
-        {(hovered || inputRef.current === document.activeElement) && (
-          <div className='flex flex-row mt-[1px] hover:bg-redBg hover:text-redTag'>
-            <ModalButton svg={<Close />} onClick={onDelete} />
-          </div>
-        )}
-      </div>
+      {!checked && (
+        <div className='flex'>
+          {(hovered || inputRef.current === document.activeElement) && (
+            <div className='flex flex-row mt-[1px]'>
+              <ModalButton svg={<Edit />} onClick={handleFocus} />
+            </div>
+          )}
+          {(hovered || inputRef.current === document.activeElement) && (
+            <div className='flex flex-row mt-[1px] hover:bg-redBg hover:text-redTag'>
+              <ModalButton svg={<Close />} onClick={onDelete} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

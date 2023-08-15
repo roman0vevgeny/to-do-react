@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import InfoCard from '../Info/InfoCard'
 import Star from '../svgs/Star'
-import Subtasks from '../svgs/Subtasks'
 import TaskName from '../TaskName/TaskName'
 import CheckBox from '../CheckBox/CheckBox'
 import styles from './CardItem.module.scss'
@@ -13,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   updateTaskChecked,
   updateTaskIsFavorite,
+  updateTaskSubtasks,
 } from '../../features/tasksSlice'
 import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
@@ -36,6 +36,10 @@ const CardItem = ({ taskId }) => {
     e.stopPropagation()
   }
 
+  const handleSubtasksChange = (newSubtasks) => {
+    dispatch(updateTaskSubtasks({ id: taskId, subtasks: newSubtasks }))
+  }
+
   const toggleChecked = () => {
     dispatch(updateTaskChecked(taskId))
   }
@@ -50,15 +54,11 @@ const CardItem = ({ taskId }) => {
 
   const allTags = useSelector((state) => state.tags)
 
-  const totalSubtasks = task.subtasks.length
-  const completedSubtasks = task.subtasks.filter(
-    (subtask) => subtask.checked
-  ).length
-  const subtasksCounter = `${completedSubtasks}/${totalSubtasks}`
-
   return (
     <div className='relative w-full my-4'>
-      <div className={styles.body} onClick={handleOpenModal}>
+      <div
+        className={checked ? styles.bodyChecked : styles.body}
+        onClick={handleOpenModal}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />
         </button>
@@ -83,9 +83,6 @@ const CardItem = ({ taskId }) => {
                   checked={task.checked}
                 />
               )}
-              {task.subtasks && task.subtasks.length > 0 && (
-                <InfoCard svg={<Subtasks />} children={subtasksCounter} />
-              )}
               {task.project && (
                 <InfoCard svg={<Projects />} children={task.project.name} />
               )}
@@ -104,7 +101,11 @@ const CardItem = ({ taskId }) => {
           </div>
           {task.subtasks.length > 0 && (
             <div className='flex flex-wrap'>
-              <TaskSubtasks subtasks={task.subtasks} checked={task.checked} />
+              <TaskSubtasks
+                subtasks={task.subtasks}
+                onSubtasksChange={handleSubtasksChange}
+                checked={task.checked}
+              />
             </div>
           )}
           <div className='flex'>

@@ -157,8 +157,7 @@
 
 // export default SearchBar
 
-// SearchBar.jsx
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import styles from './SearchBar.module.scss'
 import Search from '../svgs/Search'
 import Close from '../svgs/Close'
@@ -169,6 +168,7 @@ import ArrowLeft from '../svgs/ArrowLeft'
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState('')
   const [isSearchFocused, setIsSearchFocused] = useState(false)
+  const [limitTasks, setLimitTasks] = useState(true)
   const inputRef = useRef(null)
 
   const handleSearchFocus = () => {
@@ -178,11 +178,13 @@ const SearchBar = () => {
   const handleClearInput = () => {
     setSearchValue('')
     setIsSearchFocused(true)
+    setLimitTasks(true)
   }
 
   const handleCloseInput = () => {
     setSearchValue('')
     setIsSearchFocused(false)
+    setLimitTasks(true)
   }
 
   const handleInputChange = (e) => {
@@ -226,12 +228,26 @@ const SearchBar = () => {
         )}
       </div>
       {searchValue && isSearchFocused && (
-        <div className={styles.searchPopup}>
+        <div
+          className={
+            !limitTasks && filteredTasks.length > 14
+              ? styles.searchPopupLimited
+              : styles.searchPopup
+          }>
           {filteredTasks.length > 0 ? (
-            filteredTasks.map((task) => <TaskCard key={task.id} task={task} />)
+            filteredTasks
+              .slice(0, limitTasks ? 12 : filteredTasks.length)
+              .map((task) => <TaskCard key={task.id} task={task} />)
           ) : (
             <div className={styles.item}>
-              <p className={styles.searchText}>No tasks found</p>
+              <p>No tasks found</p>
+            </div>
+          )}
+          {filteredTasks.length > 12 && limitTasks && (
+            <div
+              className={styles.limitButton}
+              onClick={() => setLimitTasks(false)}>
+              <p>...</p>
             </div>
           )}
         </div>

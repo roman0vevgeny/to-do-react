@@ -66,6 +66,9 @@ const ListItem = ({ taskId }) => {
               <TaskName name={task.name} checked={task.checked} />
             </div>
             <div className='flex mt-[2px]'>
+              {task.subtasks && task.subtasks.length > 0 && (
+                <InfoCard svg={<Subtasks />} children={subtasksCounter} />
+              )}
               {task.expirationDate && (
                 <InfoExpiration
                   svg={<Cal />}
@@ -80,9 +83,6 @@ const ListItem = ({ taskId }) => {
                   expirationDate={task.expirationDate}
                   checked={task.checked}
                 />
-              )}
-              {task.subtasks && task.subtasks.length > 0 && (
-                <InfoCard svg={<Subtasks />} children={subtasksCounter} />
               )}
               {task.project && (
                 <InfoCard svg={<Projects />} children={task.project.name} />

@@ -80,7 +80,7 @@ const TaskDescription = ({ id, checked }) => {
   const dispatch = useDispatch()
 
   const handleFocus = () => {
-    if (inputRef.current.textContent === '+ Add a description') {
+    if (inputRef.current.textContent === checked ? '' : '+ Add a description') {
       inputRef.current.textContent = ''
     }
     inputRef.current.focus()
@@ -99,7 +99,7 @@ const TaskDescription = ({ id, checked }) => {
     if (newText !== description) {
       dispatch(updateTaskDescription({ id, description: newText }))
     } else if (newText === '' && description === '') {
-      inputRef.current.textContent = '+ Add a description'
+      inputRef.current.textContent = checked ? '' : '+ Add a description'
     }
   }
 
@@ -114,7 +114,7 @@ const TaskDescription = ({ id, checked }) => {
     if (description !== '') {
       inputRef.current.textContent = description
     } else {
-      inputRef.current.textContent = '+ Add a description'
+      inputRef.current.textContent = checked ? '' : '+ Add a description'
     }
   }, [description])
 
@@ -132,10 +132,11 @@ const TaskDescription = ({ id, checked }) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-
-      <div className='flex flex-row mt-1'>
-        <ModalButton svg={<Edit />} onClick={handleFocus} />
-      </div>
+      {!checked && (
+        <div className='flex flex-row mt-1'>
+          <ModalButton svg={<Edit />} onClick={handleFocus} />
+        </div>
+      )}
     </div>
   )
 }
