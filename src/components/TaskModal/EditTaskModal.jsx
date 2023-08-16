@@ -47,7 +47,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
         />
       </div>
 
-      <div className='flex flex-row'>
+      <div className='flex flex-row w-full'>
         <div className='flex flex-col justify-between'>
           <div>
             <TaskNameModal id={id} checked={checked} />
@@ -69,6 +69,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                         deleteTag={!checked ? true : false}
                         key={index}
                         onDelete={() => handleDeleteTag(tagId)}
+                        checked={checked}
                       />
                     )
                   )
@@ -85,7 +86,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
               checked={checked}
             />
           </div>
-          <div className='m-2 flex'>
+          <div className='m-2 flex w-full'>
             <div className='w-full mr-1'>
               <button
                 type={'submit'}

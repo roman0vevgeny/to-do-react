@@ -2,8 +2,15 @@ import React from 'react'
 import styles from './InfoExpiration.module.scss'
 import { isNotExpired } from '../../helpers/isNotExpired'
 import { isToday } from '../../helpers/isToday'
+import Delete from '../svgs/Delete'
 
-const InfoExpiration = ({ svg, children, expirationDate, checked }) => {
+const InfoExpiration = ({
+  svg,
+  children,
+  expirationDate,
+  checked,
+  onDelete,
+}) => {
   const notExpired = isNotExpired(expirationDate, checked)
   const today = isToday(expirationDate, checked)
   return (
@@ -18,16 +25,32 @@ const InfoExpiration = ({ svg, children, expirationDate, checked }) => {
       <div className='flex w-[25px] h-[25px] justify-center items-center'>
         {svg}
       </div>
-      {children && (
+      {children && !onDelete ? (
         <div
           className={
             today && !checked
-              ? 'whitespace-nowrap text-yellowTag'
+              ? 'whitespace-nowrap text-blueTag'
               : notExpired
               ? 'whitespace-nowrap text-gray'
               : 'whitespace-nowrap text-expired'
           }>
           {today ? 'Today' : children}
+        </div>
+      ) : (
+        <div
+          className={
+            today && !checked
+              ? 'whitespace-nowrap text-blueTag flex flex-row'
+              : notExpired
+              ? 'whitespace-nowrap text-grayHover flex flex-row'
+              : 'whitespace-nowrap text-expired flex flex-row'
+          }>
+          {today ? 'Today' : children}
+          {onDelete && (
+            <div className={styles.onDelete} onClick={onDelete}>
+              <Delete />
+            </div>
+          )}
         </div>
       )}
     </div>

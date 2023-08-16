@@ -68,6 +68,9 @@ const CreateTaskModal = ({ onClose, today }) => {
           onProjectsChange={(newProjects) =>
             setTask({ ...task, projects: newProjects })
           }
+          onExpirationDateChange={(newExpirationDate) =>
+            setTask({ ...task, expirationDate: newExpirationDate })
+          }
           isNewTask={true}
           taskId={null}
         />

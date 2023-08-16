@@ -1,6 +1,6 @@
 .notExpired {
   @apply flex flex-nowrap grid-cols-2 auto-cols-max gap-[2px] auto-rows-max justify-start 
-  h-[25px] min-w-[25px] items-center rounded-[5px] text-12 mx-2 text-gray;
+  h-[25px] min-w-[25px] items-center rounded-[5px] text-12 mx-2  text-gray;
 }
 
 .expired {
@@ -10,5 +10,5 @@
 
 .today {
   @apply flex flex-nowrap grid-cols-2 auto-cols-max gap-[2px] auto-rows-max justify-start 
-  h-[25px] min-w-[25px] items-center rounded-[5px] text-12 mx-2 text-yellowTag;
+  h-[25px] min-w-[25px] items-center rounded-[5px] text-12 mx-2 text-blueTag;
 }

@@ -119,7 +119,12 @@ const ListItem = ({ taskId }) => {
                   const tag = allTags.find((tag) => tag.id === tagId)
                   return (
                     tag && (
-                      <Tag color={tag.color} tagName={tag.name} key={index} />
+                      <Tag
+                        color={tag.color}
+                        tagName={tag.name}
+                        key={index}
+                        checked={checked}
+                      />
                     )
                   )
                 })}

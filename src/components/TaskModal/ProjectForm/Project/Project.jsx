@@ -7,7 +7,7 @@ const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
 }
 
-const Project = ({ projectName, deleteProject, onDelete }) => {
+const Project = ({ projectName, deleteProject, onDelete, checked }) => {
   return (
     <div>
       {deleteProject ? (
@@ -21,7 +21,7 @@ const Project = ({ projectName, deleteProject, onDelete }) => {
           </div>
         </div>
       ) : (
-        <div className={styles.project}>
+        <div className={checked ? styles.checked : styles.project}>
           <p>{capitalizeFirstLetter(projectName)}</p>
         </div>
       )}

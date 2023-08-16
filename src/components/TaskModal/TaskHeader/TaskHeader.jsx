@@ -2,17 +2,21 @@ import React from 'react'
 import InfoCard from '../../Info/InfoCard'
 import Subtasks from '../../svgs/Subtasks'
 import { useSelector } from 'react-redux'
-import { updateTaskProjects } from '../../../features/tasksSlice'
+import {
+  updateTaskProjects,
+  updateTaskExpirationDate,
+} from '../../../features/tasksSlice'
 import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
-import InfoExpiration from '../../Info/InfoExpiration'
 import Project from '../../TaskModal/ProjectForm/Project/Project'
+import InfoDate from '../../Info/InfoDate'
 
 const TaskHeader = ({
   task,
   onFavoriteChange,
   onProjectsChange,
+  onExpirationDateChange,
   isNewTask,
   dispatch,
 }) => {
@@ -49,6 +53,19 @@ const TaskHeader = ({
     }
   }
 
+  const handleDeleteExpirationDate = () => {
+    if (isNewTask) {
+      onExpirationDateChange(null)
+    } else {
+      dispatch(
+        updateTaskExpirationDate({
+          id: id,
+          expirationDate: null,
+        })
+      )
+    }
+  }
+
   return (
     <div>
       <div className='flex flex-row justify-between items-center text-gray mb-3'>
@@ -66,7 +83,7 @@ const TaskHeader = ({
         {isNewTask && <p className='text-12'>Create a new task</p>}
         <div className='flex flex-row justify-end'>
           {projects && (
-            <div className='flex'>
+            <div className={'flex'}>
               {projects.map((projectId, index) => {
                 const project = allProjects.find(
                   (project) => project.id === projectId
@@ -78,6 +95,7 @@ const TaskHeader = ({
                       deleteProject={!checked ? true : false}
                       key={index}
                       onDelete={() => handleDeleteProject(projectId)}
+                      checked={checked}
                     />
                   )
                 )
@@ -85,7 +103,7 @@ const TaskHeader = ({
             </div>
           )}
           {expirationDate && (
-            <InfoExpiration
+            <InfoDate
               svg={<Cal />}
               children={new Date(expirationDate).toLocaleDateString(
                 navigator.language,
@@ -95,6 +113,7 @@ const TaskHeader = ({
                   year: '2-digit',
                 }
               )}
+              onDelete={() => handleDeleteExpirationDate()}
               expirationDate={expirationDate}
               checked={checked}
             />
