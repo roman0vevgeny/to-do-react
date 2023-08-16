@@ -22,7 +22,7 @@ const initialState = {
       ],
       favorite: false,
       tags: [],
-      project: null,
+      projects: [],
     },
     {
       id: 8,
@@ -41,7 +41,7 @@ const initialState = {
       subtasks: [],
       favorite: false,
       tags: [],
-      project: null,
+      projects: [],
     },
   ],
 }
@@ -204,6 +204,35 @@ const tasksSlice = createSlice({
         state.tasks[index].subtasks = action.payload.subtasks
       }
     },
+
+    addTaskProject(state, action) {
+      const index = state.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      )
+      if (index > -1) {
+        state.tasks[index].projects.push(action.payload.projectId)
+      }
+    },
+
+    deleteTaskProject(state, action) {
+      const index = state.tasks.findIndex(
+        (task) => task.id === action.payload.id
+      )
+      if (index > -1) {
+        const projectIndex = state.tasks[index].projects.findIndex(
+          (projectId) => projectId === action.payload.projectId
+        )
+        state.tasks[index].projects.splice(projectIndex, 1)
+      }
+    },
+
+    updateTaskProjects(state, action) {
+      const { id, projects } = action.payload
+      const task = state.tasks.find((task) => task.id === id)
+      if (task) {
+        task.projects = projects
+      }
+    },
   },
 })
 
@@ -226,4 +255,7 @@ export const {
   updateTask,
   updateTaskTags,
   updateTaskSubtasks,
+  updateTaskProjects,
+  addTaskProject,
+  deleteTaskProject,
 } = tasksSlice.actions

@@ -10,6 +10,7 @@ import Plus from '../svgs/Plus'
 import Tag from '../Tag/Tag'
 import TaskHeader from './TaskHeader/TaskHeader'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
+import ProjectForm from './ProjectForm/ProjectForm'
 
 const CreateTaskModal = ({ onClose, today }) => {
   const [task, setTask] = useState({
@@ -17,6 +18,7 @@ const CreateTaskModal = ({ onClose, today }) => {
     name: '',
     description: '',
     tags: [],
+    projects: [],
     expirationDate: null,
     subtasks: [],
     checked: false,
@@ -63,7 +65,11 @@ const CreateTaskModal = ({ onClose, today }) => {
           onFavoriteChange={(newFavorite) =>
             setTask({ ...task, favorite: newFavorite })
           }
+          onProjectsChange={(newProjects) =>
+            setTask({ ...task, projects: newProjects })
+          }
           isNewTask={true}
+          taskId={null}
         />
       </div>
 
@@ -133,6 +139,14 @@ const CreateTaskModal = ({ onClose, today }) => {
           <div className={styles.verticalDevider}></div>
           <div className='ml-5 mt-2'>
             <div>
+              <ProjectForm
+                value={task.projects}
+                onChange={(newProjects) =>
+                  setTask({ ...task, projects: newProjects })
+                }
+                isNewTask={false}
+                taskId={null}
+              />
               <Calend
                 expirationDate={expirationDate}
                 task={task}

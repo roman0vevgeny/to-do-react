@@ -5,20 +5,21 @@ import TaskDescription from './TaskDescription/TaskDescription'
 import TagForm from './TagForm/TagForm'
 import Tag from '../Tag/Tag'
 import Calend from './Calendar/Calendar'
-import Plus from '../svgs/Plus'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   updateTaskExpirationDate,
   updateTaskTags,
   updateTaskSubtasks,
   updateTaskIsFavorite,
+  updateTaskProjects,
 } from '../../features/tasksSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
 import History from '../svgs/History'
+import ProjectForm from './ProjectForm/ProjectForm'
 
 const EditTaskModal = ({ handleCloseModal, task }) => {
-  const { id, tags, description, checked } = task
+  const { id, tags, description, checked, projects } = task
   const dispatch = useDispatch()
   const allTags = useSelector((state) => state.tags)
 
@@ -41,6 +42,8 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
               updateTaskIsFavorite({ id: task.id, favorite: newFavorite })
             )
           }
+          isNewTask={false}
+          dispatch={dispatch}
         />
       </div>
 
@@ -83,14 +86,29 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
             />
           </div>
           <div className='m-2 flex'>
-            <button
-              type={'submit'}
-              className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'>
-              <div className='mr-2'>
-                <History />
+            <div className='w-full mr-1'>
+              <button
+                type={'submit'}
+                className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'>
+                <div className='mr-2'>
+                  <History />
+                </div>
+                <p className='flex justify-center ml-1'>View history</p>
+              </button>
+            </div>
+
+            {checked && (
+              <div className='w-full ml-1'>
+                <button
+                  type={'submit'}
+                  className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'>
+                  <div className='mr-2'>
+                    <History />
+                  </div>
+                  <p className='flex justify-center ml-1'>Add to archive</p>
+                </button>
               </div>
-              <p className='flex justify-center ml-1'>View history</p>
-            </button>
+            )}
           </div>
         </div>
 
@@ -99,6 +117,16 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
             <div className={styles.verticalDevider}></div>
             <div className='ml-5 mt-2'>
               <div>
+                <ProjectForm
+                  value={projects}
+                  onChange={(newProjects) =>
+                    dispatch(
+                      updateTaskProjects({ id: task.id, projects: newProjects })
+                    )
+                  }
+                  isNewTask={false}
+                  taskId={id}
+                />
                 <Calend
                   expirationDate={task.expirationDate}
                   task={task}

@@ -1,16 +1,52 @@
 import React from 'react'
 import InfoCard from '../../Info/InfoCard'
 import Subtasks from '../../svgs/Subtasks'
+import { useSelector } from 'react-redux'
+import { updateTaskProjects } from '../../../features/tasksSlice'
 import Star from '../../svgs/Star'
 import Cal from '../../svgs/Cal'
 import styles from './TaskHeader.module.scss'
 import InfoExpiration from '../../Info/InfoExpiration'
+import Project from '../../TaskModal/ProjectForm/Project/Project'
 
-const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
-  const { subtasks, creationDate, expirationDate, favorite, checked } = task
+const TaskHeader = ({
+  task,
+  onFavoriteChange,
+  onProjectsChange,
+  isNewTask,
+  dispatch,
+}) => {
+  const {
+    subtasks,
+    creationDate,
+    expirationDate,
+    favorite,
+    checked,
+    projects,
+    id,
+  } = task
+
+  const allProjects = useSelector((state) => state.projects)
+  console.log(allProjects)
+  console.log(projects)
 
   const handleToggleFavorite = () => {
     onFavoriteChange(!favorite)
+  }
+
+  const handleDeleteProject = (projectId) => {
+    const updatedProjects = projects.filter((id) => id !== projectId)
+
+    if (isNewTask) {
+      onProjectsChange(updatedProjects)
+    } else {
+      dispatch(
+        updateTaskProjects({
+          id: id,
+          projects: updatedProjects,
+        })
+      )
+    }
   }
 
   return (
@@ -29,6 +65,25 @@ const TaskHeader = ({ task, onFavoriteChange, isNewTask }) => {
         )}
         {isNewTask && <p className='text-12'>Create a new task</p>}
         <div className='flex flex-row justify-end'>
+          {projects && (
+            <div className='flex'>
+              {projects.map((projectId, index) => {
+                const project = allProjects.find(
+                  (project) => project.id === projectId
+                )
+                return (
+                  project && (
+                    <Project
+                      projectName={project.name}
+                      deleteProject={!checked ? true : false}
+                      key={index}
+                      onDelete={() => handleDeleteProject(projectId)}
+                    />
+                  )
+                )
+              })}
+            </div>
+          )}
           {expirationDate && (
             <InfoExpiration
               svg={<Cal />}

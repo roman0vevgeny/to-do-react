@@ -6,7 +6,6 @@ import CheckBox from '../CheckBox/CheckBox'
 import styles from './CardItem.module.scss'
 import Cal from '../svgs/Cal'
 import Tag from '../Tag/Tag'
-import Projects from '../svgs/Projects'
 import EditTaskModal from '../TaskModal/EditTaskModal'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -19,6 +18,7 @@ import { selectTaskById } from '../../helpers/selectTaskById'
 import Modal from '../Modal/Modal'
 import TaskDescription from '../TaskDescription/TaskDescription'
 import TaskSubtasks from '../TaskSubtasks/TaskSubtasks'
+import Folder from '../svgs/Folder'
 
 const CardItem = ({ taskId }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
@@ -53,6 +53,26 @@ const CardItem = ({ taskId }) => {
   }
 
   const allTags = useSelector((state) => state.tags)
+  const allProjects = useSelector((state) => state.projects)
+
+  const renderProjects = () => {
+    if (task.projects.length === 1) {
+      const project = allProjects.find(
+        (project) => project.id === task.projects[0]
+      )
+      return <InfoCard svg={<Folder />} children={project.name} />
+    } else if (task.projects.length > 1) {
+      const firstProject = allProjects.find(
+        (project) => project.id === task.projects[0]
+      )
+      return (
+        <>
+          <InfoCard svg={<Folder />} children={`${firstProject.name}...`} />
+        </>
+      )
+    }
+    return null
+  }
 
   return (
     <div className='relative w-full my-4'>
@@ -68,6 +88,7 @@ const CardItem = ({ taskId }) => {
               <TaskName name={task.name} checked={task.checked} cards={true} />
             </div>
             <div className='flex mt-[2px]'>
+              {renderProjects()}
               {task.expirationDate && (
                 <InfoExpiration
                   svg={<Cal />}
@@ -82,9 +103,6 @@ const CardItem = ({ taskId }) => {
                   expirationDate={task.expirationDate}
                   checked={task.checked}
                 />
-              )}
-              {task.project && (
-                <InfoCard svg={<Projects />} children={task.project.name} />
               )}
               <button
                 className={favorite ? styles.favorite : styles.notFavorite}

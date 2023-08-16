@@ -11,7 +11,6 @@ import {
 } from '../features/tasksSelectors'
 import InfoBlock from '../components/Info/IndoBlock'
 import ScrollButton from '../components/Button/ScrollButton'
-import { configureStore } from '@reduxjs/toolkit'
 
 const List = () => {
   const [showButton, setShowButton] = useState(false)
