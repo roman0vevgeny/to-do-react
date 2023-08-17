@@ -233,6 +233,10 @@ const tasksSlice = createSlice({
         task.projects = projects
       }
     },
+
+    updateTasksOrder(state, action) {
+      state.tasks = action.payload
+    },
   },
 })
 
@@ -258,4 +262,5 @@ export const {
   updateTaskProjects,
   addTaskProject,
   deleteTaskProject,
+  updateTasksOrder,
 } = tasksSlice.actions
