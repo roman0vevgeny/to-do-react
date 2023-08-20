@@ -1,3 +1,5 @@
 export const selectTaskById = (state, taskId) => {
-  return state.tasks.tasks.find((task) => task.id === taskId)
+  const task = state.tasks.tasks.find((task) => task.id === taskId)
+  console.log('Selected task:', task)
+  return task
 }

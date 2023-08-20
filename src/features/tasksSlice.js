@@ -235,7 +235,9 @@ const tasksSlice = createSlice({
     },
 
     updateTasksOrder(state, action) {
-      state.tasks = action.payload
+      const { startIndex, endIndex } = action.payload
+      const [movedTask] = state.tasks.splice(startIndex, 1)
+      state.tasks.splice(endIndex, 0, movedTask)
     },
   },
 })

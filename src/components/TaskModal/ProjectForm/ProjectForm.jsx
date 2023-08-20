@@ -72,7 +72,7 @@ const ProjectForm = ({ value, onChange, isNewTask, taskId }) => {
   }
 
   return (
-    <form className='flex flex-col w-full mb-8 mt-1' onSubmit={handleSubmit}>
+    <form className='flex flex-col w-full mt-1' onSubmit={handleSubmit}>
       <ProjectInput name={name} onNameChange={handleNameChange} />
       <div className='flex flex-col mt-2'>
         {projects && projects.length > 0 && (

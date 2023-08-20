@@ -80,7 +80,11 @@ const TaskDescription = ({ id, checked }) => {
   const dispatch = useDispatch()
 
   const handleFocus = () => {
-    if (inputRef.current.textContent === checked ? '' : '+ Add a description') {
+    if (
+      inputRef.current.textContent === '' && checked
+        ? ''
+        : '+ Add a description'
+    ) {
       inputRef.current.textContent = ''
     }
     inputRef.current.focus()

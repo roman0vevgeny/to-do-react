@@ -106,7 +106,7 @@ function MyCalendar({
   }
 
   return (
-    <div className='text-12 text-task w-[225px] h-[210px] mb-7'>
+    <div className='text-12 text-task w-[225px] my-7'>
       {showNavigation && (
         <div className='flex w-full justify-between'>
           <button

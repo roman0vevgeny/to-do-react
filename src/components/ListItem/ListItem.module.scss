@@ -47,3 +47,11 @@
     content: '';
   }
 }
+
+.dropZone {
+  @apply flex flex-row items-center justify-center h-[40px] w-full rounded-[5px] mx-2 bg-blueTag;
+}
+
+.draggedTaskPlaceholder {
+  @apply flex flex-row items-center justify-center h-[40px] w-full rounded-[5px] mx-2 bg-gray;
+}
