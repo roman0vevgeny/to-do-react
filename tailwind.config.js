@@ -196,6 +196,7 @@ export default {
         input: 'var(--color-main-bg)',
         warning: 'var(--expired)',
         borderHover: 'var(--border-hover)',
+        borderMain: 'var(--color-main-bg)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',
