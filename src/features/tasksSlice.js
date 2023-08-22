@@ -234,12 +234,16 @@ const tasksSlice = createSlice({
       }
     },
 
+    // updateTasksOrder(state, action) {
+    //   const { startIndex, endIndex } = action.payload
+    //   const newTasks = [...state.tasks]
+    //   const [movedTask] = newTasks.splice(startIndex, 1)
+    //   newTasks.splice(endIndex, 0, movedTask)
+    //   state.tasks = newTasks
+    // },
+
     updateTasksOrder(state, action) {
-      const { startIndex, endIndex } = action.payload
-      const newTasks = [...state.tasks]
-      const [movedTask] = newTasks.splice(startIndex, 1)
-      newTasks.splice(endIndex, 0, movedTask)
-      state.tasks = newTasks
+      state.tasks = action.payload.tasks
     },
   },
 })

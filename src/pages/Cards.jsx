@@ -4,11 +4,11 @@ import SectionName from '../components/SectionName/SectionName'
 import CreateButton from '../components/Button/CreateButton'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { allTasksSelector } from '../features/tasksSelectors'
 import {
-  allTasksSelector,
   todayTasksSelector,
   expiredTasksSelector,
-} from '../features/tasksSelectors'
+} from '../features/taskMemoSelectors'
 import InfoBlock from '../components/Info/IndoBlock'
 import ScrollButton from '../components/Button/ScrollButton'
 

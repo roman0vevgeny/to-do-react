@@ -13,7 +13,7 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import {
   todayTasksSelector,
   expiredTasksSelector,
-} from '../features/tasksSelectors'
+} from '../features/taskMemoSelectors'
 
 const List = () => {
   const [isShowButton, setIsShowButton] = React.useState(false)
@@ -41,10 +41,14 @@ const List = () => {
   }
 
   const tasks = getTasksByPath(location.pathname)
-
   console.log('Tasks: ', tasks)
 
   const sectionRef = useRef(null)
+
+  const isDragDisabled = () => {
+    const path = location.pathname
+    return path === '/today/list' || path === '/expired/list'
+  }
 
   const handleScroll = useCallback(() => {
     const position = sectionRef.current.scrollTop
@@ -66,9 +70,27 @@ const List = () => {
     }
   }, [sectionRef])
 
+  // const onDragEnd = (result) => {
+  //   const { source, destination } = result
+  //   if (!destination) {
+  //     return
+  //   }
+  //   if (
+  //     source.index === destination.index &&
+  //     source.droppableId === destination.droppableId
+  //   ) {
+  //     return
+  //   }
+  //   dispatch(
+  //     updateTasksOrder({
+  //       startIndex: source.index,
+  //       endIndex: destination.index,
+  //     })
+  //   )
+  // }
+
   const onDragEnd = (result) => {
     const { source, destination } = result
-
     if (!destination) {
       return
     }
@@ -80,10 +102,12 @@ const List = () => {
       return
     }
 
+    const newTasks = [...tasks]
+    const [removed] = newTasks.splice(source.index, 1)
+    newTasks.splice(destination.index, 0, removed)
     dispatch(
       updateTasksOrder({
-        startIndex: source.index,
-        endIndex: destination.index,
+        tasks: newTasks,
       })
     )
   }
@@ -142,8 +166,8 @@ const List = () => {
                       <div
                         className={
                           snapshot.isDraggingOver
-                            ? 'border-b-1 border-x-1 pb-[3px] border-stroke'
-                            : 'border-b-1 border-x-1 pb-[3px] border-borderMain'
+                            ? 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-stroke'
+                            : 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-borderMain'
                         }
                         ref={provided.innerRef}
                         {...provided.droppableProps}
@@ -153,7 +177,8 @@ const List = () => {
                             <Draggable
                               key={`${task.id}`}
                               draggableId={`${task.id}`}
-                              index={index}>
+                              index={index}
+                              isDragDisabled={isDragDisabled()}>
                               {(provided, snapshot) => (
                                 <div
                                   ref={provided.innerRef}
@@ -164,6 +189,7 @@ const List = () => {
                                       taskId={task.id}
                                       onSelectTask={handleSelectTask}
                                       onClick={() => handleSelectTask(task.id)}
+                                      isDragging={snapshot.isDragging}
                                     />
                                   </div>
                                 </div>

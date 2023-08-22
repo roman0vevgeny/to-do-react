@@ -16,10 +16,8 @@ import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
 import Folder from '../svgs/Folder'
 
-const ListItem = ({ taskId, onClick }) => {
+const ListItem = ({ taskId, onClick, isDragging }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
-  // console.log('Task:', task)
-  // console.log('TaskId:', taskId)
   const dispatch = useDispatch()
   const checked = task.checked
   const favorite = task.favorite
@@ -61,7 +59,9 @@ const ListItem = ({ taskId, onClick }) => {
 
   return (
     <div className='relative w-full cursor-auto'>
-      <div className={styles.body} onClick={onClick}>
+      <div
+        className={isDragging ? styles.dragging : styles.body}
+        onClick={onClick}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />
         </button>
@@ -118,7 +118,7 @@ const ListItem = ({ taskId, onClick }) => {
           </div>
         </div>
       </div>
-      <div className={styles.devider}></div>
+      <div className={isDragging ? '' : styles.devider}></div>
     </div>
   )
 }

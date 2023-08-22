@@ -1,5 +1,10 @@
 .body {
-  @apply flex flex-row py-3 mx-5 border-stroke items-start rounded-[10px] max-w-[800px] relative cursor-pointer bg-mainBg;
+  @apply flex flex-row py-3 mx-5 border-borderMain border-1 items-start rounded-[10px] max-w-[800px] relative cursor-pointer bg-mainBg;
+}
+
+.dragging {
+  @apply flex flex-row pt-3 pb-[11px] mx-5 border-stroke border-1 items-start rounded-[10px] max-w-[800px] relative cursor-pointer bg-mainBg
+  shadow-lg;
 }
 
 .checkbox {
