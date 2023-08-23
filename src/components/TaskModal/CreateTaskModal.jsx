@@ -18,11 +18,11 @@ const CreateTaskModal = ({ onClose, today }) => {
     name: '',
     description: '',
     tags: [],
-    projects: [],
     expirationDate: null,
     subtasks: [],
     checked: false,
     favorite: false,
+    projects: [],
   })
 
   const [error, setError] = useState(null)
@@ -42,17 +42,30 @@ const CreateTaskModal = ({ onClose, today }) => {
 
   const allTags = useSelector((state) => state.tags)
 
+  // const handleCreateTask = () => {
+  //   if (!task.name || task.name === '') {
+  //     setError('Please enter a valid task name')
+  //   } else {
+  //     setError(null)
+  //     dispatch(
+  //       addTask({
+  //         ...task,
+  //         expirationDate: expirationDate,
+  //       })
+  //     )
+  //     onClose()
+  //   }
+  // }
+
   const handleCreateTask = () => {
     if (!task.name || task.name === '') {
       setError('Please enter a valid task name')
     } else {
       setError(null)
-      dispatch(
-        addTask({
-          ...task,
-          expirationDate: expirationDate,
-        })
-      )
+      dispatch(addTask(task))
+      task.projects.forEach((projectId) => {
+        dispatch(addTaskToProject({ projectId, taskId: task.id }))
+      })
       onClose()
     }
   }

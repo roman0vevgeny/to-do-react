@@ -29,10 +29,23 @@ const tagsSlice = createSlice({
         state[index].color = action.payload.color
       }
     },
+
+    // updateTagsOrder(state, action) {
+    //   state = action.payload.tags
+    // },
+
+    updateTagsOrder(state, action) {
+      state.splice(0, state.length, ...action.payload.tags)
+    },
   },
 })
 
 export default tagsSlice.reducer
 
-export const { addTag, deleteTag, updateTagName, updateTagColor } =
-  tagsSlice.actions
+export const {
+  addTag,
+  deleteTag,
+  updateTagName,
+  updateTagColor,
+  updateTagsOrder,
+} = tagsSlice.actions

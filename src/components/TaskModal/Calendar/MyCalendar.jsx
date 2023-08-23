@@ -106,7 +106,7 @@ function MyCalendar({
   }
 
   return (
-    <div className='text-12 text-task w-[225px] my-7'>
+    <div className='text-12 text-task w-[227px] my-3 p-[10px] border-1 border-stroke rounded-[5px]'>
       {showNavigation && (
         <div className='flex w-full justify-between'>
           <button
@@ -127,7 +127,7 @@ function MyCalendar({
           </button>
         </div>
       )}
-      <div className='grid gap-y-[2px] gap-x-[5px] grid-cols-7 mt-0 justify-items-center'>
+      <div className='grid gap-y-[2px] grid-cols-7 mt-0 justify-items-center'>
         {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((dayName) => (
           <div className='mt-[8px] h-[20px]' key={dayName}>
             {dayName}

@@ -11,7 +11,7 @@ const TagInput = ({ name, onNameChange }) => {
   }
 
   return (
-    <div className='relative flex h-fit items-center w-full'>
+    <div className='relative flex h-fit items-center w-fit'>
       <input
         className={styles.input}
         placeholder='Enter a new tag'

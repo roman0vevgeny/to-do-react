@@ -40,7 +40,9 @@
 }
 
 .dropdown {
-  @apply flex flex-col content-start justify-start w-full mt-[1px] rounded-md max-h-0 overflow-hidden origin-top;
+  @apply flex flex-col content-start justify-start w-full mt-[1px] rounded-md max-h-0 
+
+  origin-top;
 }
 
 .item {

@@ -1,9 +1,13 @@
 import React from 'react'
+import AppIcon from '../components/svgs/AppIcon'
+import styles from './LoadingScreen.module.scss'
 
 const LoadingScreen = () => {
   return (
     <div className='flex justify-center items-center h-screen w-screen'>
-      <div className='animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-mainBg'></div>
+      <div className={styles.app}>
+        <AppIcon />
+      </div>
     </div>
   )
 }

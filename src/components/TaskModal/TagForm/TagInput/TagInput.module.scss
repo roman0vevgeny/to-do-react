@@ -1,5 +1,5 @@
 .input {
-  @apply flex box-border text-start text-14 font-medium mr-2 pl-[8px] pr-8 py-1 bg-mainBg text-task rounded-[5px] w-full cursor-pointer border-1 border-stroke;
+  @apply flex box-border text-start text-14 font-medium mr-2 pl-[8px] pr-8 py-1 bg-mainBg text-task rounded-[5px] w-[187px] cursor-pointer border-1 border-stroke;
 
   &:hover {
     @apply text-gray;
@@ -10,7 +10,7 @@
   }
 
   &:focus {
-    @apply outline-none bg-inputFocus text-inputFocus cursor-auto border-none pl-[9px] py-[5px];
+    @apply outline-none bg-inputFocus text-inputFocus cursor-auto border-r-1 border-blueBorder pl-[8px] py-[4px];
 
     &::placeholder {
       @apply text-inputFocus;

@@ -35,7 +35,7 @@ const Layout = () => {
       />
       <div className='relative flex snap-y flex-raw'>
         {showNavbar && (
-          <nav className='min-w-[300px] bg-nav py-10 pl-[15px] pr-[5px] overflow-y-scroll h-[calc(100vh-50px)]'>
+          <nav className='min-w-[300px] bg-nav py-10 pl-[15px] pr-[0px] h-[calc(100vh-50px)]'>
             <Navbar className='sticky top-0' />
           </nav>
         )}

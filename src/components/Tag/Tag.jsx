@@ -6,7 +6,7 @@ const capitalize = (string) => {
   return string.toUpperCase()
 }
 
-const Tag = ({ tagName, color, deleteTag, onDelete, checked }) => {
+const Tag = ({ tagName, color, deleteTag, onDelete, checked, isDragging }) => {
   const getTagType = (color) => {
     switch (color) {
       case 'red':
@@ -35,7 +35,9 @@ const Tag = ({ tagName, color, deleteTag, onDelete, checked }) => {
   return (
     <div
       className={
-        !checked ? `${styles.tagBg} ${styles[tagType]}` : styles.tagBg
+        (!checked ? `${styles.tagBg} ${styles[tagType]}` : styles.tagBg) +
+        ' ' +
+        (isDragging ? 'shadow-md border-1 border-borderHover' : '')
       }>
       <p>{typeof tagName === 'string' ? capitalize(tagName) : tagName}</p>
       {deleteTag && (

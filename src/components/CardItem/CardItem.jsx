@@ -22,12 +22,10 @@ import Folder from '../svgs/Folder'
 
 const CardItem = ({ taskId }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
-  console.log(task)
+  // console.log(task)
 
   const [open, setOpen] = useState(false)
-
   const dispatch = useDispatch()
-
   const checked = task.checked
   const favorite = task.favorite
 
@@ -111,12 +109,16 @@ const CardItem = ({ taskId }) => {
               </button>
             </div>
           </div>
-          <div>
-            <TaskDescription
-              description={task.description}
-              checked={task.checked}
-            />
-          </div>
+          {task.description ? (
+            <div>
+              <TaskDescription
+                description={task.description}
+                checked={task.checked}
+              />
+            </div>
+          ) : (
+            <div className='h-[5px]'></div>
+          )}
           {task.subtasks.length > 0 && (
             <div className='flex flex-wrap'>
               <TaskSubtasks

@@ -13,6 +13,10 @@ import {
   updateTaskIsFavorite,
   updateTaskProjects,
 } from '../../features/tasksSlice'
+import {
+  addTaskToProject,
+  removeTaskFromProject,
+} from '../../features/projectSlice'
 import SubtaskBlock from './SubtaskBlock/SubtaskBlock'
 import TaskHeader from './TaskHeader/TaskHeader'
 import History from '../svgs/History'
@@ -32,6 +36,14 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
     )
   }
 
+  const handleProjectSelect = (projectId) => {
+    if (projects.includes(projectId)) {
+      dispatch(removeTaskFromProject({ projectId, taskId: id }))
+    } else {
+      dispatch(addTaskToProject({ projectId, taskId: id }))
+    }
+  }
+
   return (
     <div onClose={handleCloseModal} className='bg-mainBg mx-8 mb-8'>
       <div className='sticky top-0 z-[1] bg-mainBg pt-8'>
@@ -47,7 +59,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
         />
       </div>
 
-      <div className='flex flex-row w-full'>
+      <div className='relative flex flex-row w-full'>
         <div className='flex flex-col justify-between'>
           <div>
             <TaskNameModal id={id} checked={checked} />
@@ -126,6 +138,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
                     )
                   }
                   isNewTask={false}
+                  handleProjectSelect={handleProjectSelect}
                   taskId={id}
                 />
                 <Calend

@@ -6,6 +6,7 @@ import TagInput from './TagInput/TagInput'
 import TagColorSection from './TagColorSection/TagColorSection'
 import AllTags from './AllTags/AllTags'
 import ErrorMessage from '../ErrorMessage'
+import Plus from '../../svgs/Plus'
 
 const TagForm = ({ value, onChange, isNewTask, taskId }) => {
   const dispatch = useDispatch()
@@ -81,8 +82,16 @@ const TagForm = ({ value, onChange, isNewTask, taskId }) => {
   }
 
   return (
-    <form className='flex flex-col w-full mb-2' onSubmit={handleSubmit}>
-      <TagInput name={name} onNameChange={handleNameChange} />
+    <form className='flex flex-col w-full mb-3' onSubmit={handleSubmit}>
+      <div className='flex'>
+        <TagInput name={name} onNameChange={handleNameChange} />
+        <button
+          type={'submit'}
+          className='flex rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover w-[32px] h-[29px]'>
+          <Plus />
+        </button>
+      </div>
+
       <div className='flex flex-col mt-2'>
         <TagColorSection color={color} onColorSelect={handleColorSelect} />{' '}
         {tags && tags.length > 0 && (
@@ -94,14 +103,7 @@ const TagForm = ({ value, onChange, isNewTask, taskId }) => {
           />
         )}
       </div>
-      <div className='mr-2 mt-1'>
-        <button
-          type={'submit'}
-          className='flex p-1 rounded-[5px] text-gray text-14 font-bold bg-gray justify-center items-center hover:bg-grayHover hover:text-grayHover my-1 h-fit px-2 w-full'>
-          <p className='flex justify-center'>Create tag</p>
-        </button>
-        {error && <ErrorMessage message={error} />}
-      </div>
+      <div>{error && <ErrorMessage message={error} />}</div>
     </form>
   )
 }

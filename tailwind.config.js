@@ -43,6 +43,13 @@ export default {
           fontWeight: '400',
         },
       ],
+      13: [
+        '13px',
+        {
+          lineHeight: '1',
+          fontWeight: '400',
+        },
+      ],
       14: [
         '14px',
         {
@@ -197,6 +204,7 @@ export default {
         warning: 'var(--expired)',
         borderHover: 'var(--border-hover)',
         borderMain: 'var(--color-main-bg)',
+        blueBorder: 'var(--input-focus-bg)',
       },
       placeholderColor: {
         search: 'var(--menu-text)',

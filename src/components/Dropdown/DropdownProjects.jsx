@@ -1,21 +1,25 @@
 import React, { useState } from 'react'
-import Tag from '../Tag/Tag'
 import Arrow from '../svgs/Arrow'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateTagsOrder, deleteTag } from '../../features/tagsSlice'
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import styles from './Dropdown.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import {
+  updateProjectsOrder,
+  deleteProject,
+  // removeProjectFromTasks,
+} from '../../features/projectSlice'
+import ProjectDraggable from '../TaskModal/ProjectForm/Project/ProjectDraggable'
 
 const capitalizeFirstLetter = (string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1).toLowerCase()
 }
 
-const Dropdown = ({ children, svg }) => {
+const DropdownProjects = ({ children, svg }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isRotated, setIsRotated] = useState(false)
 
   const dispatch = useDispatch()
-  const tags = useSelector((state) => state.tags)
+  const projects = useSelector((state) => state.projects)
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -25,8 +29,9 @@ const Dropdown = ({ children, svg }) => {
     setIsRotated(!isRotated)
   }
 
-  const handleDeleteTag = (tag) => {
-    dispatch(deleteTag(tag.id))
+  const handleDeleteProject = (project) => {
+    dispatch(deleteProject(project.id))
+    // dispatch(removeProjectFromTasks({ projectId: project.id }))
   }
 
   const onDragEnd = (result) => {
@@ -42,17 +47,17 @@ const Dropdown = ({ children, svg }) => {
       return
     }
 
-    const newTags = [...tags]
-    const [removed] = newTags.splice(source.index, 1)
-    newTags.splice(destination.index, 0, removed)
+    const newProjects = [...projects]
+    const [removed] = newProjects.splice(source.index, 1)
+    newProjects.splice(destination.index, 0, removed)
     dispatch(
-      updateTagsOrder({
-        tags: newTags,
+      updateProjectsOrder({
+        projects: newProjects,
       })
     )
   }
 
-  console.log(tags)
+  console.log('projects', projects)
 
   return (
     <div>
@@ -84,29 +89,27 @@ const Dropdown = ({ children, svg }) => {
               <div
                 className={
                   snapshot.isDraggingOver
-                    ? 'pb-[7px] pt-[7px]'
-                    : 'pb-[7px] pt-[7px]'
+                    ? 'pb-[7px] pt-[7px] w-full'
+                    : 'pb-[7px] pt-[7px] w-full'
                 }
                 ref={provided.innerRef}
                 {...provided.droppableProps}>
-                {tags && tags.length > 0 ? (
-                  tags.map((tag, index) => (
+                {projects && projects.length > 0 ? (
+                  projects.map((project, index) => (
                     <Draggable
-                      key={tag.id}
-                      draggableId={`${tag.id}`}
+                      key={project.id}
+                      draggableId={`${project.id}`}
                       index={index}>
                       {(provided, snapshot) => (
                         <li
-                          className='flex px-7 pt-[1px]'
+                          className='flex'
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}>
-                          <Tag
-                            color={tag.color}
-                            tagName={tag.name}
-                            deleteTag={true}
-                            // key={tag.id}
-                            onDelete={() => handleDeleteTag(tag)}
+                          <ProjectDraggable
+                            projectName={project.name}
+                            deleteProject={true}
+                            onDelete={() => handleDeleteProject(project)}
                             isDragging={snapshot.isDragging}
                           />
                         </li>
@@ -115,7 +118,7 @@ const Dropdown = ({ children, svg }) => {
                   ))
                 ) : (
                   <p className='text-14 flex px-7 py-[2px] text-gray'>
-                    No tags yet
+                    No projects yet
                   </p>
                 )}
                 {provided.placeholder}
@@ -128,4 +131,4 @@ const Dropdown = ({ children, svg }) => {
   )
 }
 
-export default Dropdown
+export default DropdownProjects

@@ -45,9 +45,11 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
         }}>
         <div className={styles.icon}>
           {svg && svg}
-          {typeof children === 'string'
-            ? capitalizeFirstLetter(children)
-            : children}
+          <div className='pt-[2px]'>
+            {typeof children === 'string'
+              ? capitalizeFirstLetter(children)
+              : children}
+          </div>
         </div>
         <div className={styles.counter}>
           <div>{<Arrow rotate={isRotated} />}</div>
