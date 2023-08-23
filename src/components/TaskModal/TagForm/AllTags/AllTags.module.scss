@@ -7,10 +7,10 @@
   }
 
   &::-webkit-scrollbar-track {
-    @apply bg-nav rounded-[5px];
+    @apply bg-transparent;
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply bg-grayHover rounded-[5px];
+    @apply bg-scroll rounded-md;
   }
 }

@@ -51,6 +51,18 @@
 
 .searchPopupLimited {
   @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search h-[686px] overflow-y-scroll;
+
+  &::-webkit-scrollbar {
+    @apply w-[10px] absolute right-0;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-scroll rounded-md;
+  }
 }
 
 .item {

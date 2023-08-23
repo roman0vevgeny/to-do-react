@@ -6,6 +6,10 @@
   }
 }
 
+.dragging {
+  @apply flex flex-row py-3 px-3 mx-5 border-1 border-stroke items-start rounded-[10px] max-w-[800px] relative cursor-pointer bg-mainBg overflow-hidden shadow-lg;
+}
+
 .bodyChecked {
   @apply flex flex-row py-3 px-3 mx-5 border-1 border-stroke items-start rounded-[10px] max-w-[800px] relative cursor-pointer bg-mainBg overflow-hidden;
 

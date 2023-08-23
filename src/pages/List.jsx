@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import ListItem from '../components/ListItem/ListItem'
+import styles from './Home.module.scss'
 import SectionName from '../components/SectionName/SectionName'
 import CreateButton from '../components/Button/CreateButton'
 import { useSelector, useDispatch } from 'react-redux'
@@ -70,38 +71,17 @@ const List = () => {
     }
   }, [sectionRef])
 
-  // const onDragEnd = (result) => {
-  //   const { source, destination } = result
-  //   if (!destination) {
-  //     return
-  //   }
-  //   if (
-  //     source.index === destination.index &&
-  //     source.droppableId === destination.droppableId
-  //   ) {
-  //     return
-  //   }
-  //   dispatch(
-  //     updateTasksOrder({
-  //       startIndex: source.index,
-  //       endIndex: destination.index,
-  //     })
-  //   )
-  // }
-
   const onDragEnd = (result) => {
     const { source, destination } = result
     if (!destination) {
       return
     }
-
     if (
       source.index === destination.index &&
       source.droppableId === destination.droppableId
     ) {
       return
     }
-
     const newTasks = [...tasks]
     const [removed] = newTasks.splice(source.index, 1)
     newTasks.splice(destination.index, 0, removed)
@@ -125,12 +105,14 @@ const List = () => {
     }
   }
 
-  const renderCreateButton = (path) => {
+  const renderCreateButton = (path, bigButton) => {
     switch (path) {
       case '/home/list':
-        return <CreateButton />
+        return <CreateButton bigButton={bigButton} />
       case '/today/list':
-        return <CreateButton today={true} />
+        return <CreateButton today={true} bigButton={bigButton} />
+      case '/expired/list':
+        return <CreateButton bigButton={bigButton} />
       default:
         return null
     }
@@ -140,18 +122,12 @@ const List = () => {
     setOpen(true)
   }
 
-  // const handleCloseModal = () => {
-  //   setOpen(false)
-  // }
-
   return (
-    <div className='relative h-[calc(100vh-50px)] w-full flex justify-center'>
+    <div className={styles.main}>
       {Array.isArray(tasks) && tasks.length === 0 ? (
         <InfoBlock location={location.pathname} />
       ) : (
-        <section
-          ref={sectionRef}
-          className='flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10'>
+        <section ref={sectionRef} className={styles.scrollable}>
           <div className='mb-[50px]'>
             <div className='sticky top-0 z-[1] bg-mainBg'>
               {renderSectionName(location.pathname)}
@@ -212,6 +188,7 @@ const List = () => {
           {isShowButton && <ScrollButton sectionRef={sectionRef} />}
         </section>
       )}
+      {renderCreateButton(location.pathname, true)}
       <Modal
         open={selectedTaskId !== null}
         onClose={() => handleSelectTask(null)}

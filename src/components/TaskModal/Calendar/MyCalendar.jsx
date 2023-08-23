@@ -110,7 +110,7 @@ function MyCalendar({
       {showNavigation && (
         <div className='flex w-full justify-between'>
           <button
-            className='flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center'
+            className='flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center hover:bg-gray'
             onClick={() => handleMonthChange('prev')}>
             {prevLabel}
           </button>
@@ -121,7 +121,7 @@ function MyCalendar({
             })}
           </span>
           <button
-            className='rotate-180 flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center'
+            className='rotate-180 flex py-[2px] mb-[5px] w-[25px] h-[25px] rounded-md text-gray justify-center items-center hover:bg-gray'
             onClick={() => handleMonthChange('next')}>
             {nextLabel}
           </button>
@@ -135,17 +135,16 @@ function MyCalendar({
         ))}
         {getDaysArray(currentYear, currentMonth).map((day, index) => (
           <div
-            className={`pt-[6px] w-[25px] h-[25px] rounded-full text-center cursor-pointer justify-self-center hover:bg-gray ${
-              isCurrentDate(day) ? 'bg-blueTag text-blueTag' : 'text-gray'
-            } ${
-              isEqualDate(new Date(value), day)
-                ? 'bg-main text-white hover:text-gray'
-                : ''
-            } ${
-              day.getMonth() !== currentMonth
-                ? 'text-[var(--color-text-gray)] hover:text-gray'
-                : ''
-            }`}
+            className={
+              'pt-[6px] w-[25px] h-[25px] rounded-full text-center cursor-pointer justify-self-center ' +
+              (isEqualDate(new Date(value), day)
+                ? 'bg-[var(--calendar-bg-active)] text-[var(--calendar-bg-active-text)] hover:text-[var(--calendar-bg-active-text)] hover:bg-[var(--calendar-bg-active)]'
+                : isCurrentDate(day)
+                ? 'bg-blueTag text-blueTag hover:text-grayHover hover:bg-gray'
+                : day.getMonth() !== currentMonth
+                ? 'text-[var(--calendar-disable)] hover:text-grayHover hover:bg-gray'
+                : 'text-gray hover:bg-gray hover:text-grayHover')
+            }
             key={index}
             onClick={() => handleDateSelect(day)}>
             {formatDay(day)}

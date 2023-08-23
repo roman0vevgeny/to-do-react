@@ -1,15 +1,19 @@
-// .listContainer {
-//   @apply relative bg-mainBg overflow-visible;
-// }
+.main {
+  @apply relative h-[calc(100vh-50px)] w-full flex justify-center;
+}
 
-// .startDevider {
-//   @apply relative z-[11] h-[30px] bg-mainBg;
-// }
+.scrollable {
+  @apply flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10;
 
-// .sectionName {
-//   @apply relative;
-// }
+  &::-webkit-scrollbar {
+    @apply w-[10px] absolute right-0;
+  }
 
-// .listItem {
-//   @apply mt-[0px];
-// }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent rounded-[5px];
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-checkboxActive rounded-[5px];
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import InfoCard from '../Info/InfoCard'
 import Star from '../svgs/Star'
 import TaskName from '../TaskName/TaskName'
@@ -6,7 +6,6 @@ import CheckBox from '../CheckBox/CheckBox'
 import styles from './CardItem.module.scss'
 import Cal from '../svgs/Cal'
 import Tag from '../Tag/Tag'
-import EditTaskModal from '../TaskModal/EditTaskModal'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   updateTaskChecked,
@@ -15,19 +14,19 @@ import {
 } from '../../features/tasksSlice'
 import InfoExpiration from '../Info/InfoExpiration'
 import { selectTaskById } from '../../helpers/selectTaskById'
-import Modal from '../Modal/Modal'
 import TaskDescription from '../TaskDescription/TaskDescription'
 import TaskSubtasks from '../TaskSubtasks/TaskSubtasks'
 import Folder from '../svgs/Folder'
 
-const CardItem = ({ taskId }) => {
+const CardItem = ({ taskId, onClick, isDragging }) => {
   const task = useSelector((state) => selectTaskById(state, taskId))
   // console.log(task)
-
-  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const checked = task.checked
   const favorite = task.favorite
+
+  const allTags = useSelector((state) => state.tags)
+  const allProjects = useSelector((state) => state.projects)
 
   const handleToggleFavorite = (e) => {
     dispatch(updateTaskIsFavorite({ id: task.id, favorite: !task.favorite }))
@@ -41,17 +40,6 @@ const CardItem = ({ taskId }) => {
   const toggleChecked = () => {
     dispatch(updateTaskChecked(taskId))
   }
-
-  const handleOpenModal = () => {
-    setOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setOpen(false)
-  }
-
-  const allTags = useSelector((state) => state.tags)
-  const allProjects = useSelector((state) => state.projects)
 
   const renderProjects = () => {
     if (task.projects.length === 1) {
@@ -73,10 +61,10 @@ const CardItem = ({ taskId }) => {
   }
 
   return (
-    <div className='relative w-full my-4'>
+    <div className='relative w-full p-2'>
       <div
-        className={checked ? styles.bodyChecked : styles.body}
-        onClick={handleOpenModal}>
+        className={isDragging ? styles.dragging : styles.body}
+        onClick={onClick}>
         <button className={styles.checkbox} onClick={toggleChecked}>
           <CheckBox checked={checked} toggleChecked={toggleChecked} />
         </button>
@@ -149,17 +137,6 @@ const CardItem = ({ taskId }) => {
           </div>
         </div>
       </div>
-      <Modal
-        open={open}
-        onClose={handleCloseModal}
-        children={
-          <EditTaskModal
-            task={task}
-            onClose={(e) => handleCloseModal()}
-            // formatDate={formatDate}
-          />
-        }
-      />
     </div>
   )
 }

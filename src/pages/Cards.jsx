@@ -1,10 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import styles from './Home.module.scss'
 import CardItem from '../components/CardItem/CardItem'
 import SectionName from '../components/SectionName/SectionName'
 import CreateButton from '../components/Button/CreateButton'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { allTasksSelector } from '../features/tasksSelectors'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import { updateTasksOrder } from '../features/tasksSlice'
+import Modal from '../components/Modal/Modal'
+import EditTaskModal from '../components/TaskModal/EditTaskModal'
+
 import {
   todayTasksSelector,
   expiredTasksSelector,
@@ -13,34 +18,47 @@ import InfoBlock from '../components/Info/IndoBlock'
 import ScrollButton from '../components/Button/ScrollButton'
 
 const Cards = () => {
-  const [showButton, setShowButton] = useState(false)
+  const [isShowButton, setIsShowButton] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [selectedTaskId, setSelectedTaskId] = useState(null)
   let location = useLocation()
-  let tasks
+  const dispatch = useDispatch()
 
-  switch (location.pathname) {
-    case '/home/cards':
-      tasks = useSelector(allTasksSelector)
-      break
-    case '/today/cards':
-      tasks = useSelector(todayTasksSelector)
-      break
-    case '/expired/cards':
-      tasks = useSelector(expiredTasksSelector)
-      break
-    default:
-      tasks = []
+  const handleSelectTask = (taskId) => {
+    setSelectedTaskId(taskId)
   }
+
+  const getTasksByPath = (path) => {
+    switch (path) {
+      case '/home/cards':
+        return useSelector((state) => state.tasks.tasks)
+      case '/today/cards':
+        return useSelector(todayTasksSelector)
+      case '/expired/cards':
+        return useSelector(expiredTasksSelector)
+      default:
+        return []
+    }
+  }
+
+  const tasks = getTasksByPath(location.pathname)
+  console.log('Tasks: ', tasks)
 
   const sectionRef = useRef(null)
 
-  const handleScroll = () => {
+  const isDragDisabled = () => {
+    const path = location.pathname
+    return path === '/today/cards' || path === '/expired/cards'
+  }
+
+  const handleScroll = useCallback(() => {
     const position = sectionRef.current.scrollTop
     if (position > 300) {
-      setShowButton(true)
+      setIsShowButton(true)
     } else {
-      setShowButton(false)
+      setIsShowButton(false)
     }
-  }
+  }, [sectionRef])
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -53,43 +71,134 @@ const Cards = () => {
     }
   }, [sectionRef])
 
+  const onDragEnd = (result) => {
+    const { source, destination } = result
+    if (!destination) {
+      return
+    }
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    ) {
+      return
+    }
+    const newTasks = [...tasks]
+    const [removed] = newTasks.splice(source.index, 1)
+    newTasks.splice(destination.index, 0, removed)
+    dispatch(
+      updateTasksOrder({
+        tasks: newTasks,
+      })
+    )
+  }
+
+  const renderSectionName = (path) => {
+    switch (path) {
+      case '/home/cards':
+        return <SectionName name={'Tasks'} />
+      case '/today/cards':
+        return <SectionName name={'Today'} />
+      case '/expired/cards':
+        return <SectionName name={'Expired'} />
+      default:
+        return null
+    }
+  }
+
+  const renderCreateButton = (path, bigButton) => {
+    switch (path) {
+      case '/home/cards':
+        return <CreateButton bigButton={bigButton} />
+      case '/today/cards':
+        return <CreateButton today={true} bigButton={bigButton} />
+      case '/expired/cards':
+        return <CreateButton bigButton={bigButton} />
+      default:
+        return null
+    }
+  }
+
+  const handleOpenModal = () => {
+    setOpen(true)
+  }
+
   return (
-    <div className='relative h-[calc(100vh-50px)] w-full flex justify-center'>
-      {tasks && tasks.length === 0 ? (
+    <div className={styles.main}>
+      {Array.isArray(tasks) && tasks.length === 0 ? (
         <InfoBlock location={location.pathname} />
       ) : (
-        <section
-          className='flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10'
-          ref={sectionRef}>
+        <section ref={sectionRef} className={styles.scrollable}>
           <div className='mb-[50px]'>
-            <div className='sticky top-0 z-[1] bg-mainBg'>
-              {location.pathname === '/home/cards' && (
-                <SectionName name={'Tasks'} />
-              )}
-              {location.pathname === '/today/cards' && (
-                <SectionName name={'Today'} />
-              )}
-              {location.pathname === '/expired/cards' && (
-                <SectionName name={'Expired'} />
-              )}
+            <div className='sticky top-0 z-[1] bg-mainBg mb-1'>
+              {renderSectionName(location.pathname)}
             </div>
+
             <div className='z-[0]'>
-              {tasks &&
-                tasks.map((task) => (
-                  <CardItem key={task.id} taskId={task.id} />
-                ))}
+              <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId={'1'} className='z-[0]'>
+                  {(provided, snapshot) => {
+                    const { droppableProps, innerRef, ...rest } = provided
+                    return (
+                      <div
+                        className={
+                          snapshot.isDraggingOver
+                            ? 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-stroke'
+                            : 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-borderMain'
+                        }
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        {...rest}>
+                        {tasks &&
+                          tasks.map((task, index) => (
+                            <Draggable
+                              key={`${task.id}`}
+                              draggableId={`${task.id}`}
+                              index={index}
+                              isDragDisabled={isDragDisabled()}>
+                              {(provided, snapshot) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}>
+                                  <div onClick={handleOpenModal}>
+                                    <CardItem
+                                      taskId={task.id}
+                                      onSelectTask={handleSelectTask}
+                                      onClick={() => handleSelectTask(task.id)}
+                                      isDragging={snapshot.isDragging}
+                                    />
+                                  </div>
+                                </div>
+                              )}
+                            </Draggable>
+                          ))}
+
+                        {provided.placeholder}
+                      </div>
+                    )
+                  }}
+                </Droppable>
+              </DragDropContext>
               <div className='flex justify-between mr-5 mt-5'>
                 <div></div>
-                {location.pathname === '/home/cards' && <CreateButton />}
-                {location.pathname === '/today/cards' && (
-                  <CreateButton today={true} />
-                )}
+                {renderCreateButton(location.pathname)}
               </div>
             </div>
           </div>
-          {showButton && <ScrollButton sectionRef={sectionRef} />}
+          {isShowButton && <ScrollButton sectionRef={sectionRef} />}
         </section>
       )}
+      {renderCreateButton(location.pathname, true)}
+      <Modal
+        open={selectedTaskId !== null}
+        onClose={() => handleSelectTask(null)}
+        children={
+          <EditTaskModal
+            task={tasks.find((task) => task.id === selectedTaskId)}
+            onClose={() => handleSelectTask(null)}
+          />
+        }
+      />
     </div>
   )
 }
