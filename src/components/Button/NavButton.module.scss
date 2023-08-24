@@ -3,7 +3,7 @@
   h-[30px] min-w-[25px] 
   items-center px-[7px] py-1 rounded-[5px] 
   font-bold text-14 text-gray my-1
-  justify-between;
+  justify-between transition-all duration-200 ease-in-out;
 
   &:hover {
     @apply bg-navButtonHover text-grayHover;
@@ -15,7 +15,7 @@
   h-[30px] min-w-[25px] 
   items-center px-[7px] py-1 rounded-[5px] 
   font-bold text-14 text-grayHover my-1
-  justify-between bg-grayHover;
+  justify-between bg-grayHover transition-all duration-200 ease-in-out;
 }
 
 .icon {

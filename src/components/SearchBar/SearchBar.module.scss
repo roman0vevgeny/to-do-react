@@ -1,5 +1,5 @@
 .main {
-  @apply relative flex flex-grow max-h-[30px] items-center ml-2 text-menu box-border;
+  @apply relative flex flex-grow max-h-[30px] items-center ml-2 text-menu box-border transition-all duration-200 ease-in-out transition-all duration-200 ease-in-out;
 }
 
 .icon {
@@ -12,12 +12,12 @@
 
 .inputActive {
   @apply flex absolute left-0 top-0 w-[470px] box-border items-center rounded-l-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
-  placeholder-search cursor-text;
+  placeholder-search cursor-text transition-all duration-200 ease-in-out;
 }
 
 .inputInactive {
   @apply flex absolute left-0 top-0 w-[240px] box-border items-center rounded-[5px] border-1 border-search bg-main pl-9 pr-8 outline-none text-16 h-[30px] 
-  placeholder-search cursor-pointer;
+  placeholder-search cursor-pointer transition-all duration-200 ease-in-out;
 }
 
 .clear {
@@ -29,10 +29,18 @@
 }
 
 .close {
-  @apply px-[7px] absolute top-[0px] left-[469px] rounded-r-[5px] z-5 border-1 border-search h-[30px];
+  @apply px-[7px] absolute top-[0px] left-[469px] rounded-r-[5px] z-5 border-1 border-search h-[30px] transition-all duration-200 ease-in-out;
 
   &:hover {
-    @apply bg-menu;
+    @apply bg-menu transition-all duration-200 ease-in-out;
+  }
+}
+
+.closeNone {
+  @apply px-[7px] absolute top-[0px] left-[239px] rounded-r-[5px] z-5 border-1 border-search h-[30px] transition-all duration-200 ease-in-out opacity-0;
+
+  &:hover {
+    @apply bg-menu transition-all duration-200 ease-in-out;
   }
 }
 
@@ -46,22 +54,23 @@
 }
 
 .searchPopup {
-  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search max-h-[686px] overflow-hidden;
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search max-h-[686px] overflow-hidden
+  transition-all duration-200 ease-in-out;
 }
 
 .searchPopupLimited {
-  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search h-[686px] overflow-y-scroll;
+  @apply absolute shadow-md top-[32px] left-2 py-1 bg-mainBg w-[500px] z-[20] rounded-[5px] border-1 border-search h-[686px] overflow-y-scroll transition-all duration-200 ease-in-out;
 
   &::-webkit-scrollbar {
-    @apply w-[10px] absolute right-0;
+    @apply w-[10px] absolute right-0 transition-all duration-200 ease-in-out;
   }
 
   &::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    @apply bg-transparent transition-all duration-200 ease-in-out;
   }
 
   &::-webkit-scrollbar-thumb {
-    @apply bg-scroll rounded-md;
+    @apply bg-scroll rounded-md transition-all duration-200 ease-in-out;
   }
 }
 

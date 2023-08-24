@@ -1,9 +1,9 @@
 .text {
-  @apply text-task;
+  @apply text-task transition-all duration-200 ease-in-out;
 }
 
 .textChecked {
-  @apply text-gray;
+  @apply text-gray transition-all duration-200 ease-in-out;
 }
 
 .textBig {

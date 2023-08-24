@@ -3,7 +3,7 @@
   h-[30px] min-w-[25px] 
   items-center px-[7px] py-1 rounded-[5px] 
   font-bold text-14 text-gray mt-1
-  justify-between;
+  justify-between transition-all duration-200 ease-in-out;
 
   &:hover {
     @apply bg-navButtonHover text-grayHover;
@@ -19,14 +19,14 @@
   h-[30px] min-w-[25px] bg-mainBg
   items-center px-[7px] py-1 rounded-t-[5px] 
   font-bold text-14 text-gray mt-1
-  justify-between;
+  justify-between transition-all duration-200 ease-in-out;
 
   &:hover {
-    @apply bg-navButtonHover text-grayHover;
+    @apply bg-navButtonHover text-grayHover transition-all duration-200 ease-in-out;
   }
 
   &:active {
-    @apply bg-grayHover text-grayHover;
+    @apply bg-grayHover text-grayHover transition-all duration-200 ease-in-out;
   }
 }
 
@@ -41,14 +41,13 @@
 
 .dropdown {
   @apply flex flex-col content-start justify-start w-full mt-[1px] rounded-md max-h-0 
-
-  origin-top;
+  origin-top transition-all duration-200 ease-in-out;
 }
 
 .item {
-  @apply flex py-1 pl-7 pr-2 text-14 text-gray cursor-pointer truncate;
+  @apply flex py-1 pl-7 pr-2 text-14 text-gray cursor-pointer truncate transition-all duration-200 ease-in-out;
 
   &:hover {
-    @apply bg-gray text-grayHover;
+    @apply bg-gray text-grayHover transition-all duration-200 ease-in-out;
   }
 }

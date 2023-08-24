@@ -1,6 +1,6 @@
 .withDelete {
   @apply flex flex-row items-center w-full py-[7px] px-[25px] rounded-[3px] text-14 leading-[11px] cursor-pointer bg-mainBg 
-  text-gray;
+  text-gray transition-all duration-200 ease-in-out;
   &:hover {
     @apply bg-gray text-grayHover;
   }

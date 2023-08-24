@@ -225,16 +225,16 @@ export default {
         button: '0 0 15px rgba(0, 0, 0, 0.25)',
         card: '0 0 15px rgba(0, 0, 0, 0.25)',
       },
-      keyframes: {
-        'open-menu': {
-          '0%': { transform: 'scaleY(0)' },
-          '80%': { transform: 'scaleY(1.2)' },
-          '100%': { transform: 'scaleY(1)' },
-        },
-      },
-      animation: {
-        'open-menu': 'open-menu 0.5s ease-in-out forwards',
-      },
+      // keyframes: {
+      //   'open-menu': {
+      //     '0%': { transform: 'scaleY(0)' },
+      //     '80%': { transform: 'scaleY(1.2)' },
+      //     '100%': { transform: 'scaleY(1)' },
+      //   },
+      // },
+      // animation: {
+      //   'open-menu': 'open-menu 0.5s ease-in-out forwards',
+      // },
       zIndex: {
         1: '1',
         2: '2',

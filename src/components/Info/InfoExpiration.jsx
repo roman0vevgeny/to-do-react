@@ -29,10 +29,10 @@ const InfoExpiration = ({
         <div
           className={
             today && !checked
-              ? 'whitespace-nowrap text-blueTag'
+              ? 'whitespace-nowrap text-blueTag transition-all duration-200 ease-in-out'
               : notExpired
-              ? 'whitespace-nowrap text-gray'
-              : 'whitespace-nowrap text-expired'
+              ? 'whitespace-nowrap text-gray transition-all duration-200 ease-in-out'
+              : 'whitespace-nowrap text-expired transition-all duration-200 ease-in-out'
           }>
           {today ? 'Today' : children}
         </div>
@@ -40,7 +40,7 @@ const InfoExpiration = ({
         <div
           className={
             today && !checked
-              ? 'whitespace-nowrap text-blueTag flex flex-row'
+              ? 'whitespace-nowrap text-blueTag flex flex-row '
               : notExpired
               ? 'whitespace-nowrap text-grayHover flex flex-row'
               : 'whitespace-nowrap text-expired flex flex-row'

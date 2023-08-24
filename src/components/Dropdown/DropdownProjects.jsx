@@ -76,11 +76,18 @@ const DropdownProjects = ({ children, svg }) => {
           </div>
         </div>
         <div className={styles.counter}>
-          <div>{<Arrow rotate={isRotated} />}</div>
+          <div
+            className={
+              isRotated
+                ? '-rotate-120 transition-all duration-200 ease-in-out'
+                : '-rotate-90 transition-all duration-200 ease-in-out'
+            }>
+            {<Arrow />}
+          </div>
         </div>
       </button>
       <div
-        className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden ${
+        className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden transition-all duration-200 ease-in-out ${
           isOpen ? 'max-h-screen opacity-100' : 'opacity-0'
         }`}>
         <DragDropContext onDragEnd={onDragEnd}>

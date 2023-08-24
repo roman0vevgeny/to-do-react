@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Arrow = ({ rotate }) => {
+const Arrow = () => {
   return (
     <svg
-      className={`${rotate ? 'rotate-180' : ''}`}
       width='15'
       height='9'
       viewBox='0 0 15 9'

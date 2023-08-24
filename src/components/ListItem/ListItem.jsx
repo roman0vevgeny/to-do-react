@@ -161,7 +161,8 @@ const ListItem = ({ taskId, onClick, isDragging }) => {
     e.stopPropagation()
   }
 
-  const toggleChecked = () => {
+  const toggleChecked = (e) => {
+    e.stopPropagation()
     dispatch(updateTaskChecked(taskId))
   }
 
@@ -243,7 +244,7 @@ const ListItem = ({ taskId, onClick, isDragging }) => {
           </div>
         </div>
       </div>
-      <div className={isDragging ? '' : styles.devider}></div>
+      <div className={isDragging ? styles.deviderDrag : styles.devider}></div>
     </div>
   )
 }

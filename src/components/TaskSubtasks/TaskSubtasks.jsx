@@ -20,14 +20,15 @@ const TaskSubtasks = ({ onSubtasksChange, subtasks, checked }) => {
             <button
               className={styles.checkbox}
               onClick={(e) => {
+                e.stopPropagation()
                 e.preventDefault()
                 handleSubtaskCheckedChange(subtask.id, !subtask.checked)
               }}>
               <CheckBox
                 checked={subtask.checked}
-                toggleChecked={() =>
+                toggleChecked={() => {
                   handleSubtaskCheckedChange(subtask.id, !subtask.checked)
-                }
+                }}
               />
             </button>
             <TaskSubtask

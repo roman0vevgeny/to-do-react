@@ -24,20 +24,9 @@
 }
 
 body {
-  @apply relative m-0 p-0 bg-mainBg;
+  @apply relative m-0 p-0 bg-mainBg
+  transition-all duration-200 ease-in-out;
 }
-
-// main::-webkit-scrollbar {
-//   @apply w-[10px] absolute right-0;
-// }
-
-// main::-webkit-scrollbar-track {
-//   @apply bg-nav rounded-[5px];
-// }
-
-// main::-webkit-scrollbar-thumb {
-//   @apply bg-grayHover rounded-[5px];
-// }
 
 #root {
   font-family: 'Gilroy-Medium', sans-serif;
@@ -124,12 +113,12 @@ body {
   --color-pink: #66335d;
   --color-text-gray-tag: #b9b9b9;
   --color-text-red-tag: #f07c91;
-  --color-text-green-tag: #76c869;
+  --color-text-green-tag: #64bb56;
   --color-text-yellow-tag: #e3ad5c;
   --color-text-purple-tag: #bd8bdc;
-  --color-text-sea-tag: #87d1db;
-  --color-text-blue-tag: #7698f0;
-  --color-text-pink-tag: #ee9cc9;
+  --color-text-sea-tag: #79c8d3;
+  --color-text-blue-tag: #7fa1f7;
+  --color-text-pink-tag: #dd81b4;
   --image-color: #585858;
   --tag-delete: #dcdcdc;
   --calendar-disable: #636363;

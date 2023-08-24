@@ -52,21 +52,28 @@ const DropdownFavorites = ({ children, items = [], svg }) => {
           </div>
         </div>
         <div className={styles.counter}>
-          <div>{<Arrow rotate={isRotated} />}</div>
+          <div
+            className={
+              isRotated
+                ? '-rotate-120 transition-all duration-200 ease-in-out'
+                : '-rotate-90 transition-all duration-200 ease-in-out'
+            }>
+            {<Arrow />}
+          </div>
         </div>
       </button>
       <div
-        className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden ${
+        className={`flex flex-col w-full mt-[1px] bg-mainBg rounded-b-md max-h-0 overflow-hidden transition-all duration-200 ease-in-out ${
           isOpen ? 'max-h-screen opacity-100' : 'opacity-0'
         }`}>
-        <ul className='py-2 w-[270px]'>
+        <ul className='py-2 w-[270px] border-1 border-borderMain transition-all duration-200 ease-in-out'>
           {items.length > 0 ? (
             items.map((item) => (
               <li
                 key={item.id}
                 className={styles.item}
                 onClick={() => handleOpenModal(item)}>
-                <span className='text-14 text-gray truncate'>{item.name}</span>
+                <span className='text-14 truncate'>{item.name}</span>
               </li>
             ))
           ) : (

@@ -1,12 +1,13 @@
 .main {
-  @apply relative h-[calc(100vh-50px)] w-full flex justify-center;
+  @apply relative h-[calc(100vh-50px)] w-full flex justify-center transition-all duration-200 ease-in-out;
 }
 
 .scrollable {
-  @apply flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10;
+  @apply flex flex-col items-center overflow-y-auto h-[calc(100vh-100px)] w-full pb-10 transition-all duration-200 ease-in-out;
 
   &::-webkit-scrollbar {
-    @apply w-[10px] absolute right-0;
+    @apply w-[10px] absolute right-0 transition-all duration-200 ease-in-out;
+    scroll-behavior: smooth;
   }
 
   &::-webkit-scrollbar-track {

@@ -37,7 +37,8 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
     dispatch(updateTaskSubtasks({ id: taskId, subtasks: newSubtasks }))
   }
 
-  const toggleChecked = () => {
+  const toggleChecked = (e) => {
+    e.stopPropagation()
     dispatch(updateTaskChecked(taskId))
   }
 

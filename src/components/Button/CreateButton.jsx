@@ -26,7 +26,7 @@ const CreateButton = ({ children, today, bigButton }) => {
         />
       ) : (
         <div
-          className='absolute h-[50px] w-[50px] bottom-[100px] right-[50px] m-3 p-5 bg-[var(--checkbox-active)] rounded-full cursor-pointer shadow-md hover:bg-menu text-[var(--color-main-bg)] hover:text-menu'
+          className='absolute h-[50px] w-[50px] bottom-[100px] right-[50px] m-3 p-5 bg-[var(--checkbox-active)] rounded-full cursor-pointer shadow-md hover:bg-menu text-[var(--color-main-bg)] hover:text-menu transition-all duration-200 ease-in-out'
           onClick={handleOpenModal}>
           <div className='relative'>
             <div className='absolute top-[-3px] left-[-4px] rotate-180'>

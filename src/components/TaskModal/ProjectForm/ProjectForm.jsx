@@ -176,16 +176,16 @@ const ProjectForm = ({
         </button>
       </div>
 
-      <div className='flex flex-col mt-2'>
-        {projects && projects.length > 0 && (
+      {projects && projects.length > 0 && (
+        <div className='flex flex-col mt-2'>
           <AllProjects
             projects={projects}
             taskProjects={value}
             onAddProject={handleProjectClick}
             onDeleteProject={handleProjectClick}
           />
-        )}
-      </div>
+        </div>
+      )}
       <div>{error && <ErrorMessage message={error} />}</div>
     </form>
   )

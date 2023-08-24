@@ -37,7 +37,7 @@ const Tag = ({ tagName, color, deleteTag, onDelete, checked, isDragging }) => {
       className={
         (!checked ? `${styles.tagBg} ${styles[tagType]}` : styles.tagBg) +
         ' ' +
-        (isDragging ? 'shadow-md border-1 border-borderHover' : '')
+        (isDragging ? 'shadow-md' : '')
       }>
       <p>{typeof tagName === 'string' ? capitalize(tagName) : tagName}</p>
       {deleteTag && (

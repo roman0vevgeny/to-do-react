@@ -129,7 +129,7 @@ const List = () => {
       ) : (
         <section ref={sectionRef} className={styles.scrollable}>
           <div className='mb-[50px]'>
-            <div className='sticky top-0 z-[1] bg-mainBg'>
+            <div className='sticky top-0 z-[1] bg-mainBg transition-all duration-200 ease-in-out'>
               {renderSectionName(location.pathname)}
             </div>
 
@@ -143,7 +143,7 @@ const List = () => {
                         className={
                           snapshot.isDraggingOver
                             ? 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-stroke'
-                            : 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-borderMain'
+                            : 'border-b-1 border-dashed border-x-1 pb-[3px] pt-[2px] border-borderMain transition-all duration-200 ease-in-out'
                         }
                         ref={provided.innerRef}
                         {...provided.droppableProps}
