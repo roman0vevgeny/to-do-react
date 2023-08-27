@@ -69,7 +69,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
               <TaskDescription id={id} checked={checked} />
             )}
 
-            {tags && (
+            {tags.length > 0 && (
               <div className='flex flex-wrap ml-4 mt-1 mb-3 max-w-[530px]'>
                 {tags.map((tagId, index) => {
                   const tag = allTags.find((tag) => tag.id === tagId)

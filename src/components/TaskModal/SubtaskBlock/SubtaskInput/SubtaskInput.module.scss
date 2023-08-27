@@ -1,5 +1,5 @@
 .input {
-  @apply flex box-border text-start text-14 font-medium flex-grow mt-1 mr-2 px-2 py-1 bg-mainBg text-gray rounded-[5px] w-[500px] cursor-pointer border-1 border-input;
+  @apply flex box-border text-start text-14 font-medium flex-grow mt-1 mr-2 pl-2 pr-7 py-1 bg-mainBg text-gray rounded-[5px] w-[500px] cursor-pointer border-1 border-input;
 
   &:hover {
     @apply text-gray box-border;

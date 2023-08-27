@@ -6,7 +6,7 @@ const initialState = {
       id: 1,
       checked: false,
       name: 'Первая задача с очень длинным текстом',
-      description: 'Описание первой задачи',
+      description: '<p>Описание первой задачи</p>',
       creationDate: new Date().toLocaleString('us-US', {
         year: 'numeric',
         month: '2-digit',
@@ -28,7 +28,7 @@ const initialState = {
       id: 8,
       checked: true,
       name: 'Вторая задача',
-      description: 'Описание второй задачи',
+      description: null,
       creationDate: new Date().toLocaleString('us-US', {
         year: 'numeric',
         month: '2-digit',

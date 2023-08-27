@@ -3,25 +3,21 @@
   height: 100px;
   margin: auto;
   animation: spin-scale 3s infinite;
+  scrollbar-width: 0px;
+  -ms-overflow-style: none;
 }
 
 @keyframes spin-scale {
-  // начальное состояние: без поворота и масштаба
   0% {
     transform: rotate(0deg) scale(1);
-    // задаем функцию времени ease-in для плавного старта
     animation-timing-function: ease-in;
   }
-  // промежуточное состояние: поворот на 180 градусов и увеличение масштаба на 20%
   50% {
-    transform: rotate(180deg) scale(1.2);
-    // задаем функцию времени ease-out для плавного завершения
+    transform: rotate(0deg) scale(1.5);
     animation-timing-function: ease-out;
   }
-  // конечное состояние: поворот на 360 градусов и возврат к исходному масштабу
   100% {
-    transform: rotate(360deg) scale(1);
-    // задаем функцию времени ease-in для плавного перехода к следующей итерации
+    transform: rotate(0deg) scale(1);
     animation-timing-function: ease-in;
   }
 }

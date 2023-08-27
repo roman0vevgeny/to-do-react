@@ -52,7 +52,7 @@ const TaskNameModal = ({ id, checked }) => {
   return (
     <div className='flex flex-row justify-between mx-2 items-start my-2'>
       <div
-        className={checked ? styles.inputChecked : styles.input}
+        className={styles.input}
         placeholder={name}
         ref={inputRef}
         contentEditable='true'

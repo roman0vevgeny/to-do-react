@@ -71,7 +71,7 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
         </button>
         <div className={styles.clickable}>
           <div className='flex flex-raw justify-between items-start w-full'>
-            <div className='flex flex-grow'>
+            <div className=''>
               <TaskName name={task.name} checked={task.checked} cards={true} />
             </div>
             <div className='flex mt-[2px]'>

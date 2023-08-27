@@ -25,7 +25,8 @@
 
 body {
   @apply relative m-0 p-0 bg-mainBg
-  transition-all duration-200 ease-in-out;
+  transition-all duration-200 ease-in-out
+  overflow-hidden;
 }
 
 #root {
@@ -127,4 +128,67 @@ body {
   --bg-scroll: #4b4b4b;
   --expired: #f07c91;
   --border-hover: #949494;
+}
+
+.bangle-editor {
+  @apply py-1 px-2 outline-none bg-mainBg text-start leading-1.5 rounded-[5px] cursor-pointer;
+}
+
+.bangle-editor p {
+  color: var(--task-text);
+  font-family: 'Gilroy-Medium', sans-serif;
+  src: url('./fonts/Gilroy-Medium.ttf') format('truetype');
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.4;
+  margin: 0px;
+}
+
+.bangle-editor a {
+  @apply text-blueTag cursor-pointer hover:text-blueTag;
+}
+
+.bangle-editor li {
+  @apply text-task;
+}
+
+.bangle-editor:focus li {
+  @apply text-inputFocus;
+}
+
+.bangle-editor:focus p {
+  @apply text-inputFocus;
+}
+
+.bangle-editor:focus {
+  @apply bg-inputFocus cursor-auto;
+}
+
+.bangle-menu {
+  @apply flex items-center space-x-2 justify-start text-14 font-normal bg-mainBg text-gray rounded-[10px] mx-1;
+}
+
+.bangle-menu > .bangle-menu-button {
+  @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
+}
+
+.bangle-menu > .bangle-menu-button:disabled {
+  @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
+}
+
+.bangle-menu > .bangle-menu-button:active {
+  @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
+}
+
+.bangle-menu-button svg {
+  @apply w-[20px] h-[20px] text-gray hover:text-grayHover;
+}
+
+.bangle-menu .active {
+  @apply bg-grayHover;
+}
+
+.active svg {
+  @apply w-[20px] h-[20px] text-grayHover;
 }
