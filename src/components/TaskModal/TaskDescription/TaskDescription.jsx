@@ -242,14 +242,9 @@
 // export default TaskDescription
 
 import React from 'react'
-import { useSelector } from 'react-redux'
 import Bangle from '../../TextEditor/Bangle'
 
-const TaskDescription = ({ id }) => {
-  const task = useSelector((state) =>
-    state.tasks.tasks.find((t) => t.id === id)
-  )
-
+const TaskDescription = ({ task }) => {
   return (
     <div className='flex flex-col justify-between mx-2 items-start my-2 w-full'>
       <Bangle task={task} />

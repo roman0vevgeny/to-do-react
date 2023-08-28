@@ -134,7 +134,6 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
             )}
           </div>
         </div>
-        {/* <div className='h-[90px] bg-blueTag absolute top-[370px] right-[0px] w-full z-1 blur-sm  brightness-130'></div> */}
       </div>
     </div>
   )

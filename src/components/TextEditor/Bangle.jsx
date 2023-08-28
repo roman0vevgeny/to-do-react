@@ -4,7 +4,7 @@ import '@bangle.dev/react-menu/style.css'
 import styles from './Bangle.module.scss'
 import { useDispatch } from 'react-redux'
 import { updateTaskDescription } from '../../features/tasksSlice'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BangleEditor, useEditorState } from '@bangle.dev/react'
 import {
   link,
@@ -89,18 +89,17 @@ function Bangle({ task }) {
               setEditor(editor)
             }}
           />
-
           {task.checked ? null : (
             <StaticMenu
               editor={editor}
               tooltipRender={() => null}
               renderMenu={() => (
                 <Menu>
-                  <div className='flex space-x-2 rounded-[6px]'>
+                  <div className='flex space-x-1 rounded-[6px]'>
                     <BulletListButton />
                     <OrderedListButton />
                   </div>
-                  <div className='flex flex-grow ml-2'>
+                  <div className='flex flex-grow ml-[4px]'>
                     <button
                       className={styles.button}
                       onClick={handleDescriptionChange}>

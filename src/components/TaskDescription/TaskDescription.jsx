@@ -5,19 +5,21 @@ import parse, { domToReact } from 'html-react-parser'
 const TaskDescription = ({ description, width }) => {
   const listStyle = {
     listStyleType: 'disc',
+    display: 'table',
     listStylePosition: 'outside',
-    display: 'inline-block',
+    verticalAlign: 'top',
   }
 
   const listStyleBullet = {
     listStyleType: 'decimal',
+    display: 'table',
     listStylePosition: 'outside',
-    display: 'inline-block',
+    verticalAlign: 'top',
   }
 
   const listItemStyle = {
-    display: 'inline-block',
-    verticalAlign: 'middle',
+    display: 'table-row',
+    verticalAlign: 'top',
     listStylePosition: 'outside',
   }
 
@@ -36,7 +38,7 @@ const TaskDescription = ({ description, width }) => {
                 if (domNode.name === 'ul') {
                   return (
                     <ul
-                      className='flex ml-4 my-[0.5rem] w-full list-inside px-2 leading-1.5'
+                      className='ml-4 my-[0.5rem] w-full list-inside px-2 leading-1.5'
                       style={listStyle}>
                       {domToReact(domNode.children)}
                     </ul>
@@ -44,18 +46,18 @@ const TaskDescription = ({ description, width }) => {
                 } else if (domNode.name === 'ol') {
                   return (
                     <ol
-                      className='flex ml-4 my-[0.5rem] w-full list-inside px-2 leading-1.5'
+                      className='ml-4 my-[0.5rem] w-full list-inside px-2 leading-1.5'
                       style={listStyleBullet}>
                       {domToReact(domNode.children)}
                     </ol>
                   )
                 } else if (domNode.name === 'li') {
                   return (
-                    <div
-                      className='flex ml-4 my-1 w-full list-inside px-2 leading-1.5'
+                    <li
+                      className='ml-4 my-1 w-full list-inside px-2 leading-1.5'
                       style={listItemStyle}>
                       {domToReact(domNode.children)}
-                    </div>
+                    </li>
                   )
                 } else if (domNode.name === 'p') {
                   return (
@@ -64,7 +66,7 @@ const TaskDescription = ({ description, width }) => {
                         domNode.children.map((child) => {
                           if (child.name === 'a') {
                             const style = {
-                              width: '300px',
+                              width: '200px',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',
                               whiteSpace: 'nowrap',

@@ -66,7 +66,7 @@ const EditTaskModal = ({ handleCloseModal, task }) => {
             {description === '' && checked ? (
               ' '
             ) : (
-              <TaskDescription id={id} checked={checked} />
+              <TaskDescription task={task} checked={checked} />
             )}
 
             {tags.length > 0 && (
