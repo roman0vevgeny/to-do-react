@@ -62,7 +62,7 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
   }
 
   return (
-    <div className='relative w-full p-2'>
+    <div className='relative w-full p-2 '>
       <div
         className={isDragging ? styles.dragging : styles.body}
         onClick={onClick}>
@@ -99,11 +99,8 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
             </div>
           </div>
           {task.description ? (
-            <div>
-              <TaskDescription
-                description={task.description}
-                checked={task.checked}
-              />
+            <div className='pt-2'>
+              <TaskDescription description={task.description} width={false} />
             </div>
           ) : (
             <div className='h-[5px]'></div>
@@ -137,6 +134,7 @@ const CardItem = ({ taskId, onClick, isDragging }) => {
             )}
           </div>
         </div>
+        {/* <div className='h-[90px] bg-blueTag absolute top-[370px] right-[0px] w-full z-1 blur-sm  brightness-130'></div> */}
       </div>
     </div>
   )

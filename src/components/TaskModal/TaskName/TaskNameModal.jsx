@@ -60,11 +60,11 @@ const TaskNameModal = ({ id, checked }) => {
         onBlur={handleBlur}
       />
 
-      {!checked && (
+      {/* {!checked && (
         <div className='flex flex-row mt-1'>
           <ModalButton svg={<Edit />} onClick={handleFocus} />
         </div>
-      )}
+      )} */}
     </div>
   )
 }

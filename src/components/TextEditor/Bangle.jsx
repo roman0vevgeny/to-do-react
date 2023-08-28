@@ -20,12 +20,11 @@ import {
   UndoButton,
   RedoButton,
 } from '@bangle.dev/react-menu'
+import TaskDescription from '../TaskDescription/TaskDescription'
 
 function Bangle({ task }) {
   const [editor, setEditor] = useState()
-  const [showEditor, setShowEditor] = useState(
-    task.description === ('' || null) ? false : true
-  )
+  const [showEditor, setShowEditor] = useState(false)
 
   const description = task.description || null
   const dispatch = useDispatch()
@@ -60,6 +59,7 @@ function Bangle({ task }) {
         description: description,
       })
     )
+    setShowEditor(false)
   }
 
   const editorState = useEditorState({
@@ -80,35 +80,27 @@ function Bangle({ task }) {
 
   return (
     <>
-      {showEditor && (
+      {showEditor && !task.checked && (
         <div className={styles.main}>
-          {description !== null ? (
-            <BangleEditor
-              state={editorState}
-              id='bangle-editor'
-              onReady={(editor) => {
-                setEditor(editor)
-                editor.view.dom.blur()
-              }}
-            />
-          ) : (
-            <BangleEditor
-              state={editorState}
-              id='bangle-editor'
-              onReady={(editor) => {
-                setEditor(editor)
-              }}
-            />
-          )}
+          <BangleEditor
+            state={editorState}
+            id='bangle-editor'
+            onReady={(editor) => {
+              setEditor(editor)
+            }}
+          />
+
           {task.checked ? null : (
             <StaticMenu
               editor={editor}
               tooltipRender={() => null}
               renderMenu={() => (
                 <Menu>
-                  <BulletListButton />
-                  <OrderedListButton />
-                  <div className='flex flex-grow space-x-2'>
+                  <div className='flex space-x-2 rounded-[6px]'>
+                    <BulletListButton />
+                    <OrderedListButton />
+                  </div>
+                  <div className='flex flex-grow ml-2'>
                     <button
                       className={styles.button}
                       onClick={handleDescriptionChange}>
@@ -121,11 +113,25 @@ function Bangle({ task }) {
           )}
         </div>
       )}
-      {!showEditor && !task.checked && (
+      {!showEditor && !task.checked && description === null && (
         <button className={styles.buttonOpen} onClick={handleButtonClick}>
           + Add a description
         </button>
       )}
+      {description !== null &&
+        description !== '' &&
+        !showEditor &&
+        (task.checked ? (
+          <div className='pl-2 cursor-pointer w-full pr-1 pt-[3px]'>
+            <TaskDescription description={description} width={true} />
+          </div>
+        ) : (
+          <div
+            className='pl-2 cursor-pointer w-full pr-1 pt-[3px]'
+            onClick={handleButtonClick}>
+            <TaskDescription description={description} width={true} />
+          </div>
+        ))}
     </>
   )
 }

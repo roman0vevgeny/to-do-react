@@ -166,18 +166,18 @@ body {
 }
 
 .bangle-menu {
-  @apply flex items-center space-x-2 justify-start text-14 font-normal bg-mainBg text-gray rounded-[10px] mx-1;
+  @apply flex items-center text-14 font-normal bg-mainBg text-gray rounded-[10px] py-1 w-fit ml-0 mr-2 px-0;
 }
 
-.bangle-menu > .bangle-menu-button {
+.bangle-menu > div > .bangle-menu-button {
   @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
 }
 
-.bangle-menu > .bangle-menu-button:disabled {
+.bangle-menu > div > .bangle-menu-button:disabled {
   @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
 }
 
-.bangle-menu > .bangle-menu-button:active {
+.bangle-menu > div > .bangle-menu-button:active {
   @apply flex items-center justify-center text-14 font-normal rounded-[5px] bg-gray text-gray hover:bg-grayHover hover:text-grayHover hover:rounded-[5px];
 }
 
@@ -185,7 +185,7 @@ body {
   @apply w-[20px] h-[20px] text-gray hover:text-grayHover;
 }
 
-.bangle-menu .active {
+.bangle-menu > div > .active {
   @apply bg-grayHover;
 }
 

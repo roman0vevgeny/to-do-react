@@ -1,6 +1,18 @@
 .modal {
   @apply relative flex justify-center bg-mainBg rounded-[10px] shadow-card z-[9001] overflow-y-auto overflow-x-hidden max-h-[calc(100vh-140px)] 
   max-w-[1100px];
+
+  &::-webkit-scrollbar {
+    @apply w-[10px] absolute right-0;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-scroll rounded-md scroll-smooth hover:scroll-auto;
+  }
 }
 
 .overlay {
